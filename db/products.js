@@ -6,7 +6,7 @@ const faker = require('faker');
 module.exports.generateProducts = (typesLen, customersLen) => {
   let products = [];
 
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 10; i++) {
     let title = faker.commerce.productName();
     let price = faker.commerce.price();
     let description = faker.lorem.sentence();

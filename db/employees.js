@@ -6,7 +6,7 @@ const faker = require('faker');
 module.exports.generateEmployees = () => {
   let employees = [];
 
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 10; i++) {
     let firstName = faker.name.firstName();
     let lastName = faker.name.lastName();
     let phoneNumber = faker.phone.phoneNumberFormat();

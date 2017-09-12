@@ -9,23 +9,31 @@ const { generateProducts } = require('./products');
 const { generateEmployees } = require('./employees');
 const { generateDepartments } = require('./departments');
 const { generatePaymentTypes } = require('./payment-types');
+const { generateTrainingPrograms } = require('./training-programs');
 
 //create product types
 let productTypes = generateTypes();
-console.log('productTypes', productTypes);
+// console.log('productTypes', productTypes);
 // Create customer collection...
 let users = generateUsers();
-console.log('users', users);
+// console.log('users', users);
+
 // Then pass its length, and the product types' length, into the function to create products,
 // so we can randomly assign customer and product type ids to each product
 let products = generateProducts(productTypes.length, users.length);
-console.log('products', products);
+// console.log('products', products);
 
 let employees = generateEmployees();
-console.log('employees', employees);
+// console.log('employees', employees);
 
-let departments = generateDepartments(productTypes.length, users.length);
-console.log('departments', departments);
+let departments = generateDepartments(employees.length);
+// console.log('departments', departments);
 
 let payments = generatePaymentTypes(users.length);
-console.log('payments', payments);
+// console.log('payments', payments);
+
+let orders = generateOrders(users.length);
+console.log('orders', orders);
+
+let trainingPrograms = generateTrainingPrograms();
+console.log('trainingPrograms', trainingPrograms);
