@@ -41,5 +41,3 @@ let employees = generateEmployees(numEmployees);
 let departments = generateDepartments(numDepartments, employees.length);
 let trainingPrograms = generateTrainingPrograms(numTrainingPrograms);
 let computers = generateComputers(numComputers);
-
-console.log(users);
