@@ -4,15 +4,15 @@
 // const sqlite3 = require('sqlite3').verbose();
 // const db = new sqlite3.Database('db/mediaStore.sqlite');
 
-const { generateTypes } = require('./product-types');
-const { generateUsers } = require('./users');
-const { generateProducts } = require('./products');
-const { generateEmployees } = require('./employees');
-const { generateDepartments } = require('./departments');
-const { generatePaymentTypes } = require('./payment-types');
-const { generateTrainingPrograms } = require('./training-programs');
-const { generateOrders } = require('./orders');
-const { generateComputers } = require('./computers');
+const { generateTypes } = require('./faker/product-types');
+const { generateUsers } = require('./faker/users');
+const { generateProducts } = require('./faker/products');
+const { generateEmployees } = require('./faker/employees');
+const { generateDepartments } = require('./faker/departments');
+const { generatePaymentTypes } = require('./faker/payment-types');
+const { generateTrainingPrograms } = require('./faker/training-programs');
+const { generateOrders } = require('./faker/orders');
+const { generateComputers } = require('./faker/computers');
 //for each table, generate the number specified in generatorAmounts.json
 const { amounts: {
   numComputers,
@@ -24,7 +24,7 @@ const { amounts: {
   numProducts,
   numTrainingPrograms,
   numUsers
-} } = require('./generatorAmounts.json');
+} } = require('./faker/generatorAmounts.json');
 
 //first argument will be the above return from amounts json
 //create product types
@@ -41,3 +41,5 @@ let employees = generateEmployees(numEmployees);
 let departments = generateDepartments(numDepartments, employees.length);
 let trainingPrograms = generateTrainingPrograms(numTrainingPrograms);
 let computers = generateComputers(numComputers);
+
+console.log(users);
