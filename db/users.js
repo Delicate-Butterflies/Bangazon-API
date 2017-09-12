@@ -3,30 +3,30 @@
 // generate a bunch of customers with Faker
 const faker = require('faker');
 
-module.exports.generateCustomers = () => {
-  let customers = [];
+module.exports.generateUsers = () => {
+  let users = [];
 
   for (let i = 0; i < 50; i++) {
     let firstName = faker.name.firstName();
     let lastName = faker.name.lastName();
     let phoneNumber = faker.phone.phoneNumberFormat();
     let email = faker.internet.email();
-    let addressStreet = faker.address.streetAddress();
-    let addressCity = faker.address.city();
-    let addressState = faker.address.state();
-    let addressZip = faker.address.zipCode();
+    // let address_street = faker.address.streetAddress();
+    // let address_city = faker.address.city();
+    // let address_state = faker.address.state();
+    // let address_zip = faker.address.zipCode();
 
-    customers.push({
+    users.push({
       "first_name": firstName,
       "last_name": lastName,
       "phone": phoneNumber,
-      email,
-      addressStreet,
-      addressCity,
-      addressState,
-      addressZip
+      // address_street,
+      // address_city,
+      // address_state,
+      // address_zip,
+      email
     });
   }
 
-  return customers;
+  return users;
 };

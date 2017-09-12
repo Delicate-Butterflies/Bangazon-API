@@ -1,27 +1,30 @@
 'use strict';
 
-// generate a bunch of customers with Faker
+// generate some employees with Faker
 const faker = require('faker');
 
-module.exports.generateCustomers = () => {
-  let customers = [];
+module.exports.generateEmployees = () => {
+  let employees = [];
 
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 30; i++) {
     let firstName = faker.name.firstName();
     let lastName = faker.name.lastName();
     let phoneNumber = faker.phone.phoneNumberFormat();
     let email = faker.internet.email();
-    //let department_id = ();
+    let jobTitle = faker.name.jobType();
+    //there are 10 departments currently, assign the employee to one
+    let department_id = Math.floor(Math.random() * 10) + 1;
 
 
-    customers.push({
+    employees.push({
       "first_name": firstName,
       "last_name": lastName,
       "phone": phoneNumber,
+      "job_title": jobTitle,
       email,
-      //department id
+      department_id
     });
   }
 
-  return customers;
+  return employees;
 };

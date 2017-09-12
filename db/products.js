@@ -11,14 +11,14 @@ module.exports.generateProducts = (typesLen, customersLen) => {
     let price = faker.commerce.price();
     let description = faker.lorem.sentence();
     let type_id = Math.floor(Math.random() * typesLen) + 1;
-    let customer_id = Math.floor(Math.random() * customersLen) + 1;
+    let seller_user_id = Math.floor(Math.random() * customersLen) + 1;
 
     products.push({
       title,
       price,
       description,
       type_id,
-      customer_id
+      seller_user_id
     });
   }
   return products;
