@@ -1,5 +1,5 @@
 {
-  "name": "Read-Only-API",
+  "name": "Bangazon-API",
   "version": "1.0.0",
   "description": "Bangazon-corp's employees, products and users database",
   "main": "index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Delicate-Butterflies/Read-Only-API.git"
+    "url": "git+https://github.com/Delicate-Butterflies/Bangazon-API.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Delicate-Butterflies/Read-Only-API/issues"
+    "url": "https://github.com/Delicate-Butterflies/Bangazon-API/issues"
   },
-  "homepage": "https://github.com/Delicate-Butterflies/Read-Only-API#readme",
+  "homepage": "https://github.com/Delicate-Butterflies/Bangazon-API#readme",
   "dependencies": {
     "chai": "^4.1.2",
     "dotenv": "^4.0.0",
