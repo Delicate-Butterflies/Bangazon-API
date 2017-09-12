@@ -8,3 +8,4 @@ Bangazon-corp's employees, products and users database
 ## How to Install?
 - clone the project down ```git clone```
 - run ```npm install``` from the root of the directory to install all the dependencies
+- set up the database using ```db:reset``` command in terminal
