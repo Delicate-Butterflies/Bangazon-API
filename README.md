@@ -1,4 +1,4 @@
-# Read-Only-API
+# Bangazon API
 Bangazon-corp's employees, products and users database
 
 ## Software Requirement
