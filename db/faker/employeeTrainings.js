@@ -2,15 +2,16 @@
 // using Faker to generate a some departments
 const faker = require('faker');
 
-module.exports.generateEmployeeTrainings = (numEmployeeTrainings, numEmployees, numTrainingPrograms) => {
+const { amounts: {numEmployees, numTrainingPrograms}} = require('./generatorAmounts.json');
+
+module.exports.generateEmployeeTrainings = () => {
   let employeeTrainings = [];
 
-  for (let i = 0; i < numEmployeeTrainings; i++) {
-    let program_id = Math.floor(Math.random() * numTrainingPrograms) + 1;;
+  for (let i = 1; i <= numTrainingPrograms; i++) {
     let employee_id = Math.floor(Math.random() * numEmployees) + 1;;
 
     employeeTrainings.push({
-      program_id,
+      program_id: i,
       employee_id
     });
   }

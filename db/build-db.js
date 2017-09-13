@@ -26,6 +26,9 @@ let employees = generateEmployees();
 let departments = generateDepartments(employees.length);
 let trainingPrograms = generateTrainingPrograms();
 let computers = generateComputers();
+let employeeTrainings = generateEmployeeTrainings();
+let employeeComputers = generateEmployeeComputers();
+
 
 db.serialize(function() {
   
