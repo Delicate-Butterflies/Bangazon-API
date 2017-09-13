@@ -1,6 +1,6 @@
 'use strict';
 
-//will need to push this all to DB:
+// will need to push this all to DB:
 // const sqlite3 = require('sqlite3').verbose();
 // const db = new sqlite3.Database('db/mediaStore.sqlite');
 
@@ -14,8 +14,8 @@ const { generateTrainingPrograms } = require('./faker/training-programs');
 const { generateOrders } = require('./faker/orders');
 const { generateComputers } = require('./faker/computers');
 
-//first argument will be the above return from amounts json
-//create product types
+// first argument will be the above return from amounts json
+// create product types
 let productTypes = generateTypes();
 // Create user collection...
 let users = generateUsers();
@@ -24,7 +24,7 @@ let products = generateProducts(productTypes.length, users.length);
 let payments = generatePaymentTypes(users.length);
 let orders = generateOrders(users.length, payments.length);
 
-//same process for Bangazon company info:
+// same process for Bangazon company info:
 let employees = generateEmployees();
 let departments = generateDepartments(employees.length);
 let trainingPrograms = generateTrainingPrograms();
