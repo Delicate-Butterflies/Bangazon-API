@@ -26,7 +26,7 @@ let employees = generateEmployees();
 let departments = generateDepartments(employees.length);
 let trainingPrograms = generateTrainingPrograms();
 let computers = generateComputers();
-let employeeTrainings = generateEmployeeTrainings();
+let employeeTrainings = generateEmployeeTrainings(trainingPrograms);
 let employeeComputers = generateEmployeeComputers();
 
 
