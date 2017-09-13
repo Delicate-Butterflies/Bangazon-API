@@ -3,39 +3,24 @@
 const { Router } = require('express');
 const router = Router();
 
-function makeRoutes(tableName) {
-	router.use(require(`./api/v1/${tableName}`));
-	router.use(require(`./api/v1/${tableName}/:id`));
-	router.use(require(`./api/v1/${tableName}/add-new`));
-	router.use(require(`./api/v1/${tableName}/:id/edit`));
-}
-
-function makeRoutesWithDelete(tableName) {
-	router.use(require(`./api/v1/${tableName}`));
-	router.use(require(`./api/v1/${tableName}/:id`));
-	router.use(require(`./api/v1/${tableName}/add-new`));
-	router.use(require(`./api/v1/${tableName}/:id/edit`));
-	router.use(require(`./api/v1/${tableName}/:id/delete`));
-}
+router.use(require('./api/v1/employee'));
+router.use(require('./api/v1/department'));
+router.use(require('./api/v1/computer'));
+router.use(require('./api/v1/training-program'));
+router.use(require('./api/v1/user'));
+router.use(require('./api/v1/product-type'));
+router.use(require('./api/v1/product'));
+router.use(require('./api/v1/order'));
+router.use(require('./api/v1/payment-type'));
 
 // employee (GET, POST, PUT)
-makeRoutes("employee");
-console.log(makeRoutes("employee"));
 // department (GET, POST, PUT)
-makeRoutes("department");
 // computer (GET, POST, PUT, DELETE)
-makeRoutesWithDelete("computer");
 // training program (GET, POST, PUT, DELETE)
-makeRoutesWithDelete("training-program");
 // user (GET, POST, PUT)
-makeRoutes("user");
 // product type (GET, POST, PUT, DELETE)
-makeRoutesWithDelete("product-type");
 // product (GET, POST, PUT, DELETE)
-makeRoutes("product");
 // order (GET, POST, PUT, DELETE)
-makeRoutesWithDelete("order");
 // payment type (GET, POST, PUT, DELETE)
-makeRoutesWithDelete("payment-type");
 
 module.exports = router;
