@@ -30,6 +30,26 @@ let departments = generateDepartments( employees.length);
 let trainingPrograms = generateTrainingPrograms();
 let computers = generateComputers();
 
-const createProduct = require('./table/product-table');
-const createUser = require('./table/user-table');
-const createOrder = require('./table/order-table');
+
+
+const makeOrders = require('./table/order-table')
+const makeProducts = require('./table/product-table')
+const makeOrderProducts = require('./table/order-product-table')
+
+makeProducts(products)
+.then( (data) => {
+  console.log("Recieved products?: ", data)
+})
+
+makeOrders(orders)
+.then( (data) => {
+  console.log("Recieved orders?: ", data);
+})
+.catch( (err) => {
+  console.log("Erroooorrrr:",err);
+})
+
+makeOrderProducts(orders, products)
+.then( (data) => {
+  console.log("Recieved join table?: ", data);
+})
