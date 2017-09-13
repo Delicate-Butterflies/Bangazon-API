@@ -8,6 +8,8 @@
     "numPaymentTypes": 175,
     "numProducts": 50,
     "numTrainingPrograms": 10,
-    "numDepartments": 8
+    "numDepartments": 8,
+    "numEmployeeTrainings": 25,
+    "numEmployeeComputers": 40
   }
 }
