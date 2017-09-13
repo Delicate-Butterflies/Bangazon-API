@@ -9,7 +9,7 @@ const db = new sqlite3.Database('bangazon.sqlite', (err) => {
 
 //product_type table needs to be created before product table.
 module.exports = (products) => {
-    // return new Promise ((resolve, reject) => {
+    return new Promise ((resolve, reject) => {
     db.serialize( () => {
             db.run(`DROP TABLE IF EXISTS product`);
             db.run(`CREATE TABLE IF NOT EXISTS product( 
@@ -26,11 +26,9 @@ module.exports = (products) => {
                     VALUES('${product.type_id}', '${product.price}', '${product.title}', '${product.description}', '${product.original_quantity}', '${product.seller_user_id}')`, (err, data) => {
                         if(err)
                             console.log(err.toString());
-                        else
-                            console.log(data);
-                            // resolve(data);
+                        resolve("Done");
                     });
                 });
             });
-    // })
+    })
 }

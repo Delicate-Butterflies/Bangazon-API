@@ -21,18 +21,18 @@ let productTypes = generateTypes();
 let users = generateUsers();
 // Pass the users' length and the product types' length, (along with generator amount) into the function to create products, so we can randomly assign customer and product type ids to each product
 
-let payments = generatePaymentTypes(numPaymentTypes, users.length);
-let orders = generateOrders(numOrders, users.length, payments.length);
-let products = generateProducts(numProducts, productTypes.length, users.length);
+let payments = generatePaymentTypes(users.length);
+let orders = generateOrders(users.length, payments.length);
+let products = generateProducts( productTypes.length, users.length);
 //same process for Bangazon company info:
-let employees = generateEmployees(numEmployees);
-let departments = generateDepartments(numDepartments, employees.length);
-let trainingPrograms = generateTrainingPrograms(numTrainingPrograms);
-let computers = generateComputers(numComputers);
+let employees = generateEmployees();
+let departments = generateDepartments( employees.length);
+let trainingPrograms = generateTrainingPrograms();
+let computers = generateComputers();
 
-const createProduct = require('./table/product');
+const createProduct = require('./table/product-table');
 
 createProduct(products)
-// .then( (data) => {
-//   console.log("resolved data", data);
-// })
+.then( (data) => {
+  console.log("resolved data", data);
+})
