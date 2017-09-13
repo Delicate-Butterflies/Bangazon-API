@@ -1,6 +1,6 @@
 'use strict';
 
-//will need to push this all to DB:
+// will need to push this all to DB:
 // const sqlite3 = require('sqlite3').verbose();
 // const db = new sqlite3.Database('db/mediaStore.sqlite');
 
@@ -13,31 +13,19 @@ const { generatePaymentTypes } = require('./faker/payment-types');
 const { generateTrainingPrograms } = require('./faker/training-programs');
 const { generateOrders } = require('./faker/orders');
 const { generateComputers } = require('./faker/computers');
-//for each table, generate the number specified in generatorAmounts.json
-const { amounts: {
-  numComputers,
-  numDepartments,
-  numEmployees,
-  numOrders,
-  numPaymentTypes,
-  numProductTypes,
-  numProducts,
-  numTrainingPrograms,
-  numUsers
-} } = require('./faker/generatorAmounts.json');
 
-//first argument will be the above return from amounts json
-//create product types
-let productTypes = generateTypes(numProductTypes);
+// first argument will be the above return from amounts json
+// create product types
+let productTypes = generateTypes();
 // Create user collection...
-let users = generateUsers(numUsers);
+let users = generateUsers();
 // Pass the users' length and the product types' length, (along with generator amount) into the function to create products, so we can randomly assign customer and product type ids to each product
-let products = generateProducts(numProducts, productTypes.length, users.length);
-let payments = generatePaymentTypes(numPaymentTypes, users.length);
-let orders = generateOrders(numOrders, users.length, payments.length);
+let products = generateProducts(productTypes.length, users.length);
+let payments = generatePaymentTypes(users.length);
+let orders = generateOrders(users.length, payments.length);
 
-//same process for Bangazon company info:
-let employees = generateEmployees(numEmployees);
-let departments = generateDepartments(numDepartments, employees.length);
-let trainingPrograms = generateTrainingPrograms(numTrainingPrograms);
-let computers = generateComputers(numComputers);
+// same process for Bangazon company info:
+let employees = generateEmployees();
+let departments = generateDepartments(employees.length);
+let trainingPrograms = generateTrainingPrograms();
+let computers = generateComputers();

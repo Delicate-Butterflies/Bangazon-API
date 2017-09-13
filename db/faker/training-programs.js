@@ -1,8 +1,9 @@
 'use strict';
 // using Faker to generate a some departments
 const faker = require('faker');
+const { amounts: { numTrainingPrograms } } = require('./generatorAmounts.json');
 
-module.exports.generateTrainingPrograms = (numTrainingPrograms) => {
+module.exports.generateTrainingPrograms = () => {
   let programs = [];
 
   for (let i = 0; i < numTrainingPrograms; i++) {
