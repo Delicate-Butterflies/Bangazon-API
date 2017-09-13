@@ -1,6 +1,5 @@
 'use strict';
 
-//will need to push this all to DB:
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('db/bangazon.sqlite');
 
@@ -16,45 +15,20 @@ const { generateComputers } = require('./faker/computers');
 const { generateEmployeeTrainings } = require('./faker/employeeTrainings');
 const { generateEmployeeComputers } = require('./faker/employeeComputers');
 
-// for each table, generate the number specified in generatorAmounts.json
-const { amounts: {
-  numComputers,
-  numDepartments,
-  numEmployees,
-  numOrders,
-  numPaymentTypes,
-  numProductTypes,
-  numProducts,
-  numTrainingPrograms,
-  numUsers,
-  numEmployeeTrainings,
-  numEmployeeComputers
-} } = require('./faker/generatorAmounts.json');
-
-// first argument will be the above return from amounts json
-// create product types
-let productTypes = generateTypes(numProductTypes);
-// Create user collection...
-let users = generateUsers(numUsers);
-// Pass the users' length and the product types' length, (along with generator amount) into the function to create products, so we can randomly assign customer and product type ids to each product
-let products = generateProducts(numProducts, productTypes.length, users.length);
-let payments = generatePaymentTypes(numPaymentTypes, users.length);
-let orders = generateOrders(numOrders, users.length, payments.length);
-
-// same process for Bangazon company info:
-let employees = generateEmployees(numEmployees);
-let departments = generateDepartments(numDepartments, employees.length);
-let trainingPrograms = generateTrainingPrograms(numTrainingPrograms);
-let computers = generateComputers(numComputers);
-
-// employee-training join table
-let employeeTrainings = generateEmployeeTrainings(numEmployeeTrainings, numEmployees, numTrainingPrograms);
-// employee-computer join table
-let employeeComputers = generateEmployeeComputers(numEmployeeComputers, numEmployees, numComputers);
-
+let productTypes = generateTypes();
+let users = generateUsers();
+// following depend on previously generated arrays:
+let products = generateProducts(productTypes.length, users.length);
+let payments = generatePaymentTypes(users.length);
+let orders = generateOrders(users.length, payments.length);
+//same process for Bangazon company info:
+let employees = generateEmployees();
+let departments = generateDepartments(employees.length);
+let trainingPrograms = generateTrainingPrograms();
+let computers = generateComputers();
 
 db.serialize(function() {
-
+  
   //begin employee table creation
 
   db.run(`DROP TABLE IF EXISTS employee`);
@@ -77,7 +51,6 @@ db.serialize(function() {
             VALUES (${department_id}, "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", ${zip_code})`);
   });
 
-
   // begin training_program table creation
 
   db.run(`DROP TABLE IF EXISTS training_program`);
@@ -94,7 +67,6 @@ db.serialize(function() {
     db.run(`INSERT INTO training_program (start_date, end_date, max_attendance, title) 
             VALUES ("${start_date}", "${end_date}", ${max_attendance}, "${title}")`);
   });
-
 
   // begin department table creation
 

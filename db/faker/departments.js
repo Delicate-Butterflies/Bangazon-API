@@ -1,8 +1,9 @@
 'use strict';
 // using Faker to generate a some departments
 const faker = require('faker');
+const { amounts: { numDepartments } } = require('./generatorAmounts.json');
 
-module.exports.generateDepartments = (numDepartments, employeeLength) => {
+module.exports.generateDepartments = (employeeLength) => {
   let departments = [];
 
   //number of departments changes, must change corresponding value in employees.js department declaration

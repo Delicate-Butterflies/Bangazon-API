@@ -12,3 +12,6 @@ Bangazon-corp's employees, products and users database
 
 ## How to get started?
 - make your own .env file at the root of the project using .env.example file as a guide.
+
+## Third Party Libraries
+- Express

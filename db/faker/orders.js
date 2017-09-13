@@ -2,8 +2,9 @@
 
 // using Faker to generate orders
 const faker = require('faker');
+const { amounts: { numOrders } } = require('./generatorAmounts.json');
 
-module.exports.generateOrders = (numOrders, usersLen, paymentTypesLen) => {
+module.exports.generateOrders = (usersLen, paymentTypesLen) => {
   let orders = [];
 
   for (let i = 0; i < numOrders; i++) {
