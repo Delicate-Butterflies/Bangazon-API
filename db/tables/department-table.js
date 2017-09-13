@@ -9,24 +9,32 @@ const { amounts: { numDepartments, numEmployees } } = require('../faker/generato
 
 let departments = generateDepartments(numDepartments, numEmployees);
 
-module.exports = () => {
+module.exports = (departmentsArray) => {
 
-  db.serialize(function() {
+  return new Promise((resolve, reject)=>{
+
+    db.serialize(function() {
+      
+      db.run(`DROP TABLE IF EXISTS department`);
     
-    db.run(`DROP TABLE IF EXISTS department`);
+      db.run(`CREATE TABLE IF NOT EXISTS department (
+        id INTEGER PRIMARY KEY,
+        supervisor_employee_id INT, 
+        expense_budget INT NOT NULL,
+        name TEXT NOT NULL)`
+      );
+    
+      departmentsArray.forEach( ({supervisor_employee_id, expense_budget, name}) => {
+        db.run(`INSERT INTO department (supervisor_employee_id, expense_budget, name) 
+                VALUES (${supervisor_employee_id}, ${expense_budget}, "${name}")`);
+      });
+
+      db.close();
   
-    db.run(`CREATE TABLE IF NOT EXISTS department (
-      id INTEGER PRIMARY KEY,
-      supervisor_employee_id INT, 
-      expense_budget INT NOT NULL,
-      name TEXT NOT NULL)`
-    );
-  
-    departments.forEach( ({supervisor_employee_id, expense_budget, name}) => {
-      db.run(`INSERT INTO department (supervisor_employee_id, expense_budget, name) 
-              VALUES (${supervisor_employee_id}, ${expense_budget}, "${name}")`);
+      resolve('department table created and populated');
+    
     });
-  
+
   });
 
 };

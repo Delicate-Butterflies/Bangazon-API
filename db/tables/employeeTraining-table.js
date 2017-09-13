@@ -9,23 +9,31 @@ const { amounts: { numEmployeeTrainings, numEmployees, numTrainingPrograms } } =
 
 let employeeTrainings = generateEmployeeTrainings(numEmployeeTrainings, numEmployees, numTrainingPrograms);
 
-module.exports = () => {
+module.exports = (employeeTrainingsArray) => {
 
-  db.serialize(function() {
+  return new Promise((resolve, reject)=>{
+
+    db.serialize(function() {
+      
+      db.run(`DROP TABLE IF EXISTS employeeTraining`);
     
-    db.run(`DROP TABLE IF EXISTS employeeTraining`);
+      db.run(`CREATE TABLE IF NOT EXISTS employeeTraining (
+        id INTEGER PRIMARY KEY,
+        program_id INT, 
+        employee_id INT)`
+      );
+    
+      employeeTrainingsArray.forEach( ({program_id, employee_id}) => {
+        db.run(`INSERT INTO employeeTraining (program_id, employee_id) 
+                VALUES (${program_id}, ${employee_id})`);
+      });
+
+      db.close();
   
-    db.run(`CREATE TABLE IF NOT EXISTS employeeTraining (
-      id INTEGER PRIMARY KEY,
-      program_id INT, 
-      employee_id INT)`
-    );
-  
-    employeeTrainings.forEach( ({program_id, employee_id}) => {
-      db.run(`INSERT INTO employeeTraining (program_id, employee_id) 
-              VALUES (${program_id}, ${employee_id})`);
+      resolve('employeeTraining table created and populated');
+    
     });
-  
+
   });
 
 };

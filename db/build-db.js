@@ -4,11 +4,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('db/bangazon.sqlite');
 
-// const createEmployeeTable = require('./tables/employee-table');
-// const createTrainingProgramTable = require('./tables/training-program-table');
-// const createDepartmentsTable = require('./tables/department-table');
-// const createComputerTable = require('./tables/computer-table');
-
 const { generateTypes } = require('./faker/product-types');
 const { generateUsers } = require('./faker/users');
 const { generateProducts } = require('./faker/products');
@@ -60,13 +55,7 @@ let employeeComputers = generateEmployeeComputers(numEmployeeComputers, numEmplo
 
 db.serialize(function() {
 
-  // createEmployeeTable();
-  // createTrainingProgramTable();
-  // createDepartmentsTable();
-  // createComputerTable();
-
-
-  // begin employee table creation
+  //begin employee table creation
 
   db.run(`DROP TABLE IF EXISTS employee`);
   
