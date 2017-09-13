@@ -2,8 +2,9 @@
 
 // generate a bunch of customers with Faker
 const faker = require('faker');
+const { amounts: { numUsers } } = require('./generatorAmounts.json');
 
-module.exports.generateUsers = (numUsers) => {
+module.exports.generateUsers = () => {
   let users = [];
 
   for (let i = 0; i < numUsers; i++) {

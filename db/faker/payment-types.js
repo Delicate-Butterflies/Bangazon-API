@@ -2,8 +2,10 @@
 
 // using Faker to generate a pile of product types and products
 const faker = require('faker');
+const { amounts: { numPaymentTypes } } = require('./generatorAmounts.json');
 
-module.exports.generatePaymentTypes = (numPaymentTypes, usersLength) => {
+
+module.exports.generatePaymentTypes = (usersLength) => {
   let payments = [];
 
   for (let i = 0; i < numPaymentTypes; i++) {
