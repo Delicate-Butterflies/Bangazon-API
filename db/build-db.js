@@ -1,6 +1,6 @@
 'use strict';
 
-//will need to push this all to DB:
+// will need to push this all to DB:
 // const sqlite3 = require('sqlite3').verbose();
 // const db = new sqlite3.Database('db/mediaStore.sqlite');
 
@@ -14,29 +14,13 @@ const { generateTrainingPrograms } = require('./faker/training-programs');
 const { generateOrders } = require('./faker/orders');
 const { generateComputers } = require('./faker/computers');
 
-//requiring modules to create tables.
-
-
-
-//for each table, generate the number specified in generatorAmounts.json
-const { amounts: {
-  numComputers,
-  numDepartments,
-  numEmployees,
-  numOrders,
-  numPaymentTypes,
-  numProductTypes,
-  numProducts,
-  numTrainingPrograms,
-  numUsers
-} } = require('./faker/generatorAmounts.json');
-
-//first argument will be the above return from amounts json
-//create product types
-let productTypes = generateTypes(numProductTypes);
+// first argument will be the above return from amounts json
+// create product types
+let productTypes = generateTypes();
 // Create user collection...
-let users = generateUsers(numUsers);
+let users = generateUsers();
 // Pass the users' length and the product types' length, (along with generator amount) into the function to create products, so we can randomly assign customer and product type ids to each product
+
 let payments = generatePaymentTypes(numPaymentTypes, users.length);
 let orders = generateOrders(numOrders, users.length, payments.length);
 let products = generateProducts(numProducts, productTypes.length, users.length);

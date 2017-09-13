@@ -2,8 +2,9 @@
 
 // generate some employees with Faker
 const faker = require('faker');
+const { amounts: { numEmployees } } = require('./generatorAmounts.json');
 
-module.exports.generateEmployees = (numEmployees) => {
+module.exports.generateEmployees = () => {
   let employees = [];
 
   for (let i = 0; i < numEmployees; i++) {
