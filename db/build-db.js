@@ -20,9 +20,15 @@ let users = generateUsers();
 let products = generateProducts(productTypes.length, users.length);
 let payments = generatePaymentTypes(users.length);
 let orders = generateOrders(users.length, payments.length);
-
-// same process for Bangazon company info:
+//same process for Bangazon company info:
 let employees = generateEmployees();
 let departments = generateDepartments(employees.length);
 let trainingPrograms = generateTrainingPrograms();
 let computers = generateComputers();
+
+const createProduct = require('./table/product-table');
+
+createProduct(products)
+  .then((data) => {
+    console.log("resolved data", data);
+  })
