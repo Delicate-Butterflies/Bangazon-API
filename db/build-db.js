@@ -31,8 +31,5 @@ let trainingPrograms = generateTrainingPrograms();
 let computers = generateComputers();
 
 const createProduct = require('./table/product-table');
-
-createProduct(products)
-.then( (data) => {
-  console.log("resolved data", data);
-})
+const createUser = require('./table/user-table');
+const createOrder = require('./table/order-table');
