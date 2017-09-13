@@ -15,3 +15,6 @@ Bangazon-corp's employees, products and users database
 
 ## Third Party Libraries
 - Express
+
+## For usage directions
+- go to ```api/v#/```

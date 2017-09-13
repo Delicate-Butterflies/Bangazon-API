@@ -1,4 +1,4 @@
 node_modules
 bangazon.sqlite
 .env
-.sqlite
+bangazon.sqlite
