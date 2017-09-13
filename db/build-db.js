@@ -13,6 +13,11 @@ const { generatePaymentTypes } = require('./faker/payment-types');
 const { generateTrainingPrograms } = require('./faker/training-programs');
 const { generateOrders } = require('./faker/orders');
 const { generateComputers } = require('./faker/computers');
+
+//requiring modules to create tables.
+
+
+
 //for each table, generate the number specified in generatorAmounts.json
 const { amounts: {
   numComputers,
@@ -32,12 +37,18 @@ let productTypes = generateTypes(numProductTypes);
 // Create user collection...
 let users = generateUsers(numUsers);
 // Pass the users' length and the product types' length, (along with generator amount) into the function to create products, so we can randomly assign customer and product type ids to each product
-let products = generateProducts(numProducts, productTypes.length, users.length);
 let payments = generatePaymentTypes(numPaymentTypes, users.length);
 let orders = generateOrders(numOrders, users.length, payments.length);
-
+let products = generateProducts(numProducts, productTypes.length, users.length);
 //same process for Bangazon company info:
 let employees = generateEmployees(numEmployees);
 let departments = generateDepartments(numDepartments, employees.length);
 let trainingPrograms = generateTrainingPrograms(numTrainingPrograms);
 let computers = generateComputers(numComputers);
+
+const createProduct = require('./table/product');
+
+createProduct(products)
+// .then( (data) => {
+//   console.log("resolved data", data);
+// })
