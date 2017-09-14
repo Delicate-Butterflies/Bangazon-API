@@ -3,11 +3,10 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getUsers, getSingleUser, putUser } = require('../controllers/User-Ctrl');
+const { getUsers, getSingleUser, postUser, putUser } = require('../controllers/User-Ctrl');
 
-router.get('/user', getUsers);
-router.get('/user/:id', getSingleUser);
-// router.post('/user', postUser);
-router.put('/user/:id', putUser);
-
+router.get('/users', getUsers);
+router.get('/users/:id', getSingleUser);
+router.post('/users', postUser);
+router.put('/users/:id', putUser);
 module.exports = router;
