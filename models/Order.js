@@ -49,7 +49,6 @@ module.exports = {
 
   dbPutOrder: (id) => {
     return new Promise((resolve, reject) => {
-      // TODO change employee and department to employees and departments
       db.get(`SELECT * FROM orders o
 								WHERE o.id = ${id}`, (err, orderData) => {
           if (err) {
