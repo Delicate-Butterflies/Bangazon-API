@@ -160,7 +160,7 @@ db.serialize(function () {
     id INTEGER PRIMARY KEY,
     customer_user_id INTEGER,
     type TEXT,
-    account_number TEXT, FOREIGN KEY(customer_user_id) REFERENCES user(id))`
+    account_number INTEGER, FOREIGN KEY(customer_user_id) REFERENCES user(id))`
   );
 
   payments.forEach(({ customer_user_id, type, account_number }) => {
