@@ -95,7 +95,7 @@ db.serialize(function () {
     id INTEGER PRIMARY KEY,
     purchase_date TEXT NOT NULL,
     decommission_date TEXT,
-    serial_number TEXT)`
+    serial_number TEXT NOT NULL)`
   );
 
   computers.forEach(({ purchase_date, decommission_date, serial_number }) => {
