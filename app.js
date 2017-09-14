@@ -3,8 +3,10 @@
 let express = require('express');
 let app = express();
 let routes = require('./routes/');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 
+app.use(bodyParser.json());
 app.use('/api/v1/', routes);
 
 app.use( (req, res, next) => {

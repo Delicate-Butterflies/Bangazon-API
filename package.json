@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Delicate-Butterflies/Bangazon-API#readme",
   "dependencies": {
+    "body-parser": "^1.18.1",
     "chai": "^4.1.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
