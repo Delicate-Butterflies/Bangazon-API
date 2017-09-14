@@ -29,9 +29,9 @@ module.exports = {
 	},
 	dbPostEmployee: (newEmployee) => {
 		return new Promise( (resolve, reject) => {
-			let { department_id, email, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code } = newEmployee;
-			db.run(`INSERT INTO employees()
-				VALUES("${department_id}", "${email}", "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", "${zip_code}")`, (err) => {
+			let { department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code } = newEmployee;
+			db.run(`INSERT INTO employees(department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code)
+				VALUES ("${department_id}", "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", "${zip_code}")`, (err) => {
 				if(err) return reject(err);
 				resolve("New field inserted");
 			});
