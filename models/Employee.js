@@ -15,17 +15,27 @@ module.exports = {
 			});
 		});
 	},
-		dbGetOneEmployee: (id) => {
-			return new Promise( (resolve, reject) => {
-				db.get(`SELECT e.id, d.name department, e.first_name, e.last_name, e.phone_number, e.job_title, e.street_address, e.city_address, e.state_code, e.zip_code
-								FROM employees e
-								JOIN departments d
-								WHERE e.department_id = d.id
-								AND e.id = ${id}`, (err, employee) => {
-									if (err) return reject(err);
-									resolve(employee)
-								});
+	dbGetOneEmployee: (id) => {
+		return new Promise( (resolve, reject) => {
+			db.get(`SELECT e.id, d.name department, e.first_name, e.last_name, e.phone_number, e.job_title, e.street_address, e.city_address, e.state_code, e.zip_code
+							FROM employees e
+							JOIN departments d
+							WHERE e.department_id = d.id
+							AND e.id = ${id}`, (err, employee) => {
+								if (err) return reject(err);
+								resolve(employee)
+							});
+		});
+	},
+	dbPostEmployee: (newEmployee) => {
+		return new Promise( (resolve, reject) => {
+			let { department_id, email, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code } = newEmployee;
+			db.run(`INSERT INTO employees()
+				VALUES("${department_id}", "${email}", "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", "${zip_code}")`, (err) => {
+				if(err) return reject(err);
+				resolve("New field inserted");
 			});
-		}
+		});
+	}
 
 }
