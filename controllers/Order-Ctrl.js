@@ -2,7 +2,7 @@
 
 const { dbGetAllOrders, dbGetOneOrder } = require('../models/Order.js');
 
-module.exports.getOrders = (req, res, next) => {
+module.exports.getAllOrders = (req, res, next) => {
   dbGetAllOrders()
     .then((orders) => {
       res.status(200).json(orders);
