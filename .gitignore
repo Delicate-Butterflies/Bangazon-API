@@ -2,3 +2,4 @@ node_modules
 bangazon.sqlite
 .env
 bangazon.sqlite
+.vscode/
