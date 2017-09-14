@@ -1,5 +1,5 @@
 {
-  "name": "Bangazon-API",
+  "name": "bangazon-api",
   "version": "1.0.0",
   "description": "Bangazon-corp's employees, products and users database",
   "main": "index.js",
