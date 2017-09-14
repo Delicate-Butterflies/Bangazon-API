@@ -19,11 +19,12 @@ module.exports = (orders, products) => {
       FOREIGN KEY(product_id) REFERENCES product(id),
       FOREIGN kEY(order_id) REFERENCES orders(id))`);
       orders.forEach( (order) => {
+        let order_id = orders.indexOf(order)+1;
         let randomProduct = Math.floor(Math.random() * totalProducts) +1;
         let qty = Math.floor(Math.random() * 5) + 1;
         for(let i=0; i<qty; i++) {
           db.run(`INSERT INTO orderProducts (product_id, order_id)
-            VALUES('${randomProduct}', ${order.id})`, (err, data) => {
+            VALUES('${randomProduct}', ${order_id})`, (err, data) => {
               if(err)
                   console.log(err.toString());
               resolve("Done");

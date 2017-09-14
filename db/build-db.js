@@ -36,20 +36,20 @@ const makeOrders = require('./table/order-table')
 const makeProducts = require('./table/product-table')
 const makeOrderProducts = require('./table/order-product-table')
 
-makeProducts(products)
-.then( (data) => {
-  console.log("Recieved products?: ", data)
-})
+// makeProducts(products)
+// .then( (data) => {
+//   console.log("Recieved products?: ", data)
+// })
 
-makeOrders(orders)
-.then( (data) => {
-  console.log("Recieved orders?: ", data);
-})
-.catch( (err) => {
-  console.log("Erroooorrrr:",err);
-})
+// makeOrders(orders)
+// .then( (data) => {
+//   console.log("Recieved orders?: ", data);
+// })
+// .catch( (err) => {
+//   console.log("Erroooorrrr:",err);
+// })
 
-makeOrderProducts(orders, products)
-.then( (data) => {
-  console.log("Recieved join table?: ", data);
-})
+// makeOrderProducts(orders, products)
+// .then( (data) => {
+//   console.log("Recieved join table?: ", data);
+// })
