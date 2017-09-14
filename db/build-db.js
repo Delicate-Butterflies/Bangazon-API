@@ -68,7 +68,8 @@ db.serialize(function () {
 
   trainingPrograms.forEach(({ start_date, end_date, max_attendance, title }) => {
     db.run(`INSERT INTO training_programs (start_date, end_date, max_attendance, title)
-            VALUES ("${start_date}", "${end_date}", ${max_attendance}, "${title}")`);
+            VALUES ("${start_date}", "${end_date}", ${max_attendance}, "${title}")`
+    );
   });
 
   // departments table creation
@@ -83,7 +84,8 @@ db.serialize(function () {
 
   departments.forEach(({ supervisor_employee_id, expense_budget, name }) => {
     db.run(`INSERT INTO departments (supervisor_employee_id, expense_budget, name)
-            VALUES (${supervisor_employee_id}, ${expense_budget}, "${name}")`);
+            VALUES (${supervisor_employee_id}, ${expense_budget}, "${name}")`
+    );
   });
 
   // computers table creation
@@ -98,7 +100,8 @@ db.serialize(function () {
 
   computers.forEach(({ purchase_date, decommission_date, serial_number }) => {
     db.run(`INSERT INTO computers (purchase_date, decommission_date, serial_number)
-            VALUES ("${purchase_date}", "${decommission_date}", "${serial_number}")`);
+            VALUES ("${purchase_date}", "${decommission_date}", "${serial_number}")`
+    );
   });
 
   // employeesTrainings table creation
@@ -112,7 +115,8 @@ db.serialize(function () {
 
   employeeTrainings.forEach(({ program_id, employee_id }) => {
     db.run(`INSERT INTO employeesTrainings (program_id, employee_id)
-            VALUES (${program_id}, ${employee_id})`);
+            VALUES (${program_id}, ${employee_id})`
+    );
   });
 
   // employeesComputers table creation
@@ -128,7 +132,8 @@ db.serialize(function () {
 
   employeeComputers.forEach(({ employee_id, computer_id, assign_date, return_date }) => {
     db.run(`INSERT INTO employeesComputers (employee_id, computer_id, assign_date, return_date)
-            VALUES (${employee_id}, ${computer_id}, '${assign_date}', '${return_date}')`);
+            VALUES (${employee_id}, ${computer_id}, '${assign_date}', '${return_date}')`
+    );
   });
 
   // CUSTOMER DB INFO
@@ -144,7 +149,8 @@ db.serialize(function () {
 
   orders.forEach(({ customer_user_id, payment_type_id, order_date }) => {
     db.run(`INSERT INTO orders (customer_user_id, payment_type_id, order_date)
-            VALUES('${customer_user_id}', '${payment_type_id}', '${order_date}')`);
+            VALUES('${customer_user_id}', '${payment_type_id}', '${order_date}')`
+    );
   });
 
   // payment types table creation
@@ -159,7 +165,8 @@ db.serialize(function () {
 
   payments.forEach(({ customer_user_id, type, account_number }) => {
     db.run(`INSERT INTO payment_types(customer_user_id, type, account_number)
-            VALUES('${customer_user_id}', '${type}', '${account_number}')`);
+            VALUES('${customer_user_id}', '${type}', '${account_number}')`
+    );
   });
 
   // products table creation
@@ -178,7 +185,8 @@ db.serialize(function () {
 
   products.forEach(({ type_id, price, title, description, original_quantity, seller_user_id }) => {
     db.run(`INSERT INTO products(product_type_id, price, title, description, original_quantity, seller_user_id)
-            VALUES('${type_id}', '${price}', '${title}', '${description}', '${original_quantity}', '${seller_user_id}')`);
+            VALUES('${type_id}', '${price}', '${title}', '${description}', '${original_quantity}', '${seller_user_id}')`
+    );
   });
 
   // users table creation
@@ -193,11 +201,13 @@ db.serialize(function () {
     street_address TEXT,
     city_address TEXT,
     state_code TEXT,
-    zip_code TEXT )`);
+    zip_code TEXT )`
+  );
 
   users.forEach(({ first_name, last_name, account_created_date, last_login_date, address_street, address_city, address_state, address_zip }) => {
     db.run(`INSERT INTO users (first_name, last_name, account_created_date, last_login_date, street_address, city_address, state_code, zip_code)
-            VALUES("${first_name}", "${last_name}", '${account_created_date}', '${last_login_date}', "${address_street}",  "${address_city}", '${address_state}', '${address_zip}')`);
+            VALUES("${first_name}", "${last_name}", '${account_created_date}', '${last_login_date}', "${address_street}",  "${address_city}", '${address_state}', '${address_zip}')`
+    );
   });
 
   // product types table creation
@@ -205,11 +215,13 @@ db.serialize(function () {
 
   db.run(`CREATE TABLE product_types (
           id INTEGER PRIMARY KEY,
-          name TEXT)`);
+          name TEXT)`
+  );
 
   productTypes.forEach(({ name }) => {
     db.run(`INSERT INTO product_types (name)
-            VALUES('${name}')`);
+            VALUES('${name}')`
+    );
   });
 
   // ordersProducts join table creation
@@ -220,7 +232,8 @@ db.serialize(function () {
           product_id INTEGER NOT NULL,
           order_id INTEGER NOT NULL,
           FOREIGN KEY(product_id) REFERENCES product(id),
-          FOREIGN kEY(order_id) REFERENCES orders(id))`);
+          FOREIGN kEY(order_id) REFERENCES orders(id))`
+  );
 
   const { amounts: { maxQuantity } } = require('./faker/generatorAmounts.json');
   orders.forEach((order, index) => {
@@ -231,7 +244,8 @@ db.serialize(function () {
     let qty = Math.floor(Math.random() * maxQuantity) + 1;
     for (let i = 0; i < qty; i++) {
       db.run(`INSERT INTO ordersProducts (product_id, order_id)
-            VALUES('${randomProduct}', ${order_id})`);
+            VALUES('${randomProduct}', ${order_id})`
+      );
     }
   });
 
