@@ -2,17 +2,17 @@
 
 // using Faker to generate a pile of product types and products
 const faker = require('faker');
-const { amounts: { numProducts } } = require('./generatorAmounts.json');
+const { amounts: { numProducts, numProductTypes, numUsers } } = require('./generatorAmounts.json');
 
-module.exports.generateProducts = (typesLen, customersLen) => {
+module.exports.generateProducts = () => {
   let products = [];
 
   for (let i = 0; i < numProducts; i++) {
     let title = faker.commerce.productName();
     let price = faker.commerce.price();
     let description = faker.lorem.sentence();
-    let type_id = Math.floor(Math.random() * typesLen) + 1;
-    let seller_user_id = Math.floor(Math.random() * customersLen) + 1;
+    let type_id = Math.floor(Math.random() * numProductTypes) + 1;
+    let seller_user_id = Math.floor(Math.random() * numUsers) + 1;
     let original_quantity = Math.floor((faker.random.number()) / 1000);
 
     products.push({
