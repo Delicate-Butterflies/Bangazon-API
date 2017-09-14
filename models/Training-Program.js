@@ -7,7 +7,7 @@ module.exports = {
     dbPostTrainingProgram: (newTrainingProgram) => {
         return new Promise((resolve, reject) => {
             let { start_date, end_date, max_attendance, title } = newTrainingProgram;
-            db.run(`INSERT INTO training_program (start_date, end_date, max_attendance, title)
+            db.run(`INSERT INTO training_programs (start_date, end_date, max_attendance, title)
           VALUES ("${start_date}", "${end_date}", ${max_attendance}, "${title}")`, (err) => {
                 if (err) return reject(err);
                 resolve("New field inserted");
