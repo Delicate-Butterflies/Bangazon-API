@@ -23,7 +23,6 @@ module.exports = {
   },
   dbDeleteOneComputer: (id) => {
     return new Promise((resolve, reject) => {
-      console.log('test sql query', `DELETE FROM computers WHERE id = ${id}`);
       db.run(`DELETE FROM computers WHERE id = ${id}`, function(err) {
         if(err) return reject(err);
         resolve({message: "delete successful", rows_deleted: this.changes});
