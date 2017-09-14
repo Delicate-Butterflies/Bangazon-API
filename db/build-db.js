@@ -21,14 +21,15 @@ const { generateEmployeeComputers } = require('./faker/employeeComputers');
 let productTypes = generateTypes();
 let users = generateUsers();
 // following depend on previously generated arrays:
-let products = generateProducts(productTypes.length, users.length);
-let payments = generatePaymentTypes(users.length);
-let orders = generateOrders(users.length, payments.length);
+let products = generateProducts();
+let payments = generatePaymentTypes();
+let orders = generateOrders();
 // same process for Bangazon company info:
 let employees = generateEmployees();
-let departments = generateDepartments(employees.length);
+let departments = generateDepartments();
 let trainingPrograms = generateTrainingPrograms();
 let computers = generateComputers();
+//pass trainingPrograms into join table generation
 let employeeTrainings = generateEmployeeTrainings(trainingPrograms);
 let employeeComputers = generateEmployeeComputers();
 
