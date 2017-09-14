@@ -9,12 +9,12 @@ module.exports.generateOrders = (usersLen, paymentTypesLen) => {
 
   for (let i = 0; i < numOrders; i++) {
     let order_date = faker.date.past().toISOString(); //generates an ISO formate date string
-    let product_type_id = Math.floor(Math.random() * paymentTypesLen) + 1;
+    let payment_type_id = Math.floor(Math.random() * paymentTypesLen) + 1;
     let customer_user_id = Math.floor(Math.random() * usersLen) + 1;
 
     orders.push({
       order_date,
-      product_type_id,
+      payment_type_id,
       customer_user_id
     });
   }
