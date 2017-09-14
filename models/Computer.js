@@ -12,5 +12,15 @@ module.exports = {
         resolve(computersData); 
       });
     });
+  },
+  dbGetOneComputer: (id) => {
+    return new Promise( (resolve, reject) => {
+      //TODO: don't forget that the table will change
+      db.get(`SELECT * FROM computer
+              WHERE id = ${id}`, (err, computerData) => {
+        if(err) return reject(err);
+        resolve(computerData); 
+      });
+    });
   }
 }

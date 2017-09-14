@@ -3,10 +3,10 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getComputers } = require('../controllers/Computer-Ctrl');
+const { getComputers, getSingleComputer } = require('../controllers/Computer-Ctrl');
 
 router.get('/computers', getComputers);
-// router.get('/computers/:id', getSingleComputer);
+router.get('/computers/:id', getSingleComputer);
 // router.post('/computers', postComputer);
 // router.put('/computers/:id', putComputer);
 // router.delete('/computers/:id', deleteComputer);
