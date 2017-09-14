@@ -3,7 +3,7 @@
 const { Router } = require('express');
 const router = Router();
 
-// const { } = require('../controllers/Employee-Ctrl');
+const { getEmployees } = require('../controllers/Employee-Ctrl');
 
 router.get('/employee', getEmployees);
 router.get('/employee/:id', getSingleEmployee);
