@@ -10,6 +10,7 @@
     "numTrainingPrograms": 10,
     "numDepartments": 8,
     "numEmployeeTrainings": 25,
-    "numEmployeeComputers": 40
+    "numEmployeeComputers": 40,
+    "maxQuantity": 10
   }
 }
