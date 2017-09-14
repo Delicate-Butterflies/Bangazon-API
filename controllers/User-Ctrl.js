@@ -6,7 +6,7 @@ module.exports = {
   getUsers: (res, req, next) => {
   dbGetAllUsers()
   .then( (userData) => {
-    console.log(userData);
+    console.log("recieved");
     res.status(200).json(userData);
   })
   .catch( (err) => 
