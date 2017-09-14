@@ -29,23 +29,25 @@ module.exports = {
           resolve(orderData);
         });
     });
-  }
+  },
 
-  dbPostOrder: ({ }) => {
+  dbPostOrder: (newOrder) => {
     return new Promise((resolve, reject) => {
-      db.post(`INSERT INTO orders
-								WHERE o.id = ${id}`, (err, orderData) => {
+      let { customer_user_id, payment_type_id, order_date } = newOrder;
+      if (!order_date) order_date = new Date().toISOString();
+      db.run(`INSERT INTO orders
+        (customer_user_id, payment_type_id, order_date)
+        VALUES (${customer_user_id}, ${payment_type_id}, '${order_date}')`,
+        (err) => {
           if (err) {
-            console.log(err);
             return reject(err);
           }
-          console.log(orderData);
-          resolve(orderData);
+          resolve("New Order Added");
         });
     });
-  }
+  },
 
-dbPutOrder: (id) => {
+  dbPutOrder: (id) => {
     return new Promise((resolve, reject) => {
       // TODO change employee and department to employees and departments
       db.get(`SELECT * FROM orders o
@@ -58,9 +60,9 @@ dbPutOrder: (id) => {
           resolve(orderData);
         });
     });
-  }
+  },
 
-dbDeleteOrder: (id) => {
+  dbDeleteOrder: (id) => {
     return new Promise((resolve, reject) => {
       // TODO change employee and department to employees and departments
       db.get(`SELECT * FROM orders o
