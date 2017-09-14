@@ -3,7 +3,7 @@
 const { Router } = require('express');
 const router = Router();
 
-// router.use(require('./employees'));
+router.use(require('./employees'));
 // router.use(require('./departments'));
 router.use(require('./computers'));
 // router.use(require('./training-programs'));
