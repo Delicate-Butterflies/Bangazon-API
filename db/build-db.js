@@ -140,7 +140,7 @@ db.serialize(function () {
     id INTEGER PRIMARY KEY,
     customer_user_id INTEGER,
     payment_type_id INTEGER,
-    order_date TEXT, FOREIGN KEY(customer_user_id) REFERENCES user(id)`
+    order_date TEXT, FOREIGN KEY(customer_user_id) REFERENCES user(id) )`
   );
 
   orders.forEach(({ customer_user_id, payment_type_id, order_date }) => {
@@ -154,16 +154,16 @@ db.serialize(function () {
   db.run(`CREATE TABLE payment_types (
     id INTEGER PRIMARY KEY,
     customer_user_id INTEGER,
-    type INTEGER,
+    type TEXT,
     account_number TEXT, FOREIGN KEY(customer_user_id) REFERENCES user(id))`
   );
 
   payments.forEach(({ customer_user_id, type, account_number }) => {
-    db.run(`INSERT INTO payment_types(customer_user_id, payment_id, payment_date)
+    db.run(`INSERT INTO payment_types(customer_user_id, type, account_number)
             VALUES('${customer_user_id}', '${type}', '${account_number}')`);
   });
 
-  // product
+  // // product
   db.run(`DROP TABLE IF EXISTS products`);
 
   db.run(`CREATE TABLE IF NOT EXISTS products(
@@ -198,7 +198,7 @@ db.serialize(function () {
 
   users.forEach(({ first_name, last_name, account_created_date, last_login_date, address_street, address_city, address_state, address_zip }) => {
     db.run(`INSERT INTO users (first_name, last_name, account_created_date, last_login_date, street_address, city_address, state_code, zip_code)
-            VALUES('${first_name}', '${last_name}', '${account_created_date}', '${last_login_date}', '${address_street}',  '${address_city}', '${address_state}', '${address_zip}')`);
+            VALUES("${first_name}", "${last_name}", '${account_created_date}', '${last_login_date}', "${address_street}",  "${address_city}", '${address_state}', '${address_zip}')`);
   });
 
   // product types table
@@ -214,16 +214,16 @@ db.serialize(function () {
   });
 
   // ordersProducts table
-  db.run(`DROP TABLE IF EXISTS orderProducts`);
+  db.run(`DROP TABLE IF EXISTS ordersProducts`);
 
-  db.run(`CREATE TABLE orderProducts (
+  db.run(`CREATE TABLE ordersProducts (
           id INTEGER PRIMARY KEY,
           product_id INTEGER NOT NULL,
           order_id INTEGER NOT NULL,
           FOREIGN KEY(product_id) REFERENCES product(id),
           FOREIGN kEY(order_id) REFERENCES orders(id))`);
 
-  const { amounts: { maxQuantity } } = require('./generatorAmounts.json');
+  const { amounts: { maxQuantity } } = require('./faker/generatorAmounts.json');
   orders.forEach((order, index) => {
     let order_id = index + 1;
     // choose one product out of the total number of products
