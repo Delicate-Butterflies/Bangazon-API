@@ -3,11 +3,11 @@
 const { Router } = require('express');
 const router = Router();
 
-// const { } = require('../controllers/Employee-Ctrl');
+const { getEmployees } = require('../controllers/Employee-Ctrl');
 
-router.get('/employee', getEmployees);
-router.get('/employee/:id', getSingleEmployee);
-router.post('/employee', postEmployee);
-router.put('/employee/:id', putEmployee);
+router.get('/employees', getEmployees);
+// router.get('/employees/:id', getSingleEmployee);
+// router.post('/employees', postEmployee);
+// router.put('/employees/:id', putEmployee);
 
 module.exports = router;
