@@ -1,6 +1,6 @@
 'use strict';
 
-const { dbGetAllEmployees } = require('../models/Employee');
+const { dbGetAllEmployees, dbGetOneEmployee } = require('../models/Employee');
 
 module.exports.getEmployees = (req, res, next) => {
 	dbGetAllEmployees()
@@ -12,3 +12,12 @@ module.exports.getEmployees = (req, res, next) => {
 	});
 };
 
+module.exports.getSingleEmployee = ({params: {id}}, res, next) => {
+	dbGetOneEmployee(id)
+	.then( (employee) => {
+		res.status(200).json(employee);
+	})
+	.catch( (err) => {
+		next(err);
+	});
+};
