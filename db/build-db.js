@@ -17,26 +17,24 @@ const { generateComputers } = require('./faker/computers');
 const { generateEmployeeTrainings } = require('./faker/employeeTrainings');
 const { generateEmployeeComputers } = require('./faker/employeeComputers');
 
-// generate arrays of faked data
+// generate arrays of simulated data
 let productTypes = generateTypes();
 let users = generateUsers();
-// following depend on previously generated arrays:
 let products = generateProducts();
 let payments = generatePaymentTypes();
 let orders = generateOrders();
-// same process for Bangazon company info:
 let employees = generateEmployees();
 let departments = generateDepartments();
 let trainingPrograms = generateTrainingPrograms();
 let computers = generateComputers();
-//pass trainingPrograms into join table generation
-let employeeTrainings = generateEmployeeTrainings(trainingPrograms);
+let employeeTrainings = generateEmployeeTrainings(trainingPrograms); // pass trainingPrograms array into join table generation
 let employeeComputers = generateEmployeeComputers();
 
+// one db.serialize to avoid table creation conflicts
 db.serialize(function () {
 
   // COMPANY DB INFO
-  // begin employee table creation
+  // employees table creation
   db.run(`DROP TABLE IF EXISTS employees`);
 
   db.run(`CREATE TABLE IF NOT EXISTS employees (
@@ -57,7 +55,7 @@ db.serialize(function () {
             VALUES (${department_id}, "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", ${zip_code})`);
   });
 
-  // begin training_program table creation
+  // training_programs table creation
   db.run(`DROP TABLE IF EXISTS training_programs`);
 
   db.run(`CREATE TABLE IF NOT EXISTS training_programs (
@@ -73,7 +71,7 @@ db.serialize(function () {
             VALUES ("${start_date}", "${end_date}", ${max_attendance}, "${title}")`);
   });
 
-  // begin department table creation
+  // departments table creation
   db.run(`DROP TABLE IF EXISTS departments`);
 
   db.run(`CREATE TABLE IF NOT EXISTS departments (
@@ -88,7 +86,7 @@ db.serialize(function () {
             VALUES (${supervisor_employee_id}, ${expense_budget}, "${name}")`);
   });
 
-  // begin computer table creation
+  // computers table creation
   db.run(`DROP TABLE IF EXISTS computers`);
 
   db.run(`CREATE TABLE IF NOT EXISTS computers (
@@ -103,7 +101,7 @@ db.serialize(function () {
             VALUES ("${purchase_date}", "${decommission_date}", "${serial_number}")`);
   });
 
-  // begin employeeTraining table creation
+  // employeesTrainings table creation
   db.run(`DROP TABLE IF EXISTS employeesTrainings`);
 
   db.run(`CREATE TABLE IF NOT EXISTS employeesTrainings (
@@ -117,7 +115,7 @@ db.serialize(function () {
             VALUES (${program_id}, ${employee_id})`);
   });
 
-  // begin employeeComputer table creation
+  // employeesComputers table creation
   db.run(`DROP TABLE IF EXISTS employeesComputers`);
 
   db.run(`CREATE TABLE IF NOT EXISTS employeesComputers (
@@ -134,7 +132,7 @@ db.serialize(function () {
   });
 
   // CUSTOMER DB INFO
-  // orders:
+  // orders table creation
   db.run(`DROP TABLE IF EXISTS orders`);
 
   db.run(`CREATE TABLE IF NOT EXISTS orders (
@@ -149,7 +147,7 @@ db.serialize(function () {
             VALUES('${customer_user_id}', '${payment_type_id}', '${order_date}')`);
   });
 
-  // payment types table
+  // payment types table creation
   db.run(`DROP TABLE IF EXISTS payment_types`);
 
   db.run(`CREATE TABLE payment_types (
@@ -164,7 +162,7 @@ db.serialize(function () {
             VALUES('${customer_user_id}', '${type}', '${account_number}')`);
   });
 
-  // // product
+  // products table creation
   db.run(`DROP TABLE IF EXISTS products`);
 
   db.run(`CREATE TABLE IF NOT EXISTS products(
@@ -183,7 +181,7 @@ db.serialize(function () {
             VALUES('${type_id}', '${price}', '${title}', '${description}', '${original_quantity}', '${seller_user_id}')`);
   });
 
-  // users table
+  // users table creation
   db.run(`DROP TABLE IF EXISTS users`);
 
   db.run(`CREATE TABLE users (
@@ -202,7 +200,7 @@ db.serialize(function () {
             VALUES("${first_name}", "${last_name}", '${account_created_date}', '${last_login_date}', "${address_street}",  "${address_city}", '${address_state}', '${address_zip}')`);
   });
 
-  // product types table
+  // product types table creation
   db.run(`DROP TABLE IF EXISTS product_types`);
 
   db.run(`CREATE TABLE product_types (
@@ -214,7 +212,7 @@ db.serialize(function () {
             VALUES('${name}')`);
   });
 
-  // ordersProducts table
+  // ordersProducts join table creation
   db.run(`DROP TABLE IF EXISTS ordersProducts`);
 
   db.run(`CREATE TABLE ordersProducts (
