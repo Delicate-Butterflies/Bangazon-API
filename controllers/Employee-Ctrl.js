@@ -1,6 +1,6 @@
 'use strict';
 
-const { } = require('../models/Employee');
+const { dbGetAllEmployees } = require('../models/Employee');
 
 module.exports.getEmployees = (req, res, next) => {
 	dbGetAllEmployees()
