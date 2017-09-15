@@ -1,6 +1,12 @@
 'use strict';
 
-const { dbGetAllComputers, dbGetOneComputer, dbDeleteOneComputer, dbPostComputer, dbPutComputer } = require('../models/Computer');
+const { dbGetAllComputers,
+        dbGetOneComputer,
+        dbDeleteOneComputer,
+        dbPostComputer,
+        dbPutComputer } = require('../models/Computer');
+
+const { dbDeleteEmployeeComputers } = require('../models/Employee-Computer');
 
 module.exports.getComputers = (req, res, next) => {
   dbGetAllComputers()

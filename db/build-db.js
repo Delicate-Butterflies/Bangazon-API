@@ -127,7 +127,9 @@ db.serialize(function () {
     employee_id INT,
     computer_id INT,
     assign_date TEXT,
-    return_date TEXT)`
+    return_date TEXT,
+    FOREIGN KEY(employee_id) REFERENCES employees(id) ON DELETE CASCADE,
+    FOREIGN KEY(computer_id) REFERENCES computers(id) ON DELETE CASCADE)`
   );
 
   employeeComputers.forEach(({ employee_id, computer_id, assign_date, return_date }) => {
