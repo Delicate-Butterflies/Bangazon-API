@@ -3,12 +3,12 @@
 const { Router } = require('express');
 const router = Router();
 
-// const { } = require('../controllers/Product-Type-Ctrl');
+const { getSingleProductType, getProductType, postProductType, putProductType, deleteProductType } = require('../controllers/Product-Type-Ctrl');
 
-router.get('/product-type', getProductTypes);
-router.get('/product-type/:id', getSingleProductType);
-router.post('/product-type', postProductType);
-router.put('/product-type/:id', putProductType);
-router.delete('/product-type/:id', deleteProductType);
+router.get('/product-types', getProductType);
+router.get('/product-types/:id', getSingleProductType);
+router.post('/product-types', postProductType);
+router.put('/product-types/:id', putProductType);
+router.delete('/product-types/:id', deleteProductType);
 
 module.exports = router;
