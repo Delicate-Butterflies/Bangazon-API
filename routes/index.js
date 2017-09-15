@@ -9,10 +9,9 @@ router.use(require('./computers'));
 router.use(require('./users'));
 router.use(require('./training-programs'));
 router.use(require('./payment-types'));
-
-// router.use(require('./product-types'));
-// router.use(require('./products'));
-// router.use(require('./orders'));
+router.use(require('./products'));
+router.use(require('./product-types'));
+router.use(require('./orders'));
 
 router.get('/', (req, res) => {
     res.json({

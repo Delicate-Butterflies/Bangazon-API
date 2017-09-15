@@ -127,7 +127,9 @@ db.serialize(function () {
     employee_id INT,
     computer_id INT,
     assign_date TEXT,
-    return_date TEXT)`
+    return_date TEXT,
+    FOREIGN KEY(employee_id) REFERENCES employees(id) ON DELETE CASCADE,
+    FOREIGN KEY(computer_id) REFERENCES computers(id) ON DELETE CASCADE)`
   );
 
   employeeComputers.forEach(({ employee_id, computer_id, assign_date, return_date }) => {
@@ -144,7 +146,9 @@ db.serialize(function () {
     id INTEGER PRIMARY KEY,
     customer_user_id INTEGER,
     payment_type_id INTEGER,
-    order_date TEXT, FOREIGN KEY(customer_user_id) REFERENCES user(id) )`
+    order_date TEXT,
+    FOREIGN KEY(customer_user_id) REFERENCES users(id),
+    FOREIGN KEY(payment_type_id) REFERENCES payment_types(id) )`
   );
 
   orders.forEach(({ customer_user_id, payment_type_id, order_date }) => {
@@ -160,7 +164,8 @@ db.serialize(function () {
     id INTEGER PRIMARY KEY,
     customer_user_id INTEGER,
     type TEXT,
-    account_number INTEGER, FOREIGN KEY(customer_user_id) REFERENCES user(id))`
+    account_number INTEGER,
+    FOREIGN KEY(customer_user_id) REFERENCES users(id))`
   );
 
   payments.forEach(({ customer_user_id, type, account_number }) => {
@@ -180,7 +185,7 @@ db.serialize(function () {
     description TEXT,
     original_quantity INTEGER,
     seller_user_id INTEGER,
-    FOREIGN KEY(seller_user_id) REFERENCES product_type(id))`
+    FOREIGN KEY(product_type_id) REFERENCES product_types(id))`
   );
 
   products.forEach(({ type_id, price, title, description, original_quantity, seller_user_id }) => {
@@ -231,7 +236,7 @@ db.serialize(function () {
           id INTEGER PRIMARY KEY,
           product_id INTEGER NOT NULL,
           order_id INTEGER NOT NULL,
-          FOREIGN KEY(product_id) REFERENCES product(id),
+          FOREIGN KEY(product_id) REFERENCES products(id),
           FOREIGN kEY(order_id) REFERENCES orders(id))`
   );
 
