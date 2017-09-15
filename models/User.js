@@ -13,7 +13,7 @@ module.exports.dbGetAllUsers = () => {
           resolve(userData);
       })
     })
-  }; 
+  };
   module.exports.dbGetOneUser = (id) => {
     return new Promise( (resolve, reject) => {
       db.all(`SELECT * FROM users WHERE id = ${id}`, (err, userData) => {
@@ -46,7 +46,7 @@ module.exports.dbGetAllUsers = () => {
       let keys = (Object.keys(user));
       keys.forEach( (key) => {
         query += `"${key}" = "${user[key]}",`;
-      }) 
+      })
       query = query.slice(0,-1);
       query += ` WHERE id = ${user_id}`;
       db.run(query, (err, userData) => {
@@ -56,6 +56,18 @@ module.exports.dbGetAllUsers = () => {
         else {
           resolve("userData");
         }
+    })
+  })
+};
+
+module.exports.dbGetInactiveUsers = () => {
+  return new Promise( (resolve, reject) => {
+    db.all(`SELECT * FROM users
+            EXCEPT
+            SELECT u.* FROM users u
+            JOIN orders o ON u.id = o.customer_user_id`, (err, inactiveUsersData) => {
+      if(err) return reject(err);
+      resolve(inactiveUsersData);
     })
   })
 };

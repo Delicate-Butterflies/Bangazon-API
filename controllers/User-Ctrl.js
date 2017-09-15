@@ -1,13 +1,14 @@
 'use strict';
 
-const { dbGetAllUsers, dbGetOneUser, dbPostUser, dbPutUser  } = require('../models/User.js');
+const { dbGetAllUsers, dbGetOneUser, dbPostUser, dbPutUser, dbGetInactiveUsers } = require('../models/User.js');
 
 module.exports.getUsers = (req, res, next) => {
-  dbGetAllUsers()
+  let q = req.query;
+  q.active == false ? dbGetInactiveUsers() : dbGetAllUsers()
   .then( (userData) => {
     res.status(200).json(userData);
   })
-  .catch( (err) => 
+  .catch( (err) =>
     next(err));
   };
 
@@ -16,7 +17,7 @@ module.exports.getUsers = (req, res, next) => {
     .then( (oneUserData) => {
       res.status(200).json(oneUserData);
     })
-    .catch( (err) => 
+    .catch( (err) =>
     next(err));
   };
 
@@ -26,7 +27,7 @@ module.exports.getUsers = (req, res, next) => {
     .then( (newUserData) => {
       res.status(200).json(newUserData);
     })
-    .catch( (err) => 
+    .catch( (err) =>
     next(err));
   }
   module.exports.putUser = ( req, res, next) => {
@@ -35,6 +36,6 @@ module.exports.getUsers = (req, res, next) => {
     .then( (editedUserData) => {
       res.status(200).json(editedUserData);
     })
-    .catch( (err) => 
+    .catch( (err) =>
     next(err));
   }
