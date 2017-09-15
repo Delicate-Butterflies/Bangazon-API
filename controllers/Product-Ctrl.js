@@ -33,7 +33,7 @@ module.exports.postProduct = (req, res, next) => {
 };
 
 module.exports.deleteProduct = ({params: {id}}, res, next) => {
-  dbPutProduct(id)
+  dbDeleteProduct(id)
   .then((deleteConfirmation) => {
     res.status(200).json(deleteConfirmation);
   })
@@ -44,7 +44,7 @@ module.exports.deleteProduct = ({params: {id}}, res, next) => {
 
 module.exports.putProduct = (req, res, next) => {
   let id = req.params.id;
-  dbDeleteProduct(req, id)
+  dbPutProduct(req, id)
   .then( (editedProduct) => {
     res.status(200).json(editedProduct);
   })

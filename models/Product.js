@@ -6,43 +6,43 @@ const db = new sqlite3.Database('./db/bangazon.sqlite');
 module.exports.dbGetAllProducts = () => {
   return new Promise( (resolve, reject) => {
     db.all(`SELECT * FROM products`, (err, productdata) => {
-      if(err) return reject(err);
+      if(err) reject(err);
       resolve(productdata);
     });
   });
 };
 
-module.exports.dbGetOneTrainingProgram = (id) => {
+module.exports.dbGetSingleProduct = (id) => {
   return new Promise( (resolve, reject) => {
     db.get(`SELECT * FROM products
             WHERE id = ${id}`, (err, productdata) => {
-      if(err) return reject(err);
+      if(err) reject(err);
       resolve(productdata);
     });
   });
 };
 
-module.exports.dbPostTrainingProgram = (newProduct) => {
+module.exports.dbPostProduct = (newProduct) => {
   return new Promise((resolve, reject) => {
       let { type_id, price, title, description, original_quantity, seller_user_id } = newProduct;
       db.run(`INSERT INTO products(product_type_id, price, title, description, original_quantity, seller_user_id)
       VALUES('${type_id}', '${price}', '${title}', '${description}', '${original_quantity}', '${seller_user_id}')`, (err) => {
-          if (err) return reject(err);
+          if (err) reject(err);
           resolve("New field inserted");
       });
   });
 };
 
-module.exports.dbDeleteOneTrainingProgram = (id) => {
+module.exports.dbDeleteProduct = (id) => {
   return new Promise((resolve, reject) => {
     db.run(`DELETE FROM products WHERE id = ${id}`, function(err) {
-      if(err) return reject(err);
+      if(err) reject(err);
       resolve({message: "delete successful", rows_deleted: this.changes});
     });
   });
 };
 
-module.exports.dbPutTrainingProgram = (req, product_id) => {
+module.exports.dbPutProduct = (req, product_id) => {
   let product = req.body;
   return new Promise( (resolve, reject) => {
     let query = `UPDATE products SET `;
