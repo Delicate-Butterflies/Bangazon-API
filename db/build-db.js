@@ -146,7 +146,9 @@ db.serialize(function () {
     id INTEGER PRIMARY KEY,
     customer_user_id INTEGER,
     payment_type_id INTEGER,
-    order_date TEXT, FOREIGN KEY(customer_user_id) REFERENCES user(id))`
+    order_date TEXT,
+    FOREIGN KEY(customer_user_id) REFERENCES users(id),
+    FOREIGN KEY(payment_type_id) REFERENCES payment_types(id) )`
   );
 
   orders.forEach(({ customer_user_id, payment_type_id, order_date }) => {
@@ -162,7 +164,8 @@ db.serialize(function () {
     id INTEGER PRIMARY KEY,
     customer_user_id INTEGER,
     type TEXT,
-    account_number INTEGER, FOREIGN KEY(customer_user_id) REFERENCES user(id))`
+    account_number INTEGER,
+    FOREIGN KEY(customer_user_id) REFERENCES users(id))`
   );
 
   payments.forEach(({ customer_user_id, type, account_number }) => {
@@ -233,7 +236,7 @@ db.serialize(function () {
           id INTEGER PRIMARY KEY,
           product_id INTEGER NOT NULL,
           order_id INTEGER NOT NULL,
-          FOREIGN KEY(product_id) REFERENCES product(id) ,
+          FOREIGN KEY(product_id) REFERENCES products(id),
           FOREIGN kEY(order_id) REFERENCES orders(id))`
   );
 

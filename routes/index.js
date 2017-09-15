@@ -11,7 +11,7 @@ router.use(require('./training-programs'));
 
 router.use(require('./product-types'));
 // router.use(require('./products'));
-// router.use(require('./orders'));
+router.use(require('./orders'));
 // router.use(require('./payment-types'));
 
 router.get('/', (req, res) => {
