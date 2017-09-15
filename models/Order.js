@@ -71,15 +71,15 @@ module.exports.dbDeleteOrder = (id) => {
   });
 };
 
-//post
-//productid, buyerid
-//promise
-db.run(`INSERT INTO orders
-        VALUES (null, date('now'), null, ${buyerid}`, function (err) {
-    if (err) { }
-    console.log('row ID', this.lastID);
-    db.run(`INSERT INTO ordersProducts
-                  values(null, ${this.lastID}, ${order.product_id})`)
-  })
+// //post
+// //productid, buyerid
+// //promise
+// db.run(`INSERT INTO orders
+//         VALUES (null, date('now'), null, ${buyerid}`, function (err) {
+//     if (err) { }
+//     console.log('row ID', this.lastID);
+//     db.run(`INSERT INTO ordersProducts
+//                   values(null, ${this.lastID}, ${order.product_id})`)
+//   })
 
-        //if open order exists,can't do this add to open order
+//         //if open order exists,can't do this add to open order
