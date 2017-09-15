@@ -180,7 +180,7 @@ db.serialize(function () {
     description TEXT,
     original_quantity INTEGER,
     seller_user_id INTEGER,
-    FOREIGN KEY(product_type_id) REFERENCES product_types(id) ON DELETE CASCADE)`
+    FOREIGN KEY(product_type_id) REFERENCES product_types(id))`
   );
 
   products.forEach(({ type_id, price, title, description, original_quantity, seller_user_id }) => {

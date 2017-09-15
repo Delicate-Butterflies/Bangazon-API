@@ -60,7 +60,6 @@ module.exports.dbGetAllProductType = () => {
     return new Promise((resolve, reject) => {
       db.all(`SELECT * FROM products WHERE product_type_id = ${id}`, (err, data) => {
         if(err) reject(err);
-          // resolve(data);
           console.log("this.changes", data);
         if(data.length === 0)
         {
