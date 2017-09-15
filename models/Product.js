@@ -24,9 +24,9 @@ module.exports.dbGetSingleProduct = (id) => {
 
 module.exports.dbPostProduct = (newProduct) => {
   return new Promise((resolve, reject) => {
-      let { type_id, price, title, description, original_quantity, seller_user_id } = newProduct;
+      let { product_type_id, price, title, description, original_quantity, seller_user_id } = newProduct;
       db.run(`INSERT INTO products(product_type_id, price, title, description, original_quantity, seller_user_id)
-      VALUES('${type_id}', '${price}', '${title}', '${description}', '${original_quantity}', '${seller_user_id}')`, (err) => {
+      VALUES('${product_type_id}', '${price}', '${title}', '${description}', '${original_quantity}', '${seller_user_id}')`, (err) => {
           if (err) reject(err);
           resolve("New field inserted");
       });
