@@ -32,7 +32,8 @@ router.get('/', (req, res) => {
         "orders": "GET or POST api/v1/orders",
         "order": "GET, PUT or DELETE api/v1/orders/:id",
         "payment-types": "GET or POST api/v1/payment-types",
-        "payment-type": "GET, PUT or DELETE api/v1/payment-types/:id"
+        "payment-type": "GET, PUT or DELETE api/v1/payment-types/:id",
+        "inactive-customers": "GET api/v1/users/?active=false"
     });
 });
 
