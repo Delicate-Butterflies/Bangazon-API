@@ -10,8 +10,9 @@ module.exports.dbGetAllProductType = () => {
         if(err) {
           reject(err);
         }
-        else
+        else {
           resolve(productTypeData);
+        }
       })
     })
   }; 
@@ -57,10 +58,20 @@ module.exports.dbGetAllProductType = () => {
   module.exports.dbDeleteProductType = (id) => {
     console.log("id-db", id);
     return new Promise((resolve, reject) => {
-      db.run(`DELETE FROM product_types WHERE id = ${id}`, function(err) {
-        if(err) 
-          reject(err);
-        resolve({message: "delete successful", rows_deleted: this.changes});
-      });
+      db.all(`SELECT * FROM products WHERE product_type_id = ${id}`, (err, data) => {
+        if(err) reject(err);
+          // resolve(data);
+          console.log("this.changes", data);
+        if(data.length === 0)
+        {
+          db.run(`DELETE FROM product_types WHERE id = ${id}`, function(err) {
+            if(err) 
+              reject(err);
+            resolve({message: "delete successful", rows_deleted: this.changes});
+          });
+        }
+        else
+          reject("Cannot delete this Data, It has Products associated with it");
+      })
     });
   }
