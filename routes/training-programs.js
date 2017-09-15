@@ -3,7 +3,7 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getTrainingPrograms, getSingleTrainingProgram, postTrainingProgram, putTrainingProgram, deleteTrainingProgram } = require('../controllers/Training-Program');
+const { getTrainingPrograms, getSingleTrainingProgram, postTrainingProgram, putTrainingProgram, deleteTrainingProgram } = require('../controllers/Training-Program-Ctrl');
 
 router.get('/training-programs', getTrainingPrograms);
 router.get('/training-programs/:id', getSingleTrainingProgram);
