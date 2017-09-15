@@ -28,5 +28,35 @@ module.exports = {
         resolve({message: "delete successful", rows_deleted: this.changes});
       });
     });
+  },
+  dbPostComputer: (newComputer) => {
+    return new Promise((resolve, reject) => {
+      let { purchase_date, decommission_date, serial_number } = newComputer;
+      db.run(`INSERT INTO computers(purchase_date, decommission_date, serial_number)
+              VALUES ("${purchase_date}", "${decommission_date}", "${serial_number}")`, function(err) {
+        if(err) return reject(err);
+        resolve({message: "new computer added", new_computer_id: this.lastID});
+      });
+    });
+  },
+  dbPutComputer: (req, computer_id) => {
+    let computer = req.body;
+    return new Promise( (resolve, reject) => {
+      let query = `UPDATE computers SET `;
+      let keys = (Object.keys(computer));
+      keys.forEach( (key) => {
+        query += `"${key}" = "${computer[key]}",`;
+      }) 
+      query = query.slice(0,-1);
+      query += ` WHERE id = ${computer_id}`;
+      db.run(query, function(err) {
+        if(err) {
+          reject(err);
+        }
+        else {
+          resolve({message: "computer updated", rows_deleted: this.changes});
+        }
+      })
+    })
   }
 }
