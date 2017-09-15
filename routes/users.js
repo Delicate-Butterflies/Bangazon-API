@@ -9,4 +9,5 @@ router.get('/users', getUsers);
 router.get('/users/:id', getSingleUser);
 router.post('/users', postUser);
 router.put('/users/:id', putUser);
+
 module.exports = router;

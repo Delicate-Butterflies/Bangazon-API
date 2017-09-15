@@ -20,7 +20,7 @@ module.exports = (products) => {
                     description TEXT, 
                     original_quantity INTEGER, 
                     seller_user_id INTEGER, 
-                    FOREIGN KEY(seller_user_id) REFERENCES product_type(id))`);
+                    FOREIGN KEY(product_type_id) REFERENCES product_type(id) ON DELETE CASCADE)`);
             products.forEach( (product) => {
                 db.run(`INSERT INTO products(product_type_id, price, title, description, original_quantity, seller_user_id)
                     VALUES('${product.type_id}', '${product.price}', '${product.title}', '${product.description}', '${product.original_quantity}', '${product.seller_user_id}')`, (err, data) => {
