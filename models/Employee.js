@@ -36,6 +36,25 @@ module.exports = {
 				resolve("New field inserted");
 			});
 		});
+	},
+	dbPutEmployee: (employee, employee_id) => {
+		return new Promise( (resolve, reject) => {
+			let query = `UPDATE employees SET `;
+			let keys = (Object.keys(employee));
+			keys.forEach( (key) => {
+				query += `"${key}" = "${employee[key]}",`;
+			})
+			query = query.slice(0,-1);
+			query += ` WHERE id = ${employee_id}`;
+			db.run(query, function(err) {
+				if(err) {
+					reject(err);
+				}
+				else {
+					resolve({message: "employee updated", rows_deleted: this.changes});
+				}
+			});
+		});
 	}
 
 }
