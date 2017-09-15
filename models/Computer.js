@@ -58,7 +58,7 @@ module.exports.dbPutComputer = (req, computer_id) => {
         reject(err);
       }
       else {
-        resolve({message: "computer updated", rows_deleted: this.changes});
+        resolve({message: "computer updated", rows_updated: this.changes});
       }
     });
   });
