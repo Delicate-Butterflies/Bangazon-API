@@ -53,7 +53,7 @@ module.exports.dbPutOrder = (order_id, order) => {
     query += ` WHERE id = ${order_id}`;
     db.run(query, function (err) {
       if (err) {
-        reject(err);
+        return reject(err);
       }
       else {
         resolve("order updated");
