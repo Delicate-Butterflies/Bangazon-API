@@ -146,13 +146,9 @@ db.serialize(function () {
     id INTEGER PRIMARY KEY,
     customer_user_id INTEGER,
     payment_type_id INTEGER,
-<<<<<<< HEAD
     order_date TEXT,
     FOREIGN KEY(customer_user_id) REFERENCES users(id),
     FOREIGN KEY(payment_type_id) REFERENCES payment_types(id) )`
-=======
-    order_date TEXT, FOREIGN KEY(customer_user_id) REFERENCES user(id))`
->>>>>>> master
   );
 
   orders.forEach(({ customer_user_id, payment_type_id, order_date }) => {
@@ -189,11 +185,7 @@ db.serialize(function () {
     description TEXT,
     original_quantity INTEGER,
     seller_user_id INTEGER,
-<<<<<<< HEAD
-    FOREIGN KEY(seller_user_id) REFERENCES product_types(id))`
-=======
     FOREIGN KEY(product_type_id) REFERENCES product_types(id))`
->>>>>>> master
   );
 
   products.forEach(({ type_id, price, title, description, original_quantity, seller_user_id }) => {
@@ -244,11 +236,7 @@ db.serialize(function () {
           id INTEGER PRIMARY KEY,
           product_id INTEGER NOT NULL,
           order_id INTEGER NOT NULL,
-<<<<<<< HEAD
           FOREIGN KEY(product_id) REFERENCES products(id),
-=======
-          FOREIGN KEY(product_id) REFERENCES product(id) ,
->>>>>>> master
           FOREIGN kEY(order_id) REFERENCES orders(id))`
   );
 
