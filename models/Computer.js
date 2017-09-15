@@ -8,7 +8,7 @@ module.exports = {
     return new Promise( (resolve, reject) => {
       db.all(`SELECT * FROM computers`, (err, computersData) => {
         if(err) return reject(err);
-        resolve(computersData); 
+        resolve(computersData);
       });
     });
   },
@@ -17,7 +17,7 @@ module.exports = {
       db.get(`SELECT * FROM computers
               WHERE id = ${id}`, (err, computerData) => {
         if(err) return reject(err);
-        resolve(computerData); 
+        resolve(computerData);
       });
     });
   },
@@ -46,7 +46,7 @@ module.exports = {
       let keys = (Object.keys(computer));
       keys.forEach( (key) => {
         query += `"${key}" = "${computer[key]}",`;
-      }) 
+      });
       query = query.slice(0,-1);
       query += ` WHERE id = ${computer_id}`;
       db.run(query, function(err) {
@@ -56,7 +56,7 @@ module.exports = {
         else {
           resolve({message: "computer updated", rows_deleted: this.changes});
         }
-      })
-    })
+      });
+    });
   }
-}
+};
