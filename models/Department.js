@@ -53,7 +53,7 @@ module.exports.dbPutDepartment = (department, department_id) => {
 				reject(err);
 			}
 			else {
-				resolve({message: "department updated"});
+				resolve({message: "department updated", rows_updated: this.changes});
 			}
 		});
 	});

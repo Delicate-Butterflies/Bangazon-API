@@ -53,7 +53,7 @@ module.exports.dbPutEmployee = (employee, employee_id) => {
 				reject(err);
 			}
 			else {
-				resolve({message: "employee updated"});
+				resolve({message: "employee updated", rows_updated: this.changes});
 			}
 		});
 	});
