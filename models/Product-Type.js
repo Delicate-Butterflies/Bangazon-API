@@ -15,7 +15,7 @@ module.exports.dbGetAllProductType = () => {
         }
       })
     })
-  }; 
+  };
   module.exports.dbGetOneProductType = (id) => {
     return new Promise( (resolve, reject) => {
       db.all(`SELECT * FROM product_types WHERE id = ${id}`, (err, productTypeData) => {
@@ -64,7 +64,7 @@ module.exports.dbGetAllProductType = () => {
         if(data.length === 0)
         {
           db.run(`DELETE FROM product_types WHERE id = ${id}`, function(err) {
-            if(err) 
+            if(err)
               reject(err);
             resolve({message: "delete successful", rows_deleted: this.changes});
           });

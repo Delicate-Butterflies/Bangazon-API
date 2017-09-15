@@ -4,7 +4,7 @@ const { dbGetAllUsers, dbGetOneUser, dbPostUser, dbPutUser, dbGetInactiveUsers }
 
 module.exports.getUsers = (req, res, next) => {
   let q = req.query;
-  q.active == false ? dbGetInactiveUsers() : dbGetAllUsers()
+  (q.active == 'false' ? dbGetInactiveUsers() : dbGetAllUsers())
   .then( (userData) => {
     res.status(200).json(userData);
   })
