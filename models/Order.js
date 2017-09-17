@@ -57,23 +57,16 @@ module.exports.dbDeleteOrder = (id) => {
 };
 
 module.exports.dbPostOrder = (orderObj) => {
-  // TODO (in ctrlr?) if open order exists for customer, can't do this add to open order
   return new Promise((resolve, reject) => {
-    let { customer_user_id, payment_type_id, order_date, product_id, product_qty } = orderObj;
-    if (!order_date) order_date = new Date().toISOString();
+    let { customer_user_id, payment_type_id, product_id } = orderObj;
+    if (!product_id) return reject();
+    if (!payment_type_id) payment_type_id = null;
+    let order_date = new Date().toISOString();
     db.run(`INSERT INTO orders
         (customer_user_id, payment_type_id, order_date)
         VALUES (${customer_user_id}, ${payment_type_id}, '${order_date}')`, function (err) {
         if (err) {
           return reject(err);
-        }
-        if (!product_qty) product_qty = 1;
-        for (let i = 0; i < product_qty; i++) {
-          db.run(`INSERT INTO ordersProducts
-            (order_id, product_id)
-            VALUES (${this.lastID}, ${product_id})`, function (error) {
-              if (error) return reject(error); // TODO need to delete new order, too?
-            });
         }
         resolve(this.lastID); // returns ID of new order
       });
