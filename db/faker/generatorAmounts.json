@@ -1,10 +1,10 @@
 {
   "amounts": {
     "numProductTypes": 10,
-    "numUsers": 200,
+    "numUsers": 20,
     "numComputers": 40,
     "numEmployees": 25,
-    "numOrders": 100,
+    "numOrders": 10,
     "numPaymentTypes": 175,
     "numProducts": 50,
     "numTrainingPrograms": 10,
