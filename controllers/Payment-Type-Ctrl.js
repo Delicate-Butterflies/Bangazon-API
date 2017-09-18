@@ -2,7 +2,8 @@
 
 const { dbGetAllPaymentTypes,
         dbGetOnePaymentType,
-        dbPutPaymentType } = require('../models/Payment-Type');
+        dbPutPaymentType,
+        dbDeleteOnePaymentType } = require('../models/Payment-Type');
 
 module.exports.getPaymentTypes = (req, res, next) => {
   dbGetAllPaymentTypes()
@@ -22,6 +23,11 @@ module.exports.putPaymentType = (req, res, next) => {
   .then( (editedPaymentType) => {
     res.status(200).json(editedPaymentType);
   })
-  .catch( (err) =>
-  next(err));
+  .catch(err => next(err));
+};
+
+module.exports.deletePaymentType = ({params: {id}}, res, next) => {
+  dbDeleteOnePaymentType(id)
+  .then(deleteConfirmation => res.status(200).json(deleteConfirmation))
+  .catch(err => next(err));
 };

@@ -41,3 +41,12 @@ module.exports.dbPutPaymentType = (req, payment_type_id) => {
     });
   });
 };
+
+module.exports.dbDeleteOnePaymentType = (id) => {
+  return new Promise((resolve, reject) => {
+    db.run(`DELETE FROM payment_types WHERE id = ${id}`, function(err){
+      if (err) reject(err);
+      resolve({ message: "delete successful", rows_deleted: this.changes });
+    });
+  });
+};
