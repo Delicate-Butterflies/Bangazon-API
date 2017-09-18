@@ -17,4 +17,4 @@ Bangazon-corp's employees, products and users database
 - Express
 
 ## For usage directions
-- go to ```api/v#/```
+- go to ```api/v#/``` for route and method layout.
