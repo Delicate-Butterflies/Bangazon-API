@@ -98,7 +98,6 @@ module.exports.getOrderProducts = (req, res, next) => {
 };
 
 module.exports.putOrderProducts = (req, res, next) => {
-  console.log('orderctrlproductput', req.params.id, req.body);
   dbPutOrderProduct(req.body, req.params.id)
     .then((data) => {
       res.status(200).json(data);
