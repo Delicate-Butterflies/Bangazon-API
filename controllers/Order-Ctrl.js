@@ -25,16 +25,6 @@ module.exports.getAllOrders = (req, res, next) => {
     });
 };
 
-module.exports.getOneOrder = (req, res, next) => {
-  dbGetOneOrder(req.params.id)
-    .then((order) => {
-      res.status(200).json(order);
-    })
-    .catch((err) => {
-      next(err);
-    });
-};
-
 module.exports.postOrder = (req, res, next) => {
   // TODO if open order exists for customer, can't do this - add to open order
   if (!req.body.customer_user_id) {
@@ -78,8 +68,7 @@ module.exports.deleteOrder = (req, res, next) => {
     });
 };
 
-module.exports.getOrderProducts = (req, res, next) => {
-  console.log('getOrderProducts');
+module.exports.getOneOrder = (req, res, next) => {
   dbGetOneOrder(req.params.id)
     .then((orderData) => {
       dbOrderProductsWithInfo(req.params.id)
