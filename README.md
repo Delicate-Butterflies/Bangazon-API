@@ -31,7 +31,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 
 ## Helper Applications
 - [DB Browser for SQLite](http://sqlitebrowser.org/) to work directly with database without command line
-- [Postman](https://www.getpostman.com/) to use PUT/POST/DELETE http verbs
+- [Postman](https://www.getpostman.com/) to use PUT/POST/DELETE http http methods
 
 
 ## Usage directions
@@ -65,7 +65,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
   > NOTE: Each Table's DELETE works differently depending on the entity relationships and dependencies. See specific table for detailed delete functionality.
 
 ### Employees
-- verbs supported: GET, POST, PUT
+- http methods supported: GET, POST, PUT
 - example body:
 ```
 {
@@ -83,7 +83,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 ```
 
 ### Departments
-- verbs supported: GET, POST, PUT
+- http methods supported: GET, POST, PUT
 - example body:
 ```
 {
@@ -95,7 +95,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 ```
 
 ### Computers
-- verbs supported: GET, POST, PUT, DELETE
+- http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a computer will delete the associated entry on the employeeComputer join table
 - example body:
 ```
@@ -108,7 +108,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 ```
 
 ### Training-Programs
-- verbs supported: GET, POST, PUT, DELETE
+- http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a training program will delete the associated entry on the employeeTraining join table
 - example body:
 ```
@@ -122,7 +122,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 ```
 
 ### Users
-- verbs supported: GET, POST, PUT
+- http methods supported: GET, POST, PUT
 - example body:
 ```
 {
@@ -139,7 +139,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 ```
 
 ### Product Types
-- verbs supported: GET, POST, PUT, DELETE
+- http methods supported: GET, POST, PUT, DELETE
 NOTE: you cannot delete a product type if there are products associated with that product type
 - example body:
 ```
@@ -150,7 +150,7 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ```
 
 ### Products
-- verbs supported: GET, POST, PUT, DELETE
+- http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a product will delete the associated entry on the orderProduct join table
 - example body:
 ```
@@ -166,7 +166,7 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ```
 
 ### Orders
-- verbs supported: GET, POST, PUT, DELETE
+- http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting an order will delete the associated entry/entries on the orderProduct join table
 - example body:
 ```
@@ -179,7 +179,7 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ```
 
 ### Detailed Orders
-- verbs supported: GET, PUT, DELETE
+- http methods supported: GET, PUT, DELETE
 > NOTE: ```api/v1/orders/:id/products```
 > NOTE: deleting a detailed order will delete the associated entry/entries on the orderProduct join table
 - example body:
@@ -193,7 +193,7 @@ NOTE: you cannot delete a product type if there are products associated with tha
 
 
 ### Payment Types
-- verbs supported: GET, POST, PUT, DELETE
+- http methods supported: GET, POST, PUT, DELETE
 > NOTE: you cannot delete a payment type if there are orders associated with that payment type
 - example body:
 ```
@@ -206,7 +206,7 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ```
 
 ### Inactive Customers
-- verbs supported: GET
+- http methods supported: GET
 - route: ```api/v1/users/?active=false```
 
 
