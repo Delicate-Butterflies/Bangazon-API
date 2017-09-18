@@ -20,11 +20,12 @@ module.exports.dbPostOrderProduct = (orderObj, order_id) => {
 
 module.exports.dbgetOrderProducts = (order_id) => {
   return new Promise((resolve, reject) => {
-    db.get(`
+    db.all(`
       SELECT product_id,
       count(product_id) as quantity
       FROM ordersProducts
-      WHERE order_id = ${order_id}`, function (err, orderProductData) {
+      WHERE order_id = ${order_id}
+      GROUP BY product_id`, function (err, orderProductData) {
         if (err) reject(err);
         resolve(orderProductData);
       });
