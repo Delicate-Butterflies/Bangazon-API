@@ -36,7 +36,7 @@ module.exports.dbPutPaymentType = (req, payment_type_id) => {
         reject(err);
       }
       else {
-        resolve({message: "payment_type updated", rows_deleted: this.changes});
+        resolve({message: "payment_type updated", rows_updated: this.changes});
       }
     });
   });
