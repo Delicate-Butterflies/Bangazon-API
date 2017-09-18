@@ -26,7 +26,7 @@ module.exports.dbPostUser = (req) => {
   return new Promise( (resolve, reject) => {
     db.run(`INSERT INTO users(first_name, last_name, account_created_date, last_login_date, street_address, city_address, state_code, zip_code) VALUES('${user.first_name}', '${user.last_name}', '${user.account_created_date}', '${user.last_login_date}', '${user.street_address}',  '${user.city_address}', '${user.state_code}', '${user.zip_code}')`, (err, userData) => {
       if(err) reject(err);
-      resolve("userData");
+      resolve("New field inserted");
     });
   });
 };
