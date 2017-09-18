@@ -2,7 +2,7 @@
 
 const { dbGetAllProductType, dbGetOneProductType, dbPostProductType, dbPutProductType, dbDeleteProductType  } = require('../models/Product-Type.js');
 
-module.exports.getProductTypes = (req, res, next) => {
+module.exports.getProductTypes = ( req, res, next) => {
   dbGetAllProductType()
   .then( (ProductTypeData) => {
     res.status(200).json(ProductTypeData);
@@ -11,7 +11,7 @@ module.exports.getProductTypes = (req, res, next) => {
     next(err));
   };
 
-module.exports.getSingleProductType = (req, res, next) => {
+module.exports.getSingleProductType = ( req, res, next) => {
   let id = req.params.id;
   dbGetOneProductType(id)
   .then( (oneProductTypeData) => {
