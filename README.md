@@ -1,5 +1,5 @@
 # Bangazon API
-Bangazon-corp's employees, products and users database. Users can GET/POST/PUT information from and to the database and DELETE from the database for selected categories.
+This is Bangazon Co.'s employees, products and users API. Users of the API can GET/POST/PUT/DELETE information to and from the database for selected categories.
 
 
 ## Table of Contents
@@ -10,7 +10,8 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 1. [Helper Applications](#helper-applications)
 1. [Usage Directions](#usage-directions)
 1. [Third Party Libraries](#third-party-libraries)
-1. [Contribute to API](#contribute-to-api)
+1. [Credits](#credits)
+1. [Contribute to the API](#contribute-to-api)
 
 
 ## Software Requirements
@@ -37,13 +38,12 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 ## Usage directions
 - go to ```api/v#/``` to view route and method layout, see additional details below
 
-### Enitity Relationship Diagram
+### **Enitity Relationship Diagram**
 
-![Bangazon API ERD](https://lh3.googleusercontent.com/qyP1et2iZMeIMztBnn6heq3L1W-51a2XY-7exajJX7ucXuQB_UspDysxH1Bf_Lo-imAGevneUz0yLiTx=w2550-h1398-rw)
+![Bangazon API ERD](db/BangazonButterflies.png "Bangazon API ERD")
 
-### Request Methods
 
-## http Request Methods
+### **Http Request Methods**
 
 * GET - will let you retrieve all the data or a specific data depending on the url
   * route: ```api/v1/orders``` - get all orders
@@ -64,7 +64,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
   * route: ```api/v1/orders/1``` - deletes order with order_id = 1
   > NOTE: Each Table's DELETE works differently depending on the entity relationships and dependencies. See specific table for detailed delete functionality.
 
-### Employees
+### **Employees**
 - http methods supported: GET, POST, PUT
 - example body:
 ```
@@ -82,130 +82,130 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 }
 ```
 
-### Departments
+### **Departments**
 - http methods supported: GET, POST, PUT
 - example body:
 ```
 {
-"id": "INT: include on PUT only",
-"supervisor_employee_id": "INT",
-"expense_budget": "INT: NOT NULL",
-"name": "TEXT: NOT NULL"
+	"id": "INT: include on PUT only",
+	"supervisor_employee_id": "INT",
+	"expense_budget": "INT: NOT NULL",
+	"name": "TEXT: NOT NULL"
 }
 ```
 
-### Computers
+### **Computers**
 - http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a computer will delete the associated entry on the employeeComputer join table
 - example body:
 ```
 {
-"id": "INT: on put only",
-"purchase_date": "TEXT NOT NULL",
-"decommission_date": "TEXT",
-"serial_number": "TEXT NOT NULL"
+	"id": "INT: on put only",
+	"purchase_date": "TEXT NOT NULL",
+	"decommission_date": "TEXT",
+	"serial_number": "TEXT NOT NULL"
 }
 ```
 
-### Training-Programs
+### **Training-Programs**
 - http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a training program will delete the associated entry on the employeeTraining join table
 - example body:
 ```
 {
-"id": "INT: include on PUT only",
-"start_date": "TEXT",
-"end_date": "TEXT",
-"max_attendance": "INT",
-"title": "TEXT"
+	"id": "INT: include on PUT only",
+	"start_date": "TEXT",
+	"end_date": "TEXT",
+	"max_attendance": "INT",
+	"title": "TEXT"
 }
 ```
 
-### Users
+### **Users**
 - http methods supported: GET, POST, PUT
 - example body:
 ```
 {
-"id": "INT: put only",
-"first_name": "TEXT",
-"last_name": "TEXT",
-"account_created_date": "TEXT NOT NULL",
-"last_login_date": "TEXT NOT NULL",
-"street_address": "TEXT",
-"city_address": "TEXT",
-"state_code": "TEXT",
-"zip_code": "TEXT"
+	"id": "INT: put only",
+	"first_name": "TEXT",
+	"last_name": "TEXT",
+	"account_created_date": "TEXT NOT NULL",
+	"last_login_date": "TEXT NOT NULL",
+	"street_address": "TEXT",
+	"city_address": "TEXT",
+	"state_code": "TEXT",
+	"zip_code": "TEXT"
 }
 ```
 
-### Product Types
+### **Product Types**
 - http methods supported: GET, POST, PUT, DELETE
 NOTE: you cannot delete a product type if there are products associated with that product type
 - example body:
 ```
 {
-"id": "INT: PUT only",
-"name": "TEXT"
+	"id": "INT: PUT only",
+	"name": "TEXT"
 }
 ```
 
-### Products
+### **Products**
 - http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a product will delete the associated entry on the orderProduct join table
 - example body:
 ```
 {
-"id": "INT: PUT only",
-"product_type_id": "INTEGER",
-"price": "REAL",
-"title": "TEXT",
-"description": "TEXT",
-"original_quantity": "INTEGER",
-"seller_user_id": "INTEGER"
+	"id": "INT: PUT only",
+	"product_type_id": "INTEGER",
+	"price": "REAL",
+	"title": "TEXT",
+	"description": "TEXT",
+	"original_quantity": "INTEGER",
+	"seller_user_id": "INTEGER"
 }
 ```
 
-### Orders
+### **Orders**
 - http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting an order will delete the associated entry/entries on the orderProduct join table
 - example body:
 ```
 {
-"id": "INT: PUT only",
-"customer_user_id": "INTEGER",
-"payment_type_id": "INTEGER",
-"order_date": "TEXT"
+	"id": "INT: PUT only",
+	"customer_user_id": "INTEGER",
+	"payment_type_id": "INTEGER",
+	"order_date": "TEXT"
 }
 ```
 
-### Detailed Orders
+### **Detailed Orders**
 - http methods supported: GET, PUT, DELETE
 > NOTE: ```api/v1/orders/:id/products```
 > NOTE: deleting a detailed order will delete the associated entry/entries on the orderProduct join table
 - example body:
 ```
 {
-"orderBody(above)": "GET only",
-"product_id": "INT: required on POST/PUT/DELETE",
-"quantity": "INT: optional on POST/PUT/DELETE, 1 by default"
+	"orderBody(above)": "GET only",
+	"product_id": "INT: required on POST/PUT/DELETE",
+	"quantity": "INT: optional on POST/PUT/DELETE, 1 by default"
 }
 ```
 
 
-### Payment Types
+### **Payment Types**
 - http methods supported: GET, POST, PUT, DELETE
 > NOTE: you cannot delete a payment type if there are orders associated with that payment type
 - example body:
 ```
 {
-"id": "INT: PUT only",
-"customer_user_id": "INTEGER",
-"type": "TEXT",
-"account_number": "INTEGER"
+	"id": "INT: PUT only",
+	"customer_user_id": "INTEGER",
+	"type": "TEXT",
+	"account_number": "INTEGER"
 }
 ```
 
-### Inactive Customers
+### **Inactive Customers**
 - http methods supported: GET
 - route: ```api/v1/users/?active=false```
 
@@ -219,10 +219,10 @@ NOTE: you cannot delete a product type if there are products associated with tha
 
 
 ## Credits
-### Project Manager
+### **Project Manager**
 - [Jufe Brown-Tsai](https://github.com/Jufebrown)
 
-### API Developers
+### **API Developers**
 - [Megan Brown](https://github.com/megbrown)
 - [Arwa Kuterwadliwala](https://github.com/Arwask)
 - [Jon Roberts](https://github.com/thejonroberts)
