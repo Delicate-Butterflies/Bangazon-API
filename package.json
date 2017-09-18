@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "db:reset": "node db/build-db.js",
-    "start": "node app.js",
-    "watch": "nodemon"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
