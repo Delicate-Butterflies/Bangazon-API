@@ -1,7 +1,17 @@
 'use strict';
 
-const { dbGetAllOrders, dbGetOneOrder, dbPostOrder, dbPutOrder, dbDeleteOrder } = require('../models/Order.js');
-const { dbPostOrderProduct } = require('../models/Order-Product.js');
+const {
+  dbGetAllOrders,
+  dbGetOneOrder,
+  dbPostOrder,
+  dbPutOrder,
+  dbDeleteOrder
+} = require('../models/Order.js');
+
+const {
+  dbPostOrderProduct,
+  dbOrderProductsWithInfo
+} = require('../models/Order-Product.js');
 
 module.exports.getAllOrders = (req, res, next) => {
   dbGetAllOrders()
@@ -59,7 +69,28 @@ module.exports.putOrder = (req, res, next) => {
 module.exports.deleteOrder = (req, res, next) => {
   dbDeleteOrder(req.params.id)
     .then((data) => {
+      console.log(data);
       res.status(200).json(data);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+module.exports.getOrderProducts = (req, res, next) => {
+  dbGetOneOrder(req.params.id)
+    .then((orderData) => {
+      dbOrderProductsWithInfo(req.params.id)
+        .then((orderProductsWithInfo) => {
+          orderData.Products = [];
+          orderProductsWithInfo.forEach((product) => {
+            orderData.Products.push(product);
+          });
+          res.status(200).json(orderData);
+        })
+        .catch((err) => {
+          next(err);
+        });
     })
     .catch((err) => {
       next(err);

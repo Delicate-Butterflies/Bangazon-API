@@ -86,6 +86,7 @@ router.get('/', (req, res) => {
         },
         "orders": "GET or POST api/v1/orders",
         "order": "GET, PUT or DELETE api/v1/orders/:id",
+        "order with product info": "GET, PUT or DELETE api/v1/orders/:id/products",
         "orderBody": {
             "id": "INT: PUT only",
             "customer_user_id": "INTEGER",
