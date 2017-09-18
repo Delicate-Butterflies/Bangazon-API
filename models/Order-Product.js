@@ -17,3 +17,19 @@ module.exports.dbPostOrderProduct = (orderObj, order_id) => {
     resolve(`${product_qty} quantity of product ${product_id} added to order ${order_id} `);
   });
 };
+
+module.exports.dbOrderProductsWithInfo = (order_id) => {
+  return new Promise((resolve, reject) => {
+    //select (and count) rows that match order id, join with product info for those product ids
+    db.all(`
+      SELECT op.product_id, count(op.product_id) as quantity, p.title, p.price
+      FROM ordersProducts op
+      JOIN products p
+      WHERE op.order_id = ${order_id}
+      AND op.product_id = p.id
+      GROUP BY op.product_id`, function (err, orderProductData) {
+        if (err) reject(err);
+        resolve(orderProductData);
+      });
+  });
+};
