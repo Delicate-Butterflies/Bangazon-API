@@ -43,6 +43,26 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 
 ### Request Methods
 
+## http Request Methods
+
+* GET - will let you retrieve all the data or a specific data depending on the url
+  * route: ```api/v1/orders``` - get all orders
+  * route: ```api/v1/orders/1``` - get single order with order_id 1
+
+* POST - will let you add data to the tables
+  * you can use postman to do a POST at the given url
+  * you will need to use the example body given for each table
+  * route: ```api/v1/orders``` - post an order
+
+* PUT - will let you edit a specific chunk of data
+  * you can use postman to do a PUT at given url
+  * you will need to use the keys from example body for all the fields you would like to edit
+  * route: ```api/v1/orders/1``` - edit order with order_id = 1
+
+* DELETE - will let you delete a specific chunk of data
+  * you can use postman to DELETE at given url
+  * route: ```api/v1/orders/1``` - deletes order with order_id = 1
+  > NOTE: Each Table's DELETE works differently depending on the entity relationships and dependencies. See specific table for detailed delete functionality.
 
 ### Employees
 - verbs supported: GET, POST, PUT
@@ -161,7 +181,7 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ### Detailed Orders
 - verbs supported: GET, PUT, DELETE
 > NOTE: ```api/v1/orders/:id/products```
-> NOTE: deleting a detailed order will delete the associated entry on the orderProduct join table
+> NOTE: deleting a detailed order will delete the associated entry/entries on the orderProduct join table
 - example body:
 ```
 {
@@ -174,6 +194,7 @@ NOTE: you cannot delete a product type if there are products associated with tha
 
 ### Payment Types
 - verbs supported: GET, POST, PUT, DELETE
+> NOTE: you cannot delete a payment type if there are orders associated with that payment type
 - example body:
 ```
 {
