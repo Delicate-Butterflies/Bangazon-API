@@ -48,3 +48,38 @@ module.exports.dbPutOrderProduct = (orderObj, order_id) => {
     resolve(`${quantity} quantity of product ${product_id} added to order ${order_id} `);
   });
 };
+
+function getOrderProductQuantity(order_id, product_id) {
+  return new Promise((resolve, reject) => {
+    db.all(`
+      SELECT count(product_id)
+      FROM ordersProducts
+      WHERE order_id = ${order_id}
+      AND product_id = ${product_id}`, function (err, orderProductCount) {
+        if (err) reject(err);
+        console.log('opcount', orderProductCount);
+        resolve(orderProductCount);
+      });
+  });
+}
+
+module.exports.dbDeleteOrderProduct = (productObj, order_id) => {
+  return new Promise((resolve, reject) => {
+    getOrderProductQuantity()
+      .then((data) => {
+        console.log('returned data', data);
+        resolve(data);
+      })
+      .catch((err) => { reject(err); });
+    // let { product_id, quantity } = productObj;
+    // if (!quantity) quantity = 1;
+    // for (let i = 0; i < quantity; i++) {
+    //   db.run(`INSERT INTO ordersProducts
+    //         (order_id, product_id)
+    //         VALUES (${order_id}, ${product_id})`, function (err) {
+    //       if (err) return reject(err);
+    //     });
+    // }
+    resolve(`${quantity} quantity of product ${product_id} added to order ${order_id} `);
+  });
+};

@@ -11,7 +11,8 @@ const {
 const {
   dbPostOrderProduct,
   dbOrderProductsWithInfo,
-  dbPutOrderProduct
+  dbPutOrderProduct,
+  dbDeleteOrderProduct
 } = require('../models/Order-Product.js');
 
 module.exports.getAllOrders = (req, res, next) => {
@@ -99,6 +100,16 @@ module.exports.getOrderProducts = (req, res, next) => {
 
 module.exports.putOrderProducts = (req, res, next) => {
   dbPutOrderProduct(req.body, req.params.id)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+module.exports.deleteOrderProducts = (req, res, next) => {
+  dbDeleteOrderProduct(req.body, req.params.id)
     .then((data) => {
       res.status(200).json(data);
     })
