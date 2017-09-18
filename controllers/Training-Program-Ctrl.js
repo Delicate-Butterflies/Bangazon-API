@@ -12,7 +12,8 @@ module.exports.getTrainingPrograms = (req, res, next) => {
   });
 };
 
-module.exports.getSingleTrainingProgram = ({params: {id}}, res, next) =>{
+module.exports.getSingleTrainingProgram = (req, res, next) =>{
+  let id = req.params.id;
   dbGetOneTrainingProgram(id)
   .then( (oneTrainingProgram) => {
     res.status(200).json(oneTrainingProgram);
@@ -32,7 +33,8 @@ module.exports.postTrainingProgram = (req, res, next) => {
     });
 };
 
-module.exports.deleteTrainingProgram = ({params: {id}}, res, next) => {
+module.exports.deleteTrainingProgram = (req, res, next) => {
+  let id = req.params.id;
   dbDeleteOneTrainingProgram(id)
   .then((deleteConfirmation) => {
     res.status(200).json(deleteConfirmation);

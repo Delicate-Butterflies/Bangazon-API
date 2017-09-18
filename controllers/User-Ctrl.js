@@ -12,7 +12,8 @@ module.exports.getUsers = (req, res, next) => {
     next(err));
   };
 
-  module.exports.getSingleUser = ({params: {id}}, res, next) => {
+  module.exports.getSingleUser = (req, res, next) => {
+    let id = req.params.id;
     dbGetOneUser(id)
     .then( (oneUserData) => {
       res.status(200).json(oneUserData);
