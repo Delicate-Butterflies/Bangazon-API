@@ -26,16 +26,17 @@ module.exports.getAllOrders = (req, res, next) => {
 };
 
 module.exports.postOrder = (req, res, next) => {
+  let { customer_user_id, payment_type_id, product_id, quantity } = req.body;
   // TODO if open order exists for customer, can't do this - add to open order
   if (!req.body.customer_user_id) {
-    next('no customer_id');
+    next('no customer_user_id');
   }
   if (!req.body.product_id) {
     next('no product_id');
   }
-  dbPostOrder(req.body)
+  dbPostOrder(customer_user_id, payment_type_id, product_id)
     .then((order_id) => {
-      dbPostOrderProduct(req.body, order_id)
+      dbPostOrderProduct(order_id, product_id, quantity)
         .then((data) => {
           res.status(200).json(data);
         })
