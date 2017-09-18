@@ -76,7 +76,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 
 ### Computers
 - verbs supported: GET, POST, PUT, DELETE
-> NOTE: Deleting a computer will delete
+> NOTE: deleting a computer will delete the associated entry on the employeeComputer join table
 - example body:
 ```
 {
@@ -89,6 +89,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 
 ### Training-Programs
 - verbs supported: GET, POST, PUT, DELETE
+> NOTE: deleting a training program will delete the associated entry on the employeeTraining join table
 - example body:
 ```
 {
@@ -119,6 +120,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 
 ### Product Types
 - verbs supported: GET, POST, PUT, DELETE
+NOTE: you cannot delete a product type if there are products associated with that product type
 - example body:
 ```
 {
@@ -129,6 +131,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 
 ### Products
 - verbs supported: GET, POST, PUT, DELETE
+> NOTE: deleting a product will delete the associated entry on the orderProduct join table
 - example body:
 ```
 {
@@ -144,6 +147,7 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 
 ### Orders
 - verbs supported: GET, POST, PUT, DELETE
+> NOTE: deleting an order will delete the associated entry/entries on the orderProduct join table
 - example body:
 ```
 {
@@ -156,11 +160,14 @@ Bangazon-corp's employees, products and users database. Users can GET/POST/PUT i
 
 ### Detailed Orders
 - verbs supported: GET, PUT, DELETE
-- route: ```api/v1/orders/:id/products```
+> NOTE: ```api/v1/orders/:id/products```
+> NOTE: deleting a detailed order will delete the associated entry on the orderProduct join table
 - example body:
 ```
 {
-
+"orderBody(above)": "GET only",
+"product_id": "INT: required on POST/PUT/DELETE",
+"quantity": "INT: optional on POST/PUT/DELETE, 1 by default"
 }
 ```
 
