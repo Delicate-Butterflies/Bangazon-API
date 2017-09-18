@@ -11,7 +11,7 @@ module.exports.dbPostOrderProduct = (orderObj, order_id) => {
       db.run(`INSERT INTO ordersProducts
             (order_id, product_id)
             VALUES (${order_id}, ${product_id})`, function (err) {
-          if (err) return reject(err); // TODO need to delete new order, too?
+          if (err) return reject(err); // TODO need to delete new order, too? - only difference between post and put methods!
         });
     }
     resolve(`${product_qty} quantity of product ${product_id} added to order ${order_id} `);
@@ -33,4 +33,33 @@ module.exports.dbOrderProductsWithInfo = (order_id) => {
       });
   });
 };
+
+module.exports.dbPutOrderProduct = (order_id, product_id, quantity) => {
+  return new Promise((resolve, reject) => {
+    if (!quantity) quantity = 1;
+    for (let i = 0; i < quantity; i++) {
+      db.run(`INSERT INTO ordersProducts
+            (order_id, product_id)
+            VALUES (${order_id}, ${product_id})`, function (err) {
+          if (err) return reject(err);
+        });
+    }
+    resolve(`${quantity} quantity of product ${product_id} added to order ${order_id} `);
+  });
+};
+
+module.exports.dbDeleteOrderProduct = (order_id, product_id) => {
+  return new Promise((resolve, reject) => {
+    db.all(`
+      DELETE
+      FROM ordersProducts
+      WHERE order_id = ${order_id}
+      AND product_id = ${product_id}`, function (err, orderProductCount) {
+        if (err) reject(err);
+        console.log(orderProductCount);
+        resolve(orderProductCount);
+      });
+  });
+};
+
 

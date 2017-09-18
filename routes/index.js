@@ -86,12 +86,17 @@ router.get('/', (req, res) => {
         },
         "orders": "GET or POST api/v1/orders",
         "order": "GET, PUT or DELETE api/v1/orders/:id",
-        "order with product info": "GET, PUT or DELETE api/v1/orders/:id/products",
         "orderBody": {
             "id": "INT: PUT only",
             "customer_user_id": "INTEGER",
             "payment_type_id": "INTEGER",
-            "order_date": "TEXT"
+            "order_date": "TEXT",
+            "Products": "GET only - an array of products on order"
+        },
+        "products on specific order": "GET, PUT api/v1/orders/:id/products",
+        "orderProductsBody": {
+            "product_id": "INT: required on POST/PUT/DELETE",
+            "quantity": "INT: optional on POST/PUT/DELETE, 1 by default, final desired (not added to current)"
         },
         "payment-types": "GET or POST api/v1/payment-types",
         "payment-type": "GET, PUT or DELETE api/v1/payment-types/:id",
@@ -103,9 +108,6 @@ router.get('/', (req, res) => {
         },
         "inactive-customers": "GET api/v1/users/?active=false"
     });
-    // TODO employeeTrainings??
-    // TODO employeesComputers??
-    // TODO ordersProducts??
 });
 
 module.exports = router;

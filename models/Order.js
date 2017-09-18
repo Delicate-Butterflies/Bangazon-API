@@ -18,8 +18,8 @@ module.exports.dbGetAllOrders = () => {
 
 module.exports.dbGetOneOrder = (id) => {
   return new Promise((resolve, reject) => {
-    db.get(`SELECT * FROM orders o
-								WHERE o.id = ${id}`, function (err, orderData) {
+    db.get(`SELECT * FROM orders
+            WHERE id = ${id}`, function (err, orderData) {
         if (err) {
           return reject(err);
         }
@@ -61,6 +61,7 @@ module.exports.dbDeleteOrder = (id) => {
 module.exports.dbPostOrder = (orderObj) => {
   return new Promise((resolve, reject) => {
     let { customer_user_id, payment_type_id, product_id } = orderObj;
+    // TODO add product_id call to add orderProduct rows
     if (!product_id) return reject();
     if (!payment_type_id) payment_type_id = null;
     let order_date = new Date().toISOString();
