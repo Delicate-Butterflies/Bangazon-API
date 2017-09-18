@@ -1,9 +1,9 @@
 'use strict';
 
-const { dbGetAllProductType, dbGetOneProductType, dbPostProductType, dbPutProductType, dbDeleteProductType  } = require('../models/Product-Type.js');
+const { dbGetAllProductTypes, dbGetOneProductType, dbPostProductType, dbPutProductType, dbDeleteProductType  } = require('../models/Product-Type.js');
 
 module.exports.getProductTypes = ( req, res, next) => {
-  dbGetAllProductType()
+  dbGetAllProductTypes()
   .then( (ProductTypeData) => {
     res.status(200).json(ProductTypeData);
   })

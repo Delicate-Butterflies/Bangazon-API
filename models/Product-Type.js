@@ -4,15 +4,11 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/bangazon.sqlite');
 db.run(`PRAGMA foreign_keys = ON`);
 
-module.exports.dbGetAllProductType = () => {
+module.exports.dbGetAllProductTypes = () => {
   return new Promise( (resolve, reject) => {
     db.all(`SELECT * FROM product_types`, (err, productTypeData) => {
-      if(err) {
-        reject(err);
-      }
-      else {
-        resolve(productTypeData);
-      }
+      if(err) reject(err);
+      resolve(productTypeData);
     });
   });
 };
@@ -20,11 +16,8 @@ module.exports.dbGetAllProductType = () => {
 module.exports.dbGetOneProductType = (id) => {
   return new Promise( (resolve, reject) => {
     db.all(`SELECT * FROM product_types WHERE id = ${id}`, (err, productTypeData) => {
-      if(err) {
-        reject(err);
-      }
-      else
-        resolve(productTypeData);
+      if(err) reject(err);
+      resolve(productTypeData);
     });
   });
 };
@@ -38,7 +31,7 @@ module.exports.dbPostProductType = (req) => {
         reject(err);
       }
       else {
-        resolve("productTypeData");
+        resolve("New field inserted");
       }
     });
   });
@@ -48,9 +41,8 @@ module.exports.dbPutProductType = (req, product_type_id) => {
   let product = req.body;
   return new Promise( (resolve, reject) => {
     db.run(`UPDATE product_types SET 'name' = '${product.name}' WHERE id = ${product_type_id}`, (err, EditedproductTypeData) => {
-      if(err)
-        reject(err);
-      resolve("EditedproductTypeData");
+      if(err) reject(err);
+      resolve({message: "training_program updated", rows_updated: this.changes});
     });
   });
 };
