@@ -2,10 +2,11 @@
   "name": "bangazon-api",
   "version": "1.0.0",
   "description": "Bangazon-corp's employees, products and users database",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "mocha --recursive --watch -R spec --colors",
-    "db:reset": "node db/build-db.js"
+    "db:reset": "node db/build-db.js",
+    "start": "node app.js",
+    "watch": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -13,6 +14,28 @@
   },
   "keywords": [],
   "author": "",
+  "contributors": [
+    {
+      "name": "Sam Baker",
+      "url": "https://github.com/SamBDev"
+    },
+    {
+      "name": "Megan Brown",
+      "url": "https://github.com/megbrown"
+    },
+    {
+      "name": "Arwa Kuterwadliwala",
+      "url": "https://github.com/Arwask"
+    },
+    {
+      "name": "Josh Lloyd",
+      "url": "https://github.com/joshualloyd"
+    },
+    {
+      "name": "Jon Roberts",
+      "url": "https://github.com/thejonroberts"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Delicate-Butterflies/Bangazon-API/issues"
@@ -20,14 +43,12 @@
   "homepage": "https://github.com/Delicate-Butterflies/Bangazon-API#readme",
   "dependencies": {
     "body-parser": "^1.18.1",
-    "chai": "^4.1.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
-    "mocha": "^3.5.3",
-    "nodemon": "^1.12.0",
     "sqlite3": "^3.1.10"
   },
   "devDependencies": {
-    "faker": "^4.1.0"
+    "faker": "^4.1.0",
+    "nodemon": "^1.12.0"
   }
 }
