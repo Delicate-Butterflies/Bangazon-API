@@ -12,7 +12,8 @@ module.exports.getProducts = (req, res, next) => {
   });
 };
 
-module.exports.getSingleProduct = ({params: {id}}, res, next) =>{
+module.exports.getSingleProduct = (req, res, next) => {
+  let id = req.params.id;
   dbGetSingleProduct(id)
   .then( (product) => {
     res.status(200).json(product);
@@ -32,7 +33,8 @@ module.exports.postProduct = (req, res, next) => {
     });
 };
 
-module.exports.deleteProduct = ({params: {id}}, res, next) => {
+module.exports.deleteProduct = (req, res, next) => {
+  let id = req.params.id;
   dbDeleteProduct(id)
   .then((deleteConfirmation) => {
     res.status(200).json(deleteConfirmation);

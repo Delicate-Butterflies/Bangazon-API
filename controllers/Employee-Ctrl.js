@@ -12,7 +12,8 @@ module.exports.getEmployees = (req, res, next) => {
 	});
 };
 
-module.exports.getSingleEmployee = ({params: {id}}, res, next) => {
+module.exports.getSingleEmployee = (req, res, next) => {
+	let id = req.params.id;
 	dbGetOneEmployee(id)
 	.then( (employee) => {
 		res.status(200).json(employee);
