@@ -6,7 +6,7 @@ const db = new sqlite3.Database('./db/bangazon.sqlite');
 module.exports.dbGetAllTrainingPrograms = () => {
   return new Promise( (resolve, reject) => {
     db.all(`SELECT * FROM training_programs`, (err, trainingData) => {
-      if(err) return reject(err);
+      if(err) reject(err);
       resolve(trainingData);
     });
   });
@@ -53,12 +53,8 @@ module.exports.dbPutTrainingProgram = (req, training_program_id) => {
     query = query.slice(0,-1);
     query += ` WHERE id = ${training_program_id}`;
     db.run(query, function(err) {
-      if(err) {
-        reject(err);
-      }
-      else {
-        resolve({message: "training_program updated", rows_deleted: this.changes});
-      }
+      if(err) reject(err);
+      resolve({message: "training_program updated", rows_updated: this.changes});
     });
   });
 };

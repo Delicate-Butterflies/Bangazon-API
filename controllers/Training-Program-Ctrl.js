@@ -14,8 +14,8 @@ module.exports.getTrainingPrograms = (req, res, next) => {
 
 module.exports.getSingleTrainingProgram = ({params: {id}}, res, next) =>{
   dbGetOneTrainingProgram(id)
-  .then( (trainingProgram) => {
-    res.status(200).json(trainingProgram);
+  .then( (oneTrainingProgram) => {
+    res.status(200).json(oneTrainingProgram);
   })
   .catch( (err) => {
     next(err);
@@ -24,8 +24,8 @@ module.exports.getSingleTrainingProgram = ({params: {id}}, res, next) =>{
 
 module.exports.postTrainingProgram = (req, res, next) => {
   dbPostTrainingProgram(req.body)
-    .then((response) => {
-      res.status(200).json(response);
+    .then((newTrainingProgram) => {
+      res.status(200).json(newTrainingProgram);
     })
     .catch((err) => {
       next(err);
