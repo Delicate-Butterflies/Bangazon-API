@@ -2,7 +2,7 @@
 
 const { dbGetAllProductTypes, dbGetOneProductType, dbPostProductType, dbPutProductType, dbDeleteProductType  } = require('../models/Product-Type.js');
 
-module.exports.getProductTypes = ( req, res, next) => {
+module.exports.getProductTypes = (req, res, next) => {
   dbGetAllProductTypes()
   .then( (ProductTypeData) => {
     res.status(200).json(ProductTypeData);
@@ -11,7 +11,7 @@ module.exports.getProductTypes = ( req, res, next) => {
     next(err));
   };
 
-module.exports.getSingleProductType = ( req, res, next) => {
+module.exports.getSingleProductType = (req, res, next) => {
   let id = req.params.id;
   dbGetOneProductType(id)
   .then( (oneProductTypeData) => {
@@ -21,7 +21,7 @@ module.exports.getSingleProductType = ( req, res, next) => {
     next(err));
 };
 
-module.exports.postProductType = ( req, res, next) => {
+module.exports.postProductType = (req, res, next) => {
   let id = req.params.id;
   dbPostProductType(req)
   .then( (newProductTypeData) => {
@@ -30,7 +30,7 @@ module.exports.postProductType = ( req, res, next) => {
   .catch( (err) =>
     next(err));
 };
-module.exports.putProductType = ( req, res, next) => {
+module.exports.putProductType = (req, res, next) => {
   let id = req.params.id;
   dbPutProductType(req, id)
   .then( (editedProductTypeData) => {
@@ -39,7 +39,7 @@ module.exports.putProductType = ( req, res, next) => {
   .catch( (err) =>
     next(err));
 };
-module.exports.deleteProductType = ( req, res, next) => {
+module.exports.deleteProductType = (req, res, next) => {
   let id = req.params.id;
   dbDeleteProductType(id)
   .then( (deletedProductTypeData) => {

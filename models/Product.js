@@ -54,7 +54,7 @@ module.exports.dbPutProduct = (req, product_id) => {
     query += ` WHERE id = ${product_id}`;
     db.run(query, function (err) {
       if (err) reject(err);
-      resolve({ message: "product updated", rows_updated: this.changes });
+      resolve({message: "product updated", rows_updated: this.changes });
     });
   });
 };

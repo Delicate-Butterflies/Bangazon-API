@@ -12,7 +12,7 @@ module.exports.getProducts = (req, res, next) => {
   });
 };
 
-module.exports.getSingleProduct = (req, res, next) =>{
+module.exports.getSingleProduct = (req, res, next) => {
   let id = req.params.id;
   dbGetSingleProduct(id)
   .then( (product) => {

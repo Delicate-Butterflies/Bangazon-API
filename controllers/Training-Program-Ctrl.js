@@ -25,7 +25,7 @@ module.exports.getSingleTrainingProgram = (req, res, next) =>{
 
 module.exports.postTrainingProgram = (req, res, next) => {
   dbPostTrainingProgram(req.body)
-    .then((newTrainingProgram) => {
+    .then( (newTrainingProgram) => {
       res.status(200).json(newTrainingProgram);
     })
     .catch((err) => {
@@ -36,7 +36,7 @@ module.exports.postTrainingProgram = (req, res, next) => {
 module.exports.deleteTrainingProgram = (req, res, next) => {
   let id = req.params.id;
   dbDeleteOneTrainingProgram(id)
-  .then((deleteConfirmation) => {
+  .then( (deleteConfirmation) => {
     res.status(200).json(deleteConfirmation);
   })
   .catch( (err) => {

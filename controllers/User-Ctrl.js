@@ -22,7 +22,7 @@ module.exports.getUsers = (req, res, next) => {
       next(err));
   };
 
-  module.exports.postUser = ( req, res, next) => {
+  module.exports.postUser = (req, res, next) => {
     let id = req.params.id;
     dbPostUser(req)
     .then( (newUserData) => {
@@ -31,7 +31,7 @@ module.exports.getUsers = (req, res, next) => {
     .catch( (err) =>
       next(err));
   };
-  module.exports.putUser = ( req, res, next) => {
+  module.exports.putUser = (req, res, next) => {
     let id = req.params.id;
     dbPutUser(req, id)
     .then( (editedUserData) => {
