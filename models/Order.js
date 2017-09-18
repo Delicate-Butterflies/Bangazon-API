@@ -2,6 +2,8 @@
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/bangazon.sqlite');
+// pragma needed for orderProduct table cascade deletion
+db.run('PRAGMA foreign_keys = ON');
 
 module.exports.dbGetAllOrders = () => {
   return new Promise((resolve, reject) => {
