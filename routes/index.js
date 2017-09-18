@@ -88,6 +88,8 @@ router.get('/', (req, res) => {
         "order": "GET, PUT or DELETE api/v1/orders/:id",
         "orderBody": {
             "id": "INT: PUT only",
+            "product_id": "INT: required on POST only",
+            "quantity": "INT: optional on POST/PUT only",
             "customer_user_id": "INTEGER",
             "payment_type_id": "INTEGER",
             "order_date": "TEXT"
@@ -102,9 +104,6 @@ router.get('/', (req, res) => {
         },
         "inactive-customers": "GET api/v1/users/?active=false"
     });
-    // TODO employeeTrainings??
-    // TODO employeesComputers??
-    // TODO ordersProducts??
 });
 
 module.exports = router;
