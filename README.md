@@ -15,7 +15,7 @@ This is Bangazon Corp.'s employees, products and users API. Users of the API can
 
 
 ## Software Requirements
-- [Node.Js](https://nodejs.org/en/)
+- [Node.js](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
 
 
@@ -171,26 +171,15 @@ http methods supported: GET, POST, PUT, DELETE
 example body:
 ```
 {
-	"id": "INT: PUT only",
-	"customer_user_id": "INTEGER",
-	"payment_type_id": "INTEGER",
-	"order_date": "TEXT"
+"id": "INT",
+"product_id": "INT: required for POST",
+"quantity": "INT: optional for POST/PUT, defaults to 1",
+"customer_user_id": "INTEGER: required for PUT/POST",
+"payment_type_id": "INTEGER: completes order",
+"order_date": "TEXT: only include on payment update/order finalize",
+"Products": "GET only - an array of products on order"
 }
 ```
-
-### **Detailed Orders**
-http methods supported: GET, PUT, DELETE
-> NOTE: ```api/v1/orders/:id/products```
-> NOTE: deleting a detailed order will delete the associated entry/entries on the orderProduct join table
-example body:
-```
-{
-	"orderBody(above)": "GET only",
-	"product_id": "INT: required on POST/PUT/DELETE",
-	"quantity": "INT: optional on POST/PUT/DELETE, 1 by default"
-}
-```
-
 
 ### **Payment Types**
 http methods supported: GET, POST, PUT, DELETE
