@@ -22,9 +22,9 @@ module.exports.dbGetOneEmployee = (id) => {
 						JOIN departments d
 						WHERE e.department_id = d.id
 						AND e.id = ${id}`, (err, employee) => {
-							if (err) return reject(err);
-							resolve(employee)
-						});
+			if (err) return reject(err);
+			resolve(employee);
+		});
 	});
 };
 
@@ -45,16 +45,12 @@ module.exports.dbPutEmployee = (employee, employee_id) => {
 		let keys = (Object.keys(employee));
 		keys.forEach( (key) => {
 			query += `"${key}" = "${employee[key]}",`;
-		})
+		});
 		query = query.slice(0,-1);
 		query += ` WHERE id = ${employee_id}`;
 		db.run(query, function(err) {
-			if(err) {
-				reject(err);
-			}
-			else {
-				resolve({message: "employee updated", rows_updated: this.changes});
-			}
+			if(err) reject(err);
+			resolve({message: "employee updated", rows_updated: this.changes});
 		});
 	});
 };
