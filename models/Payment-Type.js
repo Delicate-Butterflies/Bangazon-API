@@ -21,6 +21,27 @@ module.exports.dbGetOnePaymentType = (id) => {
   });
 };
 
+module.exports.dbPutPaymentType = (req, payment_type_id) => {
+  let payment_type = req.body;
+  return new Promise( (resolve, reject) => {
+    let query = `UPDATE payment_types SET `;
+    let keys = (Object.keys(payment_type));
+    keys.forEach( (key) => {
+      query += `"${key}" = "${payment_type[key]}",`;
+    });
+    query = query.slice(0,-1);
+    query += ` WHERE id = ${payment_type_id}`;
+    db.run(query, function(err) {
+      if(err) {
+        reject(err);
+      }
+      else {
+        resolve({message: "payment_type updated", rows_updated: this.changes});
+      }
+    });
+  });
+};
+
 module.exports.dbDeleteOnePaymentType = (id) => {
   return new Promise((resolve, reject) => {
     db.run(`DELETE FROM payment_types WHERE id = ${id}`, function(err){
