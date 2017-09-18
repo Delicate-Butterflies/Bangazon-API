@@ -20,7 +20,6 @@ module.exports.dbPostOrderProduct = (orderObj, order_id) => {
 
 module.exports.dbOrderProductsWithInfo = (order_id) => {
   return new Promise((resolve, reject) => {
-    console.log('dbOrderProductsWithInfo');
     //select (and count) rows that match order id, join with product info for those product ids
     db.all(`
       SELECT op.product_id, count(op.product_id) as quantity, p.title, p.price
@@ -30,7 +29,6 @@ module.exports.dbOrderProductsWithInfo = (order_id) => {
       AND op.product_id = p.id
       GROUP BY op.product_id`, function (err, orderProductData) {
         if (err) reject(err);
-        console.log(orderProductData);
         resolve(orderProductData);
       });
   });

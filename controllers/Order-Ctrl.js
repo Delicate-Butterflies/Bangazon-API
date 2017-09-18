@@ -93,13 +93,17 @@ module.exports.putOrderProducts = (req, res, next) => {
   let { product_id, quantity } = req.body;
   dbDeleteOrderProduct(req.params.id, product_id)
     .then((data) => {
-      dbPutOrderProduct(req.params.id, product_id, quantity)
-        .then((data) => {
-          res.status(200).json(data);
-        })
-        .catch((err) => {
-          next(err);
-        });
+      if (quantity > 0) {
+        dbPutOrderProduct(req.params.id, product_id, quantity)
+          .then((data) => {
+            res.status(200).json(`Quantity of product ${product_id} changed to ${quantity} for order ${req.params.id}`);
+          })
+          .catch((err) => {
+            next(err);
+          });
+      } else {
+        res.status(200).json(`Product ${product_id} removed from order ${req.params.id}`);
+      }
     })
     .catch((err) => { next(err); });
 };
