@@ -16,8 +16,8 @@ module.exports.dbGetAllOrders = () => {
 
 module.exports.dbGetOneOrder = (id) => {
   return new Promise((resolve, reject) => {
-    db.get(`SELECT * FROM orders o
-								WHERE o.id = ${id}`, function (err, orderData) {
+    db.get(`SELECT * FROM orders
+            WHERE id = ${id}`, function (err, orderData) {
         if (err) {
           return reject(err);
         }

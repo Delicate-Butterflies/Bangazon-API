@@ -20,6 +20,7 @@ module.exports.dbPostOrderProduct = (orderObj, order_id) => {
 
 module.exports.dbOrderProductsWithInfo = (order_id) => {
   return new Promise((resolve, reject) => {
+    console.log('dbOrderProductsWithInfo');
     //select (and count) rows that match order id, join with product info for those product ids
     db.all(`
       SELECT op.product_id, count(op.product_id) as quantity, p.title, p.price
@@ -29,14 +30,14 @@ module.exports.dbOrderProductsWithInfo = (order_id) => {
       AND op.product_id = p.id
       GROUP BY op.product_id`, function (err, orderProductData) {
         if (err) reject(err);
+        console.log(orderProductData);
         resolve(orderProductData);
       });
   });
 };
 
-module.exports.dbPutOrderProduct = (orderObj, order_id) => {
+module.exports.dbPutOrderProduct = (order_id, product_id, quantity) => {
   return new Promise((resolve, reject) => {
-    let { product_id, quantity } = orderObj;
     if (!quantity) quantity = 1;
     for (let i = 0; i < quantity; i++) {
       db.run(`INSERT INTO ordersProducts
@@ -49,37 +50,18 @@ module.exports.dbPutOrderProduct = (orderObj, order_id) => {
   });
 };
 
-function getOrderProductQuantity(order_id, product_id) {
+module.exports.dbDeleteOrderProduct = (order_id, product_id) => {
   return new Promise((resolve, reject) => {
     db.all(`
-      SELECT count(product_id)
+      DELETE
       FROM ordersProducts
       WHERE order_id = ${order_id}
       AND product_id = ${product_id}`, function (err, orderProductCount) {
         if (err) reject(err);
-        console.log('opcount', orderProductCount);
+        console.log(orderProductCount);
         resolve(orderProductCount);
       });
   });
-}
-
-module.exports.dbDeleteOrderProduct = (productObj, order_id) => {
-  return new Promise((resolve, reject) => {
-    getOrderProductQuantity()
-      .then((data) => {
-        console.log('returned data', data);
-        resolve(data);
-      })
-      .catch((err) => { reject(err); });
-    // let { product_id, quantity } = productObj;
-    // if (!quantity) quantity = 1;
-    // for (let i = 0; i < quantity; i++) {
-    //   db.run(`INSERT INTO ordersProducts
-    //         (order_id, product_id)
-    //         VALUES (${order_id}, ${product_id})`, function (err) {
-    //       if (err) return reject(err);
-    //     });
-    // }
-    resolve(`${quantity} quantity of product ${product_id} added to order ${order_id} `);
-  });
 };
+
+

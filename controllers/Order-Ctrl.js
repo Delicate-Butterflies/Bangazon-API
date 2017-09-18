@@ -79,6 +79,7 @@ module.exports.deleteOrder = (req, res, next) => {
 };
 
 module.exports.getOrderProducts = (req, res, next) => {
+  console.log('getOrderProducts');
   dbGetOneOrder(req.params.id)
     .then((orderData) => {
       dbOrderProductsWithInfo(req.params.id)
@@ -99,21 +100,16 @@ module.exports.getOrderProducts = (req, res, next) => {
 };
 
 module.exports.putOrderProducts = (req, res, next) => {
-  dbPutOrderProduct(req.body, req.params.id)
+  let { product_id, quantity } = req.body;
+  dbDeleteOrderProduct(req.params.id, product_id)
     .then((data) => {
-      res.status(200).json(data);
+      dbPutOrderProduct(req.params.id, product_id, quantity)
+        .then((data) => {
+          res.status(200).json(data);
+        })
+        .catch((err) => {
+          next(err);
+        });
     })
-    .catch((err) => {
-      next(err);
-    });
-};
-
-module.exports.deleteOrderProducts = (req, res, next) => {
-  dbDeleteOrderProduct(req.body, req.params.id)
-    .then((data) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      next(err);
-    });
+    .catch((err) => { next(err); });
 };
