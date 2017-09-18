@@ -54,12 +54,8 @@ module.exports.dbPutComputer = (req, computer_id) => {
     query = query.slice(0, -1);
     query += ` WHERE id = ${computer_id}`;
     db.run(query, function (err) {
-      if (err) {
-        reject(err);
-      }
-      else {
-        resolve({ message: "computer updated", rows_updated: this.changes });
-      }
+      if (err) reject(err);
+      resolve({ message: "computer updated", rows_updated: this.changes });
     });
   });
 };
