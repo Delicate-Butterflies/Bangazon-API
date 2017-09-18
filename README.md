@@ -231,8 +231,9 @@ NOTE: you cannot delete a product type if there are products associated with tha
 
 
 ## Contribute to API
+- fork - issue tickets and pull requests are welcome
 - use [airbnb style](https://github.com/airbnb/javascript)
-- follow template for PR requests
+- follow the template for PR requests
 - tab size 2
 
 &copy; 2017 Delicate-Butterflys
