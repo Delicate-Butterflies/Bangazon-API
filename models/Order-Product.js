@@ -11,7 +11,7 @@ module.exports.dbPostOrderProduct = (orderObj, order_id) => {
       db.run(`INSERT INTO ordersProducts
             (order_id, product_id)
             VALUES (${order_id}, ${product_id})`, function (err) {
-          if (err) return reject(err); // TODO need to delete new order, too? - only difference between post and put methods!
+          if (err) reject(err); // TODO need to delete new order, too?
         });
     }
     resolve(`${product_qty} quantity of product ${product_id} added to order ${order_id} `);

@@ -1,21 +1,22 @@
 'use strict';
 
-const { dbGetAllPaymentTypes,
-        dbGetOnePaymentType,
-        dbPutPaymentType,
-        dbDeleteOnePaymentType,
-        dbPostPaymentType } = require('../models/Payment-Type');
+const { dbGetAllPaymentTypes, dbGetOnePaymentType, dbPutPaymentType, dbDeleteOnePaymentType, dbPostPaymentType } = require('../models/Payment-Type');
 
 module.exports.getPaymentTypes = (req, res, next) => {
   dbGetAllPaymentTypes()
   .then(allPaymentTypesData => res.status(200).json(allPaymentTypesData))
-  .catch(err => next(err));
+  .catch( (err) => {
+    next(err);
+  });
 };
 
-module.exports.getSinglePaymentType = ({params: {id}}, res, next) => {
+module.exports.getSinglePaymentType = (req, res, next) => {
+  let id = req.params.id;
   dbGetOnePaymentType(id)
   .then(singlePaymentTypeData => res.status(200).json(singlePaymentTypeData))
-  .catch(err => next(err));
+  .catch( (err) => {
+    next(err);
+  });
 };
 
 module.exports.putPaymentType = (req, res, next) => {
@@ -24,19 +25,24 @@ module.exports.putPaymentType = (req, res, next) => {
   .then( (editedPaymentType) => {
     res.status(200).json(editedPaymentType);
   })
-  .catch(err => next(err));
+  .catch( (err) => {
+    next(err);
+  });
 };
 
-module.exports.deletePaymentType = ({params: {id}}, res, next) => {
+module.exports.deletePaymentType = (req, res, next) => {
+  let id = req.params.id;
   dbDeleteOnePaymentType(id)
   .then(deleteConfirmation => res.status(200).json(deleteConfirmation))
-  .catch(err => next(err));
+  .catch( (err) => {
+    next(err);
+  });
 };
 
 module.exports.postPaymentType = (req, res, next) => {
   dbPostPaymentType(req.body)
-	.then( (paymentType) => {
-		res.status(200).json(paymentType);
+	.then( (newPaymentType) => {
+		res.status(200).json(newPaymentType);
 	})
 	.catch( (err) => {
 		next(err);

@@ -9,7 +9,7 @@ module.exports. dbGetAllEmployees = () => {
 						FROM employees e
 						JOIN departments d
 						WHERE e.department_id = d.id`, (err, employeesData) => {
-			if(err) return reject(err);
+			if(err) reject(err);
 			resolve(employeesData);
 		});
 	});
@@ -22,9 +22,9 @@ module.exports.dbGetOneEmployee = (id) => {
 						JOIN departments d
 						WHERE e.department_id = d.id
 						AND e.id = ${id}`, (err, employee) => {
-							if (err) return reject(err);
-							resolve(employee)
-						});
+			if (err) reject(err);
+			resolve(employee);
+		});
 	});
 };
 
@@ -33,7 +33,7 @@ module.exports.dbPostEmployee = (newEmployee) => {
 		let { department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code } = newEmployee;
 		db.run(`INSERT INTO employees(department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code)
 			VALUES ("${department_id}", "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", "${zip_code}")`, (err) => {
-			if(err) return reject(err);
+			if(err) reject(err);
 			resolve("New field inserted");
 		});
 	});
@@ -45,16 +45,12 @@ module.exports.dbPutEmployee = (employee, employee_id) => {
 		let keys = (Object.keys(employee));
 		keys.forEach( (key) => {
 			query += `"${key}" = "${employee[key]}",`;
-		})
+		});
 		query = query.slice(0,-1);
 		query += ` WHERE id = ${employee_id}`;
 		db.run(query, function(err) {
-			if(err) {
-				reject(err);
-			}
-			else {
-				resolve({message: "employee updated", rows_updated: this.changes});
-			}
+			if(err) reject(err);
+			resolve({message: "employee updated", rows_updated: this.changes});
 		});
 	});
 };

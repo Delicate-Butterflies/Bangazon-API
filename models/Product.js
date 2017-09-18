@@ -17,7 +17,6 @@ module.exports.dbGetSingleProduct = (id) => {
     db.get(`SELECT * FROM products
             WHERE id = ${id}`, (err, productdata) => {
         if (err) reject(err);
-        console.log('pm product', productdata);
         resolve(productdata);
       });
   });
@@ -54,12 +53,8 @@ module.exports.dbPutProduct = (req, product_id) => {
     query = query.slice(0, -1);
     query += ` WHERE id = ${product_id}`;
     db.run(query, function (err) {
-      if (err) {
-        reject(err);
-      }
-      else {
-        resolve({ message: "product updated", rows_deleted: this.changes });
-      }
+      if (err) reject(err);
+      resolve({message: "product updated", rows_updated: this.changes });
     });
   });
 };

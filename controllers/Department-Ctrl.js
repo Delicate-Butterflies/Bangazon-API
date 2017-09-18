@@ -12,7 +12,8 @@ module.exports.getDepartments = (req, res, next) => {
 	});
 };
 
-module.exports.getSingleDepartment = ({params: {id}}, res, next) => {
+module.exports.getSingleDepartment = (req, res, next) => {
+	let id = req.params.id;
 	dbGetOneDepartment(id)
 	.then( (department) => {
 		res.status(200).json(department);
@@ -24,8 +25,8 @@ module.exports.getSingleDepartment = ({params: {id}}, res, next) => {
 
 module.exports.postDepartment = (req, res, next) => {
 	dbPostDepartment(req.body)
-	.then( (departments) => {
-		res.status(200).json(departments);
+	.then( (newDepartment) => {
+		res.status(200).json(newDepartment);
 	})
 	.catch( (err) => {
 		next(err);
@@ -34,8 +35,8 @@ module.exports.postDepartment = (req, res, next) => {
 
 module.exports.putDepartment = (req, res, next) => {
 	dbPutDepartment(req.body, req.params.id)
-	.then( (departments) => {
-		res.status(200).json(departments);
+	.then( (editedDepartments) => {
+		res.status(200).json(editedDepartments);
 	})
 	.catch( (err) => {
 		next(err);
