@@ -10,10 +10,8 @@ const {
 
 const {
   dbPostOrderProduct,
-  dbgetOrderProducts
+  dbOrderProductsWithInfo
 } = require('../models/Order-Product.js');
-
-const { dbGetSingleProduct } = require('../models/Product.js');
 
 module.exports.getAllOrders = (req, res, next) => {
   dbGetAllOrders()
@@ -81,27 +79,12 @@ module.exports.deleteOrder = (req, res, next) => {
 module.exports.getOrderProducts = (req, res, next) => {
   dbGetOneOrder(req.params.id)
     .then((orderData) => {
-      // console.log('orderData', orderData);
-      dbgetOrderProducts(req.params.id)
-        .then((orderProducts) => {
-          // console.log("orderProducts", orderProducts);
+      dbOrderProductsWithInfo(req.params.id)
+        .then((orderProductsWithInfo) => {
           orderData.Products = [];
-          orderProducts.forEach((product) => {
-            console.log(product);
-            dbGetSingleProduct(product.product_id)
-              .then((productData) => {
-                orderData.Products.push({
-                  "product_id": product.product_id,
-                  "quantity": product.quantity,
-                  "name": productData.title,
-                  "price": productData.price
-                });
-              })
-              .catch((err) => {
-                next(err);
-              });
+          orderProductsWithInfo.forEach((product) => {
+            orderData.Products.push(product);
           });
-          console.log('final order data', orderData);
           res.status(200).json(orderData);
         })
         .catch((err) => {
