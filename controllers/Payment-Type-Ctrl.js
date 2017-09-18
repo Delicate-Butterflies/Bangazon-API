@@ -2,7 +2,8 @@
 
 const { dbGetAllPaymentTypes,
         dbGetOnePaymentType,
-        dbDeleteOnePaymentType } = require('../models/Payment-Type');
+        dbDeleteOnePaymentType,
+        dbPostPaymentType } = require('../models/Payment-Type');
 
 module.exports.getPaymentTypes = (req, res, next) => {
   dbGetAllPaymentTypes()
@@ -20,4 +21,15 @@ module.exports.deletePaymentType = ({params: {id}}, res, next) => {
   dbDeleteOnePaymentType(id)
   .then(deleteConfirmation => res.status(200).json(deleteConfirmation))
   .catch(err => next(err));
+};
+
+module.exports.postPaymentType = (req, res, next) => {
+  // console.log('req.body', req.body);
+  dbPostPaymentType(req.body)
+	.then( (paymentType) => {
+		res.status(200).json(paymentType);
+	})
+	.catch( (err) => {
+		next(err);
+	});
 };
