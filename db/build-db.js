@@ -243,6 +243,7 @@ db.serialize(function () {
   const { amounts: { maxQuantity } } = require('./faker/generatorAmounts.json');
   orders.forEach((order, index) => {
     let order_id = index + 1;
+    // TODO - randomize the number of products per order - currently one a piece
     // choose one product out of the total number of products
     let randomProduct = Math.floor(Math.random() * products.length) + 1;
     // randomize the quantity ordered between 1 and an upper limit, from generatorAmounts.json
