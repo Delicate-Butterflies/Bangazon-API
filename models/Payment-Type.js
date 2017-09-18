@@ -32,12 +32,8 @@ module.exports.dbPutPaymentType = (req, payment_type_id) => {
     query = query.slice(0,-1);
     query += ` WHERE id = ${payment_type_id}`;
     db.run(query, function(err) {
-      if(err) {
-        reject(err);
-      }
-      else {
-        resolve({message: "payment_type updated", rows_updated: this.changes});
-      }
+      if(err) reject(err);
+      resolve({message: "payment_type updated", rows_updated: this.changes});
     });
   });
 };
@@ -56,12 +52,8 @@ module.exports.dbPostPaymentType = (paymentTypeReq) => {
   return new Promise( (resolve, reject) => {
     db.run(`INSERT INTO payment_types(customer_user_id, type, account_number)
             VALUES(${paymentType.customer_user_id}, '${paymentType.type}', '${paymentType.account_number}')`, function(err) {
-      if(err) {
-        reject(err);
-      }
-      else {
-        resolve({ message: "new payment type successfully added", new_payment_type_id: this.lastID});
-      }
+      if(err) reject(err);
+      resolve({ message: "new payment type successfully added", new_payment_type_id: this.lastID});
     });
   });
 };
