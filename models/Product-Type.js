@@ -46,8 +46,6 @@ module.exports.dbPostProductType = (req) => {
 
 module.exports.dbPutProductType = (req, product_type_id) => {
   let product = req.body;
-  console.log("product_type_id", product_type_id);
-  console.log(product);
   return new Promise( (resolve, reject) => {
     db.run(`UPDATE product_types SET 'name' = '${product.name}' WHERE id = ${product_type_id}`, (err, EditedproductTypeData) => {
       if(err)
@@ -58,11 +56,9 @@ module.exports.dbPutProductType = (req, product_type_id) => {
 };
 
 module.exports.dbDeleteProductType = (id) => {
-  console.log("id-db", id);
   return new Promise((resolve, reject) => {
     db.all(`SELECT * FROM products WHERE product_type_id = ${id}`, (err, data) => {
       if(err) reject(err);
-        console.log("this.changes", data);
       if(data.length === 0)
       {
         db.run(`DELETE FROM product_types WHERE id = ${id}`, function(err) {

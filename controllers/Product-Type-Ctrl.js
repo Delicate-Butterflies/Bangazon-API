@@ -40,7 +40,6 @@ module.exports.putProductType = ( req, res, next) => {
 };
 module.exports.deleteProductType = ( req, res, next) => {
   let id = req.params.id;
-  console.log("id :", id);
   dbDeleteProductType(id)
   .then( (deletedProductTypeData) => {
     res.status(200).json(deletedProductTypeData);
