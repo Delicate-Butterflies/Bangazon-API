@@ -1,5 +1,5 @@
 # Bangazon API
-This is Bangazon Co.'s employees, products and users API. Users of the API can GET/POST/PUT/DELETE information to and from the database for selected categories.
+This is Bangazon Corp.'s employees, products and users API. Users of the API can GET/POST/PUT/DELETE information to and from the database for selected categories.
 
 
 ## Table of Contents
@@ -15,7 +15,7 @@ This is Bangazon Co.'s employees, products and users API. Users of the API can G
 
 
 ## Software Requirements
-- [NodeJs](https://nodejs.org/en/)
+- [Node.Js](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
 
 
@@ -26,17 +26,17 @@ This is Bangazon Co.'s employees, products and users API. Users of the API can G
 
 ## Get Started
 - set up the database using ```npm run db:reset``` command in terminal
-- create your own .env file at the root of the project using the .env.example file as a guide
+- if you wish to set a custom port number, create your own .env file at the root of the project using the .env.example file as a guide
 - run ```nodemon app.js``` from the terminal
 
 
 ## Helper Applications
 - [DB Browser for SQLite](http://sqlitebrowser.org/) to work directly with database without command line
-- [Postman](https://www.getpostman.com/) to use PUT/POST/DELETE http http methods
+- [Postman](https://www.getpostman.com/) to use PUT/POST/DELETE http methods
 
 
 ## Usage directions
-- go to ```api/v#/``` to view route and method layout, see additional details below
+- go to ```api/v1/``` to view route and method layout, see additional details below
 
 ### **Enitity Relationship Diagram**
 
@@ -65,8 +65,8 @@ This is Bangazon Co.'s employees, products and users API. Users of the API can G
   > NOTE: Each Table's DELETE works differently depending on the entity relationships and dependencies. See specific table for detailed delete functionality.
 
 ### **Employees**
-- http methods supported: GET, POST, PUT
-- example body:
+http methods supported: GET, POST, PUT
+example body:
 ```
 {
 	"id": "INT: include on PUT only",
@@ -83,8 +83,8 @@ This is Bangazon Co.'s employees, products and users API. Users of the API can G
 ```
 
 ### **Departments**
-- http methods supported: GET, POST, PUT
-- example body:
+http methods supported: GET, POST, PUT
+example body:
 ```
 {
 	"id": "INT: include on PUT only",
@@ -95,9 +95,9 @@ This is Bangazon Co.'s employees, products and users API. Users of the API can G
 ```
 
 ### **Computers**
-- http methods supported: GET, POST, PUT, DELETE
+http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a computer will delete the associated entry on the employeeComputer join table
-- example body:
+example body:
 ```
 {
 	"id": "INT: on put only",
@@ -108,9 +108,9 @@ This is Bangazon Co.'s employees, products and users API. Users of the API can G
 ```
 
 ### **Training-Programs**
-- http methods supported: GET, POST, PUT, DELETE
+http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a training program will delete the associated entry on the employeeTraining join table
-- example body:
+example body:
 ```
 {
 	"id": "INT: include on PUT only",
@@ -122,8 +122,8 @@ This is Bangazon Co.'s employees, products and users API. Users of the API can G
 ```
 
 ### **Users**
-- http methods supported: GET, POST, PUT
-- example body:
+http methods supported: GET, POST, PUT
+example body:
 ```
 {
 	"id": "INT: put only",
@@ -139,9 +139,9 @@ This is Bangazon Co.'s employees, products and users API. Users of the API can G
 ```
 
 ### **Product Types**
-- http methods supported: GET, POST, PUT, DELETE
+http methods supported: GET, POST, PUT, DELETE
 NOTE: you cannot delete a product type if there are products associated with that product type
-- example body:
+example body:
 ```
 {
 	"id": "INT: PUT only",
@@ -150,9 +150,9 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ```
 
 ### **Products**
-- http methods supported: GET, POST, PUT, DELETE
+http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting a product will delete the associated entry on the orderProduct join table
-- example body:
+example body:
 ```
 {
 	"id": "INT: PUT only",
@@ -166,9 +166,9 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ```
 
 ### **Orders**
-- http methods supported: GET, POST, PUT, DELETE
+http methods supported: GET, POST, PUT, DELETE
 > NOTE: deleting an order will delete the associated entry/entries on the orderProduct join table
-- example body:
+example body:
 ```
 {
 	"id": "INT: PUT only",
@@ -179,10 +179,10 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ```
 
 ### **Detailed Orders**
-- http methods supported: GET, PUT, DELETE
+http methods supported: GET, PUT, DELETE
 > NOTE: ```api/v1/orders/:id/products```
 > NOTE: deleting a detailed order will delete the associated entry/entries on the orderProduct join table
-- example body:
+example body:
 ```
 {
 	"orderBody(above)": "GET only",
@@ -193,9 +193,9 @@ NOTE: you cannot delete a product type if there are products associated with tha
 
 
 ### **Payment Types**
-- http methods supported: GET, POST, PUT, DELETE
+http methods supported: GET, POST, PUT, DELETE
 > NOTE: you cannot delete a payment type if there are orders associated with that payment type
-- example body:
+example body:
 ```
 {
 	"id": "INT: PUT only",
@@ -206,8 +206,8 @@ NOTE: you cannot delete a product type if there are products associated with tha
 ```
 
 ### **Inactive Customers**
-- http methods supported: GET
-- route: ```api/v1/users/?active=false```
+http methods supported: GET
+route: ```api/v1/users/?active=false```
 
 
 ## Third Party Libraries
@@ -219,10 +219,10 @@ NOTE: you cannot delete a product type if there are products associated with tha
 
 
 ## Credits
-### **Project Manager**
+### Project Manager
 - [Jufe Brown-Tsai](https://github.com/Jufebrown)
 
-### **API Developers**
+### API Developers
 - [Megan Brown](https://github.com/megbrown)
 - [Arwa Kuterwadliwala](https://github.com/Arwask)
 - [Jon Roberts](https://github.com/thejonroberts)
