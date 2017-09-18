@@ -9,7 +9,7 @@ module.exports. dbGetAllDepartments = () => {
 						FROM departments d
 						JOIN employees e
 						WHERE d.supervisor_employee_id = e.id`, (err, departmentsData) => {
-			if(err) return reject(err);
+			if(err) reject(err);
 			resolve(departmentsData);
 		});
 	});
@@ -22,7 +22,7 @@ module.exports.dbGetOneDepartment = (id) => {
 						JOIN employees e
 						WHERE d.supervisor_employee_id = e.id
 						AND d.id = ${id}`, (err, department) => {
-			if (err) return reject(err);
+			if (err) reject(err);
 			resolve(department);
 		});
 	});
@@ -33,7 +33,7 @@ module.exports.dbPostDepartment = (newDepartment) => {
 		let { supervisor_employee_id, expense_budget, name } = newDepartment;
 		db.run(`INSERT INTO departments(supervisor_employee_id, expense_budget, name)
 			VALUES ("${supervisor_employee_id}", "${expense_budget}", "${name}")`, (err) => {
-			if(err) return reject(err);
+			if(err) reject(err);
 			resolve("New field inserted");
 		});
 	});

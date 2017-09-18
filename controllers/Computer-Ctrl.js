@@ -14,7 +14,8 @@ module.exports.getComputers = (req, res, next) => {
   });
 };
 
-module.exports.getSingleComputer = ({params: {id}}, res, next) =>{
+module.exports.getSingleComputer = (req, res, next) =>{
+  let id = req.params.id;
   dbGetOneComputer(id)
   .then( (computer) => {
     res.status(200).json(computer);
@@ -24,7 +25,8 @@ module.exports.getSingleComputer = ({params: {id}}, res, next) =>{
   });
 };
 
-module.exports.deleteComputer = ({params: {id}}, res, next) => {
+module.exports.deleteComputer = (req, res, next) => {
+  let id = req.params.id;
   dbDeleteOneComputer(id)
   .then((deleteConfirmation) => {
     res.status(200).json(deleteConfirmation);

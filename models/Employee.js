@@ -9,7 +9,7 @@ module.exports. dbGetAllEmployees = () => {
 						FROM employees e
 						JOIN departments d
 						WHERE e.department_id = d.id`, (err, employeesData) => {
-			if(err) return reject(err);
+			if(err) reject(err);
 			resolve(employeesData);
 		});
 	});
@@ -22,7 +22,7 @@ module.exports.dbGetOneEmployee = (id) => {
 						JOIN departments d
 						WHERE e.department_id = d.id
 						AND e.id = ${id}`, (err, employee) => {
-			if (err) return reject(err);
+			if (err) reject(err);
 			resolve(employee);
 		});
 	});
@@ -33,7 +33,7 @@ module.exports.dbPostEmployee = (newEmployee) => {
 		let { department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code } = newEmployee;
 		db.run(`INSERT INTO employees(department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code)
 			VALUES ("${department_id}", "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", "${zip_code}")`, (err) => {
-			if(err) return reject(err);
+			if(err) reject(err);
 			resolve("New field inserted");
 		});
 	});

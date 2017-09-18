@@ -12,7 +12,8 @@ module.exports.getDepartments = (req, res, next) => {
 	});
 };
 
-module.exports.getSingleDepartment = ({params: {id}}, res, next) => {
+module.exports.getSingleDepartment = (req, res, next) => {
+	let id = req.params.id;
 	dbGetOneDepartment(id)
 	.then( (department) => {
 		res.status(200).json(department);

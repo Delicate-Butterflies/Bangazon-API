@@ -16,7 +16,7 @@ module.exports.dbGetOneTrainingProgram = (id) => {
   return new Promise( (resolve, reject) => {
     db.get(`SELECT * FROM training_programs
             WHERE id = ${id}`, (err, trainingData) => {
-      if(err) return reject(err);
+      if(err) reject(err);
       resolve(trainingData);
     });
   });
@@ -27,7 +27,7 @@ module.exports.dbPostTrainingProgram = (newTrainingProgram) => {
       let { start_date, end_date, max_attendance, title } = newTrainingProgram;
       db.run(`INSERT INTO training_programs (start_date, end_date, max_attendance, title)
     VALUES ("${start_date}", "${end_date}", ${max_attendance}, "${title}")`, (err) => {
-          if (err) return reject(err);
+          if (err) reject(err);
           resolve("New field inserted");
       });
   });
@@ -36,7 +36,7 @@ module.exports.dbPostTrainingProgram = (newTrainingProgram) => {
 module.exports.dbDeleteOneTrainingProgram = (id) => {
   return new Promise((resolve, reject) => {
     db.run(`DELETE FROM training_programs WHERE id = ${id}`, function(err) {
-      if(err) return reject(err);
+      if(err) reject(err);
       resolve({message: "delete successful", rows_deleted: this.changes});
     });
   });
