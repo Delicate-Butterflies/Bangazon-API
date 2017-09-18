@@ -17,3 +17,16 @@ module.exports.dbPostOrderProduct = (orderObj, order_id) => {
     resolve(`${product_qty} quantity of product ${product_id} added to order ${order_id} `);
   });
 };
+
+module.exports.dbgetOrderProducts = (order_id) => {
+  return new Promise((resolve, reject) => {
+    db.get(`
+      SELECT product_id,
+      count(product_id) as quantity
+      FROM ordersProducts
+      WHERE order_id = ${order_id}`, function (err, orderProductData) {
+        if (err) reject(err);
+        resolve(orderProductData);
+      });
+  });
+};

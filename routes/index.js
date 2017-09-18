@@ -31,6 +31,7 @@ router.get('/', (req, res) => {
         "product": "GET, PUT or DELETE api/v1/products/:id",
         "orders": "GET or POST api/v1/orders",
         "order": "GET, PUT or DELETE api/v1/orders/:id",
+        "order with product info": "GET, PUT or DELETE api/v1/orders/:id/products",
         "payment-types": "GET or POST api/v1/payment-types",
         "payment-type": "GET, PUT or DELETE api/v1/payment-types/:id",
         "inactive-customers": "GET api/v1/users/?active=false"
