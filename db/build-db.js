@@ -237,7 +237,7 @@ db.serialize(function () {
           product_id INTEGER NOT NULL,
           order_id INTEGER NOT NULL,
           FOREIGN KEY(product_id) REFERENCES products(id),
-          FOREIGN KEY(order_id) REFERENCES orders(id))`
+          FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE CASCADE)`
   );
 
   const { amounts: { maxQuantity } } = require('./faker/generatorAmounts.json');

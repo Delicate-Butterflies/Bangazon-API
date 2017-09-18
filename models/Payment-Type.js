@@ -44,9 +44,18 @@ module.exports.dbPutPaymentType = (req, payment_type_id) => {
 
 module.exports.dbDeleteOnePaymentType = (id) => {
   return new Promise((resolve, reject) => {
-    db.run(`DELETE FROM payment_types WHERE id = ${id}`, function(err){
-      if (err) reject(err);
-      resolve({ message: "delete successful", rows_deleted: this.changes });
+    db.all(`SELECT * FROM orders WHERE payment_type_id = ${id}`, (err, data) => {
+      if(err) reject(err);
+      if(data.length === 0)
+      {
+        db.run(`DELETE FROM payment_types WHERE id = ${id}`, function(err) {
+          if(err)
+            reject(err);
+          resolve({message: "delete successful", rows_deleted: this.changes});
+        });
+      }
+      else
+        reject("Cannot delete this Data, It has Orders associated with it");
     });
   });
 };
