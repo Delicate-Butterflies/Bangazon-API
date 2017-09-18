@@ -10,23 +10,15 @@ const {
 
 const {
   dbPostOrderProduct,
-  dbOrderProductsWithInfo
+  dbOrderProductsWithInfo,
+  dbPutOrderProduct,
+  dbDeleteOrderProduct
 } = require('../models/Order-Product.js');
 
 module.exports.getAllOrders = (req, res, next) => {
   dbGetAllOrders()
     .then((orders) => {
       res.status(200).json(orders);
-    })
-    .catch((err) => {
-      next(err);
-    });
-};
-
-module.exports.getOneOrder = (req, res, next) => {
-  dbGetOneOrder(req.params.id)
-    .then((order) => {
-      res.status(200).json(order);
     })
     .catch((err) => {
       next(err);
@@ -77,7 +69,7 @@ module.exports.deleteOrder = (req, res, next) => {
     });
 };
 
-module.exports.getOrderProducts = (req, res, next) => {
+module.exports.getOneOrder = (req, res, next) => {
   dbGetOneOrder(req.params.id)
     .then((orderData) => {
       dbOrderProductsWithInfo(req.params.id)
@@ -95,4 +87,23 @@ module.exports.getOrderProducts = (req, res, next) => {
     .catch((err) => {
       next(err);
     });
+};
+
+module.exports.putOrderProducts = (req, res, next) => {
+  let { product_id, quantity } = req.body;
+  dbDeleteOrderProduct(req.params.id, product_id)
+    .then((data) => {
+      if (quantity > 0) {
+        dbPutOrderProduct(req.params.id, product_id, quantity)
+          .then((data) => {
+            res.status(200).json(`Quantity of product ${product_id} changed to ${quantity} for order ${req.params.id}`);
+          })
+          .catch((err) => {
+            next(err);
+          });
+      } else {
+        res.status(200).json(`Product ${product_id} removed from order ${req.params.id}`);
+      }
+    })
+    .catch((err) => { next(err); });
 };
