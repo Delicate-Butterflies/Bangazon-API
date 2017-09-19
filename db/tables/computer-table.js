@@ -11,28 +11,28 @@ let computers = generateComputers(numComputers);
 
 module.exports = () => {
 
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, return reject)=>{
 
-    db.serialize(function() {
-      
+    db.serialize(function () {
+
       db.run(`DROP TABLE IF EXISTS computer`);
-    
+
       db.run(`CREATE TABLE IF NOT EXISTS computer (
         id INTEGER PRIMARY KEY,
-        purchase_date TEXT NOT NULL, 
+        purchase_date TEXT NOT NULL,
         decommission_date TEXT,
         serial_number TEXT)`
       );
-    
-      computers.forEach( ({purchase_date, decommission_date, serial_number}) => {
-        db.run(`INSERT INTO computer (purchase_date, decommission_date, serial_number) 
+
+      computers.forEach(({ purchase_date, decommission_date, serial_number }) => {
+        db.run(`INSERT INTO computer (purchase_date, decommission_date, serial_number)
                 VALUES ("${purchase_date}", "${decommission_date}", "${serial_number}")`);
       });
 
       db.close();
 
       resolve('computer table created and populated');
-    
+
     });
 
   });

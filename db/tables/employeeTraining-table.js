@@ -11,27 +11,27 @@ let employeeTrainings = generateEmployeeTrainings(numEmployeeTrainings, numEmplo
 
 module.exports = (employeeTrainingsArray) => {
 
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, return reject)=>{
 
-    db.serialize(function() {
-      
+    db.serialize(function () {
+
       db.run(`DROP TABLE IF EXISTS employeeTraining`);
-    
+
       db.run(`CREATE TABLE IF NOT EXISTS employeeTraining (
         id INTEGER PRIMARY KEY,
-        program_id INT, 
+        program_id INT,
         employee_id INT)`
       );
-    
-      employeeTrainingsArray.forEach( ({program_id, employee_id}) => {
-        db.run(`INSERT INTO employeeTraining (program_id, employee_id) 
+
+      employeeTrainingsArray.forEach(({ program_id, employee_id }) => {
+        db.run(`INSERT INTO employeeTraining (program_id, employee_id)
                 VALUES (${program_id}, ${employee_id})`);
       });
 
       db.close();
-  
+
       resolve('employeeTraining table created and populated');
-    
+
     });
 
   });
