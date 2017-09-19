@@ -1,19 +1,8 @@
 'use strict';
 
-const {
-  dbGetAllOrders,
-  dbGetOneOrder,
-  dbPostOrder,
-  dbPutOrder,
-  dbDeleteOrder
-} = require('../models/Order.js');
+const { dbGetAllOrders, dbGetOneOrder, dbPostOrder, dbPutOrder, dbDeleteOrder } = require('../models/Order.js');
 
-const {
-  dbPostOrderProduct,
-  dbOrderProductsWithInfo,
-  dbPutOrderProduct,
-  dbDeleteOrderProduct
-} = require('../models/Order-Product.js');
+const { dbPostOrderProduct, dbOrderProductsWithInfo, dbPutOrderProduct, dbDeleteOrderProduct } = require('../models/Order-Product.js');
 
 module.exports.getAllOrders = (req, res, next) => {
   dbGetAllOrders()
