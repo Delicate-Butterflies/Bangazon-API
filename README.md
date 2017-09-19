@@ -199,6 +199,13 @@ example body:
 http methods supported: GET
 route: ```api/v1/users/?active=false```
 
+### **All Customer Orders**
+http methods supported: GET
+route: ```api/v1/users/:id/orders```
+
+### **All Open Customer Orders**
+http methods supported: GET
+route: ```api/v1/users/:id/orders?status=open```
 
 ## Third Party Libraries
 - [express](https://www.npmjs.com/package/express)

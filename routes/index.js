@@ -67,6 +67,11 @@ router.get('/', (req, res) => {
       "state_code": "TEXT",
       "zip_code": "TEXT"
     },
+    "user orders": "GET api/v1/users/:id/orders",
+    "user open order": "GET api/v1/users/:id/orders?status=open",
+    "user orders body": {
+      "body": "see ORDER body"
+    },
     "product-types": "GET or POST api/v1/product-types",
     "product-type": "GET, PUT or DELETE api/v1/product-types/:id",
     "productTypeBody": {
