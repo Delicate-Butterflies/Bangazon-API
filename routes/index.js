@@ -89,16 +89,16 @@ router.get('/', (req, res) => {
         "orderBody": {
             "id": "INT",
             "product_id": "INT: required for POST",
-            "quantity": "INT: optional for POST/PUT, defaults to 1",
-            "customer_user_id": "INTEGER: required for PUT/POST",
-            "payment_type_id": "INTEGER: completes order",
-            "order_date": "TEXT: only include on payment update/order finalize",
-            "Products": "GET only - an array of products on order"
+            "quantity": "INT: optional for POST, defaults to 1",
+            "customer_user_id": "INTEGER: required for POST",
+            "payment_type_id": "INTEGER: completes/close order",
+            "order_date": "TEXT: only include on payment update/order close PUT",
+            "Products": "GET only - an array of products on the order"
         },
         "products on specific order": "GET, PUT api/v1/orders/:id/products",
         "orderProductsBody": {
-            "product_id": "INT: required on POST/PUT/DELETE",
-            "quantity": "INT: optional on POST/PUT/DELETE, 1 by default, final desired (not added to current)"
+            "product_id": "INT: required on POST/PUT",
+            "quantity": "INT: optional on POST/PUT, 1 by default; total quantity (not # added to current); 0 to remove product"
         },
         "payment-types": "GET or POST api/v1/payment-types",
         "payment-type": "GET, PUT or DELETE api/v1/payment-types/:id",
