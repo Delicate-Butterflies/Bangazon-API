@@ -9,7 +9,7 @@ module.exports.generateProducts = () => {
 
   for (let i = 0; i < numProducts; i++) {
     let title = faker.commerce.productName();
-    let price = faker.commerce.price();
+    let price = faker.commerce.price() / 10;
     let description = faker.lorem.sentence();
     let type_id = Math.floor(Math.random() * numProductTypes) + 1;
     let seller_user_id = Math.floor(Math.random() * numUsers) + 1;
