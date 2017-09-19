@@ -3,12 +3,21 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/bangazon.sqlite');
 
+// module.exports. dbGetAllEmployees = () => {
+// 	return new Promise( (resolve, reject) => {
+// 		db.all(`SELECT e.id, d.name department, e.first_name, e.last_name, e.phone_number, e.job_title, e.street_address, e.city_address, e.state_code, e.zip_code
+// 						FROM employees e
+// 						JOIN departments d
+// 						WHERE e.department_id = d.id`, (err, employeesData) => {
+// 			if(err) reject(err);
+// 			resolve(employeesData);
+// 		});
+// 	});
+// };
+
 module.exports. dbGetAllEmployees = () => {
 	return new Promise( (resolve, reject) => {
-		db.all(`SELECT e.id, d.name department, e.first_name, e.last_name, e.phone_number, e.job_title, e.street_address, e.city_address, e.state_code, e.zip_code
-						FROM employees e
-						JOIN departments d
-						WHERE e.department_id = d.id`, (err, employeesData) => {
+		db.all(`SELECT * FROM employees`, (err, employeesData) => {
 			if(err) reject(err);
 			resolve(employeesData);
 		});
@@ -17,11 +26,8 @@ module.exports. dbGetAllEmployees = () => {
 
 module.exports.dbGetOneEmployee = (id) => {
 	return new Promise( (resolve, reject) => {
-		db.get(`SELECT e.id, d.name department, e.first_name, e.last_name, e.phone_number, e.job_title, e.street_address, e.city_address, e.state_code, e.zip_code
-						FROM employees e
-						JOIN departments d
-						WHERE e.department_id = d.id
-						AND e.id = ${id}`, (err, employee) => {
+		db.get(`SELECT * FROM employees
+						WHERE id = ${id}`, (err, employee) => {
 			if (err) reject(err);
 			resolve(employee);
 		});
