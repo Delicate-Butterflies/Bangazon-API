@@ -98,7 +98,9 @@ router.get('/', (req, res) => {
     "products on specific order": "GET, PUT api/v1/orders/:id/products",
     "orderProductsBody": {
       "product_id": "INT: required on POST/PUT",
-      "quantity": "INT: optional on POST/PUT, 1 by default; total quantity (not # added to current); 0 to remove product"
+      "quantity": "INT: optional on POST/PUT, 1 by default; total quantity (not # added to current); 0 to remove product",
+      "title": "TEXT: GET only",
+      "price": "REAL: GET only"
     },
     "payment-types": "GET or POST api/v1/payment-types",
     "payment-type": "GET, PUT or DELETE api/v1/payment-types/:id",
