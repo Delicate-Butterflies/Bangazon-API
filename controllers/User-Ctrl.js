@@ -1,6 +1,7 @@
 'use strict';
 
 const { dbGetAllUsers, dbGetOneUser, dbPostUser, dbPutUser, dbGetInactiveUsers } = require('../models/User.js');
+const { dbGetUserOpenOrders, dbGetUserOrders } = require('../models/Order.js');
 
 module.exports.getUsers = (req, res, next) => {
   let q = req.query;
@@ -39,4 +40,16 @@ module.exports.getUsers = (req, res, next) => {
     })
     .catch( (err) =>
       next(err));
+  };
+
+  module.exports.getUserOrders = (req, res, next) => {
+    let id = req.params.id;
+    let q = req.query;
+    (q.status == 'open' ? dbGetUserOpenOrders(id) : dbGetUserOrders(id))
+    .then((userOrderData) => {
+      res.status(200).json(userOrderData);
+    })
+    .catch((err)=>{
+      next(err)
+    });
   };
