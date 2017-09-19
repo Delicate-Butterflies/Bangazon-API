@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/bangazon.sqlite');
 
 module.exports.dbGetAllProducts = () => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.all(`SELECT * FROM products`, (err, productdata) => {
       if (err) return reject(err);
       resolve(productdata);
@@ -13,7 +13,7 @@ module.exports.dbGetAllProducts = () => {
 };
 
 module.exports.dbGetSingleProduct = (id) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.get(`SELECT * FROM products
             WHERE id = ${id}`, (err, productdata) => {
         if (err) return reject(err);
@@ -23,7 +23,7 @@ module.exports.dbGetSingleProduct = (id) => {
 };
 
 module.exports.dbPostProduct = (newProduct) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     let { product_type_id, price, title, description, original_quantity, seller_user_id } = newProduct;
     db.run(`INSERT INTO products(product_type_id, price, title, description, original_quantity, seller_user_id)
       VALUES('${product_type_id}', '${price}', '${title}', '${description}', '${original_quantity}', '${seller_user_id}')`, (err) => {
@@ -34,7 +34,7 @@ module.exports.dbPostProduct = (newProduct) => {
 };
 
 module.exports.dbDeleteProduct = (id) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.run(`DELETE FROM products WHERE id = ${id}`, function (err) {
       if (err) return reject(err);
       resolve({ message: "delete successful", rows_deleted: this.changes });
@@ -44,7 +44,7 @@ module.exports.dbDeleteProduct = (id) => {
 
 module.exports.dbPutProduct = (req, product_id) => {
   let product = req.body;
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     let query = `UPDATE products SET `;
     let keys = (Object.keys(product));
     keys.forEach((key) => {

@@ -11,7 +11,7 @@ const db = new sqlite3.Database('db/bangazon.sqlite');
 
 module.exports = (employeesArr) => {
 
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
 
     db.serialize(function () {
 

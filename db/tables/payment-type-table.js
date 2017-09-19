@@ -8,7 +8,7 @@ const db = new sqlite3.Database('bangazon.sqlite', (err) => {
 });
 
 module.exports = (payments) => {
-    return new Promise((resolve, return reject) => {
+    return new Promise((resolve, reject) => {
         db.serialize(() => {
             db.run(`DROP TABLE IF EXISTS payment_type`);
             db.run(`CREATE TABLE payment_type (

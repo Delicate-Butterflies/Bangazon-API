@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/bangazon.sqlite');
 
 module.exports.dbGetAllEmployees = () => {
-	return new Promise((resolve, return reject) => {
+	return new Promise((resolve, reject) => {
 		db.all(`SELECT e.id, d.name department, e.first_name, e.last_name, e.phone_number, e.job_title, e.street_address, e.city_address, e.state_code, e.zip_code
 						FROM employees e
 						JOIN departments d
@@ -16,7 +16,7 @@ module.exports.dbGetAllEmployees = () => {
 };
 
 module.exports.dbGetOneEmployee = (id) => {
-	return new Promise((resolve, return reject) => {
+	return new Promise((resolve, reject) => {
 		db.get(`SELECT e.id, d.name department, e.first_name, e.last_name, e.phone_number, e.job_title, e.street_address, e.city_address, e.state_code, e.zip_code
 						FROM employees e
 						JOIN departments d
@@ -29,7 +29,7 @@ module.exports.dbGetOneEmployee = (id) => {
 };
 
 module.exports.dbPostEmployee = (newEmployee) => {
-	return new Promise((resolve, return reject) => {
+	return new Promise((resolve, reject) => {
 		let { department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code } = newEmployee;
 		db.run(`INSERT INTO employees(department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code)
 			VALUES ("${department_id}", "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", "${zip_code}")`, (err) => {
@@ -40,7 +40,7 @@ module.exports.dbPostEmployee = (newEmployee) => {
 };
 
 module.exports.dbPutEmployee = (employee, employee_id) => {
-	return new Promise((resolve, return reject) => {
+	return new Promise((resolve, reject) => {
 		let query = `UPDATE employees SET `;
 		let keys = (Object.keys(employee));
 		keys.forEach((key) => {

@@ -11,7 +11,7 @@ let employeeTrainings = generateEmployeeTrainings(numEmployeeTrainings, numEmplo
 
 module.exports = (employeeTrainingsArray) => {
 
-  return new Promise((resolve, return reject)=>{
+  return new Promise((resolve, reject) => {
 
     db.serialize(function () {
 

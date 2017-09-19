@@ -11,7 +11,7 @@ let employeeComputers = generateEmployeeComputers(numEmployeeComputers, numEmplo
 
 module.exports = (employeeComputersArray) => {
 
-  return new Promise((resolve, return reject)=>{
+  return new Promise((resolve, reject) => {
 
     db.serialize(function () {
 

@@ -5,7 +5,7 @@ const db = new sqlite3.Database('./db/bangazon.sqlite');
 db.run('PRAGMA foreign_keys = ON');
 
 module.exports.dbGetAllComputers = () => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.all(`SELECT * FROM computers`, (err, computersData) => {
       if (err) return reject(err);
       resolve(computersData);
@@ -14,7 +14,7 @@ module.exports.dbGetAllComputers = () => {
 };
 
 module.exports.dbGetOneComputer = (id) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.get(`SELECT * FROM computers
             WHERE id = ${id}`, (err, computerData) => {
         if (err) return reject(err);
@@ -24,7 +24,7 @@ module.exports.dbGetOneComputer = (id) => {
 };
 
 module.exports.dbDeleteOneComputer = (id) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.run(`DELETE FROM computers WHERE id = ${id}`, function (err) {
       if (err) return reject(err);
       resolve({ message: "delete successful", rows_deleted: this.changes });
@@ -33,7 +33,7 @@ module.exports.dbDeleteOneComputer = (id) => {
 };
 
 module.exports.dbPostComputer = (newComputer) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     let { purchase_date, decommission_date, serial_number } = newComputer;
     db.run(`INSERT INTO computers(purchase_date, decommission_date, serial_number)
             VALUES ("${purchase_date}", "${decommission_date}", "${serial_number}")`, function (err) {
@@ -45,7 +45,7 @@ module.exports.dbPostComputer = (newComputer) => {
 
 module.exports.dbPutComputer = (req, computer_id) => {
   let computer = req.body;
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     let query = `UPDATE computers SET `;
     let keys = (Object.keys(computer));
     keys.forEach((key) => {

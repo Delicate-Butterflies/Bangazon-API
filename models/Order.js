@@ -6,7 +6,7 @@ const db = new sqlite3.Database('./db/bangazon.sqlite');
 db.run('PRAGMA foreign_keys = ON');
 
 module.exports.dbGetAllOrders = () => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.all(`SELECT * FROM orders`, function (err, allOrderData) {
       if (err) return reject(err);
       resolve(allOrderData);
@@ -15,7 +15,7 @@ module.exports.dbGetAllOrders = () => {
 };
 
 module.exports.dbGetOneOrder = (id) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.get(`SELECT * FROM orders
             WHERE id = ${id}`, function (err, orderData) {
         if (err) return reject(err);
@@ -25,7 +25,7 @@ module.exports.dbGetOneOrder = (id) => {
 };
 
 module.exports.dbPutOrder = (order_id, order) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     let query = `UPDATE orders SET `;
     let keys = (Object.keys(order));
     keys.forEach((key) => {
@@ -42,7 +42,7 @@ module.exports.dbPutOrder = (order_id, order) => {
 };
 
 module.exports.dbDeleteOrder = (id) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     db.run(`DELETE FROM orders WHERE id = ${id}`, function (err) {
       if (err) return reject(err);
       resolve({ message: "delete successful", rows_deleted: this.changes });
@@ -51,7 +51,7 @@ module.exports.dbDeleteOrder = (id) => {
 };
 
 module.exports.dbPostOrder = (customer_user_id, payment_type_id, product_id) => {
-  return new Promise((resolve, return reject) => {
+  return new Promise((resolve, reject) => {
     // TODO add product_id call to add orderProduct rows
     if (!product_id) return return reject('must include product_id');
     if (!payment_type_id) payment_type_id = null;

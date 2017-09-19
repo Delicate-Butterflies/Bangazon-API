@@ -11,7 +11,7 @@ let departments = generateDepartments(numDepartments, numEmployees);
 
 module.exports = (departmentsArray) => {
 
-  return new Promise((resolve, return reject)=>{
+  return new Promise((resolve, reject) => {
 
     db.serialize(function () {
 
