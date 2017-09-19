@@ -256,3 +256,7 @@ db.serialize(function () {
   });
 
 });
+
+// TODO - products - prices $xx.xx
+// TODO - % of open orders (no payment type)
+// TODO - multiple products per order
