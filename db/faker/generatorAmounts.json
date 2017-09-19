@@ -4,7 +4,7 @@
     "numUsers": 20,
     "numComputers": 40,
     "numEmployees": 25,
-    "numOrders": 10,
+    "numOrders": 100,
     "numPaymentTypes": 175,
     "numProducts": 50,
     "numTrainingPrograms": 10,
