@@ -40,3 +40,15 @@ module.exports.getUsers = (req, res, next) => {
     .catch( (err) =>
       next(err));
   };
+
+  module.exports.getUserOrders = (req, res, next) => {
+    let id = req.params.id;
+    let q = req.query;
+    (q.active == 'open' ? dbGetUserOpenOrders() : dbGetUserOrders())
+    .then((userOrderData) => {
+      res.status(200).json(userOrderData);
+    })
+    .catch((err)=>{
+      next(err)
+    });
+  };
