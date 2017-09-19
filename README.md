@@ -61,8 +61,7 @@ This is Bangazon Corp.'s employees, products and users API. Users of the API can
 
 * DELETE - will let you delete a specific chunk of data
   * you can use postman to DELETE at given url
-  * route: ```api/v1/orders/1``` - deletes order with order_id = 1
-
+  * route: ```api/v1/orders/1``` - deletes order with order_id = 1<br><br>
   > NOTE: Each Table's DELETE works differently depending on the entity relationships and dependencies. See specific table for detailed delete functionality.
 
 ### **Employees**
