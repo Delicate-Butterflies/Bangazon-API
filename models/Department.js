@@ -5,10 +5,7 @@ const db = new sqlite3.Database('./db/bangazon.sqlite');
 
 module.exports. dbGetAllDepartments = () => {
 	return new Promise( (resolve, reject) => {
-		db.all(`SELECT d.id, e.first_name supervisor_first_name, e.last_name supervisor_last_name, d.expense_budget, d.name
-						FROM departments d
-						JOIN employees e
-						WHERE d.supervisor_employee_id = e.id`, (err, departmentsData) => {
+		db.all(`SELECT * FROM departments`, (err, departmentsData) => {
 			if(err) reject(err);
 			resolve(departmentsData);
 		});
@@ -17,11 +14,8 @@ module.exports. dbGetAllDepartments = () => {
 
 module.exports.dbGetOneDepartment = (id) => {
 	return new Promise( (resolve, reject) => {
-		db.get(`SELECT d.id, e.first_name supervisor_first_name, e.last_name supervisor_last_name, d.expense_budget, d.name
-						FROM departments d
-						JOIN employees e
-						WHERE d.supervisor_employee_id = e.id
-						AND d.id = ${id}`, (err, department) => {
+		db.get(`SELECT * FROM departments
+						WHERE id = ${id}`, (err, department) => {
 			if (err) reject(err);
 			resolve(department);
 		});
