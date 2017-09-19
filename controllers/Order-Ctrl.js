@@ -97,3 +97,17 @@ module.exports.putOrderProducts = (req, res, next) => {
     })
     .catch((err) => { next(err); });
 };
+
+module.exports.getOrderProducts = (req, res, next) => {
+  dbOrderProductsWithInfo(req.params.id)
+    .then((orderProductsWithInfo) => {
+      let products = [];
+      orderProductsWithInfo.forEach((product) => {
+        products.push(product);
+      });
+      res.status(200).json(products);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
