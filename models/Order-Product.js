@@ -3,9 +3,8 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/bangazon.sqlite');
 
-module.exports.dbPostOrderProduct = (orderObj, order_id) => {
+module.exports.dbPostOrderProduct = (order_id, product_id, product_qty) => {
   return new Promise((resolve, reject) => {
-    let { product_id, product_qty } = orderObj;
     if (!product_qty) product_qty = 1;
     for (let i = 0; i < product_qty; i++) {
       db.run(`INSERT INTO ordersProducts

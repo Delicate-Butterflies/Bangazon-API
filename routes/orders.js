@@ -3,14 +3,7 @@
 const { Router } = require('express');
 const router = Router();
 
-const {
-  getOneOrder,
-  getAllOrders,
-  postOrder,
-  putOrder,
-  deleteOrder,
-  putOrderProducts
-} = require('../controllers/Order-Ctrl');
+const { getOneOrder, getAllOrders, postOrder, putOrder, deleteOrder, putOrderProducts } = require('../controllers/Order-Ctrl');
 
 router.get('/orders', getAllOrders);
 router.get('/orders/:id', getOneOrder);
