@@ -16,6 +16,7 @@ const { generateOrders } = require('./faker/orders');
 const { generateComputers } = require('./faker/computers');
 const { generateEmployeeTrainings } = require('./faker/employeeTrainings');
 const { generateEmployeeComputers } = require('./faker/employeeComputers');
+const { generateOrderProducts } = require('./faker/orderProducts');
 
 // generate arrays of simulated data
 let productTypes = generateTypes();
@@ -27,8 +28,9 @@ let employees = generateEmployees();
 let departments = generateDepartments();
 let trainingPrograms = generateTrainingPrograms();
 let computers = generateComputers();
-let employeeTrainings = generateEmployeeTrainings(trainingPrograms); // pass trainingPrograms array into join table generation
+let employeeTrainings = generateEmployeeTrainings(trainingPrograms); // pass trainingPrograms array into join table generation for max attendance per
 let employeeComputers = generateEmployeeComputers();
+let orderProducts = generateOrderProducts();
 
 // one db.serialize to avoid table creation conflicts
 db.serialize(function () {
@@ -240,19 +242,10 @@ db.serialize(function () {
           FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE CASCADE)`
   );
 
-  const { amounts: { maxQuantity } } = require('./faker/generatorAmounts.json');
-  orders.forEach((order, index) => {
-    let order_id = index + 1;
-    // TODO - randomize the number of products per order - currently one a piece
-    // choose one product out of the total number of products
-    let randomProduct = Math.floor(Math.random() * products.length) + 1;
-    // randomize the quantity ordered between 1 and an upper limit, from generatorAmounts.json
-    let qty = Math.floor(Math.random() * maxQuantity) + 1;
-    for (let i = 0; i < qty; i++) {
-      db.run(`INSERT INTO ordersProducts (product_id, order_id)
-            VALUES('${randomProduct}', ${order_id})`
-      );
-    }
+  orderProducts.forEach(({ product_id, order_id }) => {
+    db.run(`INSERT INTO ordersProducts (product_id, order_id)
+      VALUES('${product_id}', ${order_id})`
+    );
   });
 
 });

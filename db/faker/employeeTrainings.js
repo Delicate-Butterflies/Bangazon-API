@@ -1,8 +1,6 @@
 'use strict';
-// using Faker to generate a some departments
-const faker = require('faker');
 
-const { amounts: {numEmployees, numTrainingPrograms}} = require('./generatorAmounts.json');
+const { amounts: { numEmployees, numTrainingPrograms } } = require('./generatorAmounts.json');
 
 module.exports.generateEmployeeTrainings = (trainingProgramsArray) => {
 
@@ -10,10 +8,10 @@ module.exports.generateEmployeeTrainings = (trainingProgramsArray) => {
 
   for (let i = 1; i <= numTrainingPrograms; i++) {
 
-    let maxAttendance = trainingProgramsArray[i-1].max_attendance;
+    let maxAttendance = trainingProgramsArray[i - 1].max_attendance;
     let attendance = Math.floor(Math.random() * maxAttendance) + 1;
 
-    for(let j = 0; j < attendance; j++) {
+    for (let j = 0; j < attendance; j++) {
 
       let employee_id = Math.floor(Math.random() * numEmployees) + 1;;
 
