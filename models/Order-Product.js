@@ -54,8 +54,7 @@ module.exports.dbDeleteOrderProduct = (order_id, product_id) => {
       FROM ordersProducts
       WHERE order_id = ${order_id}
       AND product_id = ${product_id}`, function (err, orderProductCount) {
-        if (err) reject(err);
-        console.log(orderProductCount);
+        if (err) return reject(err);
         resolve(orderProductCount);
       });
   });
