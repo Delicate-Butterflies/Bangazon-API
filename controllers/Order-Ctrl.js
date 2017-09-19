@@ -51,7 +51,6 @@ module.exports.putOrder = (req, res, next) => {
 module.exports.deleteOrder = (req, res, next) => {
   dbDeleteOrder(req.params.id)
     .then((data) => {
-      console.log(data);
       res.status(200).json(data);
     })
     .catch((err) => {
