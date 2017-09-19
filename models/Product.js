@@ -48,6 +48,9 @@ module.exports.dbPutProduct = (req, product_id) => {
     let query = `UPDATE products SET `;
     let keys = (Object.keys(product));
     keys.forEach((key) => {
+      if(key == "id")
+        return reject("Cannot update id(primary key)");
+      else
       query += `"${key}" = "${product[key]}",`;
     });
     query = query.slice(0, -1);

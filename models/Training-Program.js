@@ -48,6 +48,9 @@ module.exports.dbPutTrainingProgram = (req, training_program_id) => {
     let query = `UPDATE training_programs SET `;
     let keys = (Object.keys(training_program));
     keys.forEach( (key) => {
+      if(key == "id")
+        return reject("Cannot update id(primary key)");
+      else
       query += `"${key}" = "${training_program[key]}",`;
     });
     query = query.slice(0,-1);

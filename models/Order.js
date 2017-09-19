@@ -29,7 +29,10 @@ module.exports.dbPutOrder = (order_id, order) => {
     let query = `UPDATE orders SET `;
     let keys = (Object.keys(order));
     keys.forEach((key) => {
-      query += `'${key}' = '${order[key]}',`;
+      if(key == "id")
+        return reject("Cannot update id(primary key)");
+      else
+        query += `'${key}' = '${order[key]}',`;
     });
     query = query.slice(0, -1);
     query += ` WHERE id = ${order_id}`;
@@ -59,7 +62,7 @@ module.exports.dbPostOrder = (customer_user_id, payment_type_id, product_id) => 
     db.run(`INSERT INTO orders
         (customer_user_id, payment_type_id, order_date)
         VALUES (${customer_user_id}, ${payment_type_id}, '${order_date}')`, function (err) {
-        if (err) reject(err);
+        if (err) return reject(err);
         resolve(this.lastID); // returns ID of new order
       });
   });

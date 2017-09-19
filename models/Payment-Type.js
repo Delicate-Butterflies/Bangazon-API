@@ -27,6 +27,9 @@ module.exports.dbPutPaymentType = (req, payment_type_id) => {
     let query = `UPDATE payment_types SET `;
     let keys = (Object.keys(payment_type));
     keys.forEach( (key) => {
+      if(key == "id")
+        return reject("Cannot update id(primary key)");
+      else
       query += `"${key}" = "${payment_type[key]}",`;
     });
     query = query.slice(0,-1);
