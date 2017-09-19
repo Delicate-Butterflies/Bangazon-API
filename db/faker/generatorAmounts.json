@@ -11,6 +11,7 @@
     "numDepartments": 8,
     "numEmployeeTrainings": 25,
     "numEmployeeComputers": 40,
-    "maxQuantity": 10
+    "maxQuantity": 5,
+    "maxProductsPerOrder": 3
   }
 }

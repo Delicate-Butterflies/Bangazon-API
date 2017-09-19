@@ -240,18 +240,21 @@ db.serialize(function () {
           FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE CASCADE)`
   );
 
-  const { amounts: { maxQuantity } } = require('./faker/generatorAmounts.json');
+  const { amounts: { maxQuantity, maxProductsPerOrder } } = require('./faker/generatorAmounts.json');
   orders.forEach((order, index) => {
     let order_id = index + 1;
-    // TODO - randomize the number of products per order - currently one a piece
-    // choose one product out of the total number of products
-    let randomProduct = Math.floor(Math.random() * products.length) + 1;
-    // randomize the quantity ordered between 1 and an upper limit, from generatorAmounts.json
-    let qty = Math.floor(Math.random() * maxQuantity) + 1;
-    for (let i = 0; i < qty; i++) {
-      db.run(`INSERT INTO ordersProducts (product_id, order_id)
-            VALUES('${randomProduct}', ${order_id})`
-      );
+    // randomize the number of products per order up to max
+    let numProducts = Math.floor(Math.random() * maxProductsPerOrder) + 1;
+    for (let j = 0; j < numProducts; j++) {
+      // choose one product out of the total number of products
+      let randomProduct = Math.floor(Math.random() * products.length) + 1;
+      // randomize the quantity ordered between 1 and an upper limit, from generatorAmounts.json
+      let qty = Math.floor(Math.random() * maxQuantity) + 1;
+      for (let i = 0; i < qty; i++) {
+        db.run(`INSERT INTO ordersProducts (product_id, order_id)
+        VALUES('${randomProduct}', ${order_id})`
+        );
+      }
     }
   });
 
