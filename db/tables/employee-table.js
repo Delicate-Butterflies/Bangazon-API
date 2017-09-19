@@ -13,13 +13,13 @@ module.exports = (employeesArr) => {
 
   return new Promise((resolve, reject) => {
 
-    db.serialize(function() {
-      
+    db.serialize(function () {
+
       db.run(`DROP TABLE IF EXISTS employee`);
-    
+
       db.run(`CREATE TABLE IF NOT EXISTS employee (
         id INTEGER PRIMARY KEY,
-        department_id INT, 
+        department_id INT,
         first_name TEXT NOT NULL,
         last_name TEXT NOT NULL,
         phone_number TEXT,
@@ -29,18 +29,18 @@ module.exports = (employeesArr) => {
         state_code TEXT,
         zip_code INT)`
       );
-    
-      employeesArr.forEach( ({department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code}) => {
-        db.run(`INSERT INTO employee (department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code) 
+
+      employeesArr.forEach(({ department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code }) => {
+        db.run(`INSERT INTO employee (department_id, first_name, last_name, phone_number, job_title, street_address, city_address, state_code, zip_code)
                 VALUES (${department_id}, "${first_name}", "${last_name}", "${phone_number}", "${job_title}", "${street_address}", "${city_address}", "${state_code}", ${zip_code})`);
       });
 
       db.close();
-      
+
       resolve('employees table created and populated');
-    
+
     });
-    
+
   });
 
 };

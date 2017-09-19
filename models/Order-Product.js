@@ -10,7 +10,7 @@ module.exports.dbPostOrderProduct = (order_id, product_id, product_qty) => {
       db.run(`INSERT INTO ordersProducts
             (order_id, product_id)
             VALUES (${order_id}, ${product_id})`, function (err) {
-          if (err) reject(err); // TODO need to delete new order, too?
+          if (err) return reject(err); // TODO need to delete new order, too?
         });
     }
     resolve(`${product_qty} quantity of product ${product_id} added to order ${order_id} `);
@@ -27,7 +27,7 @@ module.exports.dbOrderProductsWithInfo = (order_id) => {
       WHERE op.order_id = ${order_id}
       AND op.product_id = p.id
       GROUP BY op.product_id`, function (err, orderProductData) {
-        if (err) reject(err);
+        if (err) return reject(err);
         resolve(orderProductData);
       });
   });
@@ -40,7 +40,7 @@ module.exports.dbPutOrderProduct = (order_id, product_id, quantity) => {
       db.run(`INSERT INTO ordersProducts
             (order_id, product_id)
             VALUES (${order_id}, ${product_id})`, function (err) {
-          if (err) return reject(err);
+          if (err) return return reject(err);
         });
     }
     resolve(`${quantity} quantity of product ${product_id} added to order ${order_id} `);

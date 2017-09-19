@@ -22,11 +22,20 @@ module.exports = (orders, products) => {
           db.run(`INSERT INTO orderProducts (product_id, order_id)
             VALUES('${randomProduct}', ${order_id})`, (err, data) => {
               if (err)
+<<<<<<< HEAD
                 return reject(err);
+=======
+                console.log(err.toString());
+>>>>>>> rejectStatementsJR
               resolve("Done");
             });
         }
       });
     });
+<<<<<<< HEAD
   });
 };
+=======
+  })
+}
+>>>>>>> rejectStatementsJR
