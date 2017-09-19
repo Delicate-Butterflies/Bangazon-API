@@ -37,6 +37,9 @@ module.exports.dbPutUser = (req, user_id) => {
     let query = `UPDATE users SET `;
     let keys = (Object.keys(user));
     keys.forEach( (key) => {
+      if(key == "id")
+        return reject("Cannot update id(primary key)");
+      else
       query += `"${key}" = "${user[key]}",`;
     });
     query = query.slice(0,-1);

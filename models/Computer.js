@@ -49,6 +49,9 @@ module.exports.dbPutComputer = (req, computer_id) => {
     let query = `UPDATE computers SET `;
     let keys = (Object.keys(computer));
     keys.forEach((key) => {
+      if(key == "id")
+        return reject("Cannot update id(primary key)");
+      else
       query += `"${key}" = "${computer[key]}",`;
     });
     query = query.slice(0, -1);

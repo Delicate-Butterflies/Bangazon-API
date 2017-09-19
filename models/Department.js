@@ -38,6 +38,9 @@ module.exports.dbPutDepartment = (department, department_id) => {
 		let query = `UPDATE departments SET `;
 		let keys = (Object.keys(department));
 		keys.forEach( (key) => {
+			if(key == "id")
+        return reject("Cannot update id(primary key)");
+      else
 			query += `"${key}" = "${department[key]}",`;
 		});
 		query = query.slice(0,-1);
